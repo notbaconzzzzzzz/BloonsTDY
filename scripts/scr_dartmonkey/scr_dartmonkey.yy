@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_dartmonkey",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_dartmonkey",
+  "parent":{
+    "name":"Towers",
+    "path":"folders/Scripts/Towers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

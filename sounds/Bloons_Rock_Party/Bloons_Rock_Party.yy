@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Bloons_Rock_Party",
+  "audioGroupId":{
+    "name":"Music",
+    "path":"audiogroups/Music",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":114.90728,
+  "exportDir":"",
+  "name":"Bloons_Rock_Party",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Sounds/Music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Bloons_Rock_Party.mp3",
+  "volume":1.0,
+}

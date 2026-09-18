@@ -1,0 +1,25 @@
+Converting GML script: C:\Users\notba\AppData\Local\Temp\ProjectTool_1769869715\mvc\1431574342_Better_Scaling_6952c31c\mvc\scripts\better_scaling_draw_sprite\better_scaling_draw_sprite.gml
+Converted description /// @description  better_scaling_draw_sprite(sprite, subimg, x, y, xscale, yscale, rot, color, alpha, upscale method)/// @param sprite
+/// @param  subimg
+/// @param  x
+/// @param  y
+/// @param  xscale
+/// @param  yscale
+/// @param  rot
+/// @param  color
+/// @param  alpha
+/// @param  upscale method
+
+Converting GML script: C:\Users\notba\AppData\Local\Temp\ProjectTool_1769869715\mvc\1431574342_Better_Scaling_6952c31c\mvc\scripts\better_scaling_draw_surface\better_scaling_draw_surface.gml
+Converted description /// @description  better_scaling_draw_surface(id, x, y, xscale, yscale, rot, color, alpha, upscale method)/// @param id
+/// @param  x
+/// @param  y
+/// @param  xscale
+/// @param  yscale
+/// @param  rot
+/// @param  color
+/// @param  alpha
+/// @param  upscale method
+
+GameMaker Studio 1 font texture has been backed up at C:\Users\notba\AppData\Local\Temp\ProjectTool_1769869715\mvc\1431574342_Better_Scaling_6952c31c\mvc\fonts\ft_example\ft_example.gms1.png
+Added compatibility script 'texture\texture_set_interpolation.gml'

@@ -1,0 +1,1 @@
+menufunction(func, operand);

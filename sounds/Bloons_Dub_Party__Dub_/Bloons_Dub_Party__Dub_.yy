@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Bloons_Dub_Party__Dub_",
+  "audioGroupId":{
+    "name":"Music",
+    "path":"audiogroups/Music",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":96.001114,
+  "exportDir":"",
+  "name":"Bloons_Dub_Party__Dub_",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Sounds/Music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Bloons_Dub_Party__Dub_.mp3",
+  "volume":1.0,
+}

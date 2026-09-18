@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"HitMetal04",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.119160995,
+  "exportDir":"",
+  "name":"HitMetal04",
+  "parent":{
+    "name":"BloonHitSounds",
+    "path":"folders/Sounds/BloonHitSounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"HitMetal04.wav",
+  "volume":1.0,
+}

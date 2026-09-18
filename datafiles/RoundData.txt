@@ -1,0 +1,52 @@
+{ r1
+x20 red /50
+}{ r2
+x35 red /30
+}{ r3
+x10 red /30
+x5 blue
+x15 red
+}{ r4
+x25 red /25
+x18 blue /10 -40%
+x10 red /15 ??5&
+}{ r5
+x12 blue /25
+x5 red /30 1&
+x15 blue /30 1&
+}{ r6
+x4 green /30
+x15 red /20 5&
+x15 blue /&&
+}{ r7
+x10 blue /30
+x5 green /75
+x20 red /&& 1&
+x10 blue /25
+}{ r8
+x20 blue /30
+x2 green
+x10 red /10 3&
+x12 green /55 10&
+}{ r9
+x20 green /40
+x3 violet
+}{ r10
+x60 blue /35
+x5 violet /60
+x22 blue /10
+}{ r11
+x3 yellow /30
+x12 green _9&
+x10 blue /25
+x10 red /&&
+}{ r12
+x10 green /30
+x15 blue /25
+x5 yellow /40 4&
+}{ r13
+x12 violet /100
+x6 teal /200 _3/2&
+}{ r14
+
+}

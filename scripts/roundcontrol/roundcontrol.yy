@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"roundcontrol",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"roundcontrol",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"ZomgDestroyed01",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":3.8648527,
+  "exportDir":"",
+  "name":"ZomgDestroyed01",
+  "parent":{
+    "name":"BloonHitSounds",
+    "path":"folders/Sounds/BloonHitSounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"ZomgDestroyed01.wav",
+  "volume":1.0,
+}

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"HitPurple01",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.30317461,
+  "exportDir":"",
+  "name":"HitPurple01",
+  "parent":{
+    "name":"BloonHitSounds",
+    "path":"folders/Sounds/BloonHitSounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"HitPurple01.wav",
+  "volume":1.0,
+}

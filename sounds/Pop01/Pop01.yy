@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Pop01",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.11072563,
+  "exportDir":"",
+  "name":"Pop01",
+  "parent":{
+    "name":"BloonHitSounds",
+    "path":"folders/Sounds/BloonHitSounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"Pop01.wav",
+  "volume":1.0,
+}
