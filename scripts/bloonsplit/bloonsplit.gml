@@ -1,7 +1,8 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function bloonsplit(instant)
+function bloonsplit(instant = false)
 {
+	if (hp == -999999.5) return;
 	var shmup = false;
 	var m = 1 * GameManager.BloonIncomeFactor * GameManager.AllIncomeFactor;
 	PlayerModel.bloonFrac += m;
@@ -176,6 +177,7 @@ function bloonsplit(instant)
 	}
 	if (!instant) playpopsound(id);
 	instance_destroy();
+	hp = -999999.5;
 	return childs;
 }
 

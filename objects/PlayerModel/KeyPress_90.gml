@@ -17,4 +17,6 @@ else
 {
 	tryingtobuytower = true;
 	showRanges = true;
+	selectedTower = noone;
+	quickUpgradeTower = noone;
 }

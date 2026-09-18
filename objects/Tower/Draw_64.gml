@@ -53,7 +53,7 @@ if (PlayerModel.showUpgradeIndicators)
 		}
 	}
 }
-if (PlayerModel.hoveredTower == id && !PlayerModel.tryingtobuytower)
+if (PlayerModel.quickUpgradeTower == id && !PlayerModel.tryingtobuytower)
 {
 	draw_set_color(c_white);
 	draw_set_alpha(0.5);

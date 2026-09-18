@@ -110,16 +110,16 @@ function spawnrandombloon()
 	var bloonData = DataManager.BloonData[o];
 	type = DataManager.BloonOrd[o];
 	var mods = atr.none;
-	if (random(1) < clamp((currentRound - 5) / 75 * 0.5, 0, 0.5)) mods |= atr.stream;
+	if (random(1) < clamp((currentRound / ((bloonData.spd >= 200 || bloonData.type == "bbt") ? 1.5 : 1) - 40) / 60 * 0.5, 0, 0.5)) mods |= atr.stream;
 	if (!has(bloonData.atrs, atr.moab) || hasany(bloonData.atrs, atr.bob | atr.honey))
 	{
-		if (random(1) < clamp((currentRound - 10) / 40 * 0.5, 0, 0.5)) mods |= atr.camo;
-		if (random(1) < clamp((currentRound - 0) / 30 * 0.5, 0, 0.5)) mods |= atr.regrow;
-		if (random(1) < clamp((currentRound - 20) / 20 * 0.5, 0, 0.5)) mods |= atr.latex;
+		if (random(1) < clamp((currentRound / (hasany(bloonData.atrs, atr.canthits) ? 1.5 : 1) - 10) / 70 * 0.5, 0, 0.5)) mods |= atr.camo;
+		if (random(1) < clamp((currentRound / (bloonData.dmg > 40 ? 2 : 1) - 0) / 30 * 0.5, 0, 0.5)) mods |= atr.regrow;
+		if (random(1) < clamp((currentRound / (bloonData.hp > 1 ? 1.5 : 1) - 20) / 40 * 0.5, 0, 0.5)) mods |= atr.latex;
 	}
 	if (hasany(bloonData.atrs, atr.canfort))
 	{
-		if (random(1) < clamp((currentRound - 30) / 90 * 0.5, 0, 0.5)) mods |= atr.fort;
+		if (random(1) < clamp((currentRound / (has(bloonData.atrs, atr.moab) ? 2 : 1) - 30) / 40 * 0.5, 0, 0.5)) mods |= atr.fort;
 	}
 	spawnbloon(type, mods);
 	return bloonData;

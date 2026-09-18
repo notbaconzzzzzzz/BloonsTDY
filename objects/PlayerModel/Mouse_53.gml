@@ -28,19 +28,31 @@ if (tryingtobuytower)
 	var ty = mouse_y;
 	tx = round(tx / grid) * grid;
 	ty = round(ty / grid) * grid;
-	if (purchasetower(tx, ty) > 0)
+	var tower = purchasetower(tx, ty);
+	if (tower > 0)
 	{
 		if (!keyboard_check(vk_shift))
 		{
+			selectedTower = tower;
 			tryingtobuytower = false;
 			showRanges = false;
 		}
 	}
 }
-else if (hoveredTower != noone && hoverQuadrant != 0)
+else if (quickUpgradeTower != noone && hoverQuadrant != 0)
 {
-	with (hoveredTower)
+	with (quickUpgradeTower)
 	{
 		purchaseupgrade(PlayerModel.hoverQuadrant);
 	}
+}
+else if (hoveredTower != noone)
+{
+	selectedTower = hoveredTower;
+	quickUpgradeTower = noone;
+}
+else // implement check for if cursor is on the rightside area
+{
+	selectedTower = noone;
+	quickUpgradeTower = noone;
 }

@@ -4,6 +4,7 @@ event_inherited();
 if (!variable_instance_exists(id, "path"))
 {
 	path = juncchoosepath(TrackManager.StartingJunc);
+	patht = -60-rad;
 }
 if (!variable_instance_exists(id, "patht"))
 {

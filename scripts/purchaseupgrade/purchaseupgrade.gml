@@ -209,11 +209,12 @@ function purchasetower(tx, ty, type = "Dart Monkey")
 		ty = pos.ty;
 	}
 	if (PlayerModel.money < 200) return 0;
-	if (placetower(tx, ty, type) > 0)
+	var tower = placetower(tx, ty, type);
+	if (tower > 0)
 	{
 		money -= 200;
 		audio_play_sound(random(1) < 0.5 ? PlaceTowerMonkey01 : PlaceTowerMonkey02, 500, false);
-		return 1;
+		return tower;
 	}
 	return -1;
 }
@@ -231,18 +232,17 @@ function placetower(tx, ty, type)
 	{
 		return -1;
 	}
-	instance_create_layer(tx, ty, "Towers", DartMonkey);
 	PlayerModel.numberoftowers++;
-	return 1;
+	return instance_create_layer(tx, ty, "Towers", DartMonkey);
 }
 
 function isvalidtowerposition(tx, ty, type = "Dart Monkey")
 {
 	var dist = 0;
 	dist = min(tx - GameManager.shmupLeftBound, GameManager.shmupRightBound - tx);
-	if (dist < 60) return false;
+	if (dist < 30) return false;
 	dist = min(ty - 0, room_height - ty);
-	if (dist < 60) return false;
+	if (dist < 30) return false;
 	with (Tower)
 	{
 		dist = sqrt(sqr(x - tx) + sqr(y - ty));
@@ -274,7 +274,7 @@ function getrandomtowerposition()
 		tx = round(tx / grid) * grid;
 		ty = round(ty / grid) * grid;
 		if (!isvalidtowerposition(tx, ty)) continue;
-		dist = min(tx - GameManager.shmupLeftBound / 2, (GameManager.shmupRightBound + room_width) / 2 - tx) * 2;
+		dist = 999999;
 		with (Tower)
 		{
 			d = sqrt(sqr(x - tx) + sqr(y - ty));

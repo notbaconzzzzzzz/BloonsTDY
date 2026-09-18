@@ -111,7 +111,7 @@ function DartMonkey_initstats()
 	},
 	{
 		name : "Juggernaut",
-		price : 240,
+		price : 2400,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{

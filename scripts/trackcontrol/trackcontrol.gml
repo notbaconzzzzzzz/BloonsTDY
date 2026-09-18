@@ -138,9 +138,35 @@ function pathmovement(m)
 		}
 		if (path.pathlength <= patht + m)
 		{
-			m -= path.pathlength - patht;
-			patht = 0;
-			path = juncchoosepath(path.junc);
+			if (path.junc.kind == jnc.finish && variable_instance_exists(id, "rad"))
+			{
+				if (patht + m < path.pathlength + rad)
+				{
+					patht += m;
+					m = 0;
+				}
+				else
+				{
+					PlayerModel.lifes -= BloonData.dmg;
+					if (GameManager.TrackLoop)
+					{
+						path = juncchoosepath(TrackManager.StartingJunc);
+						patht = -60-rad;
+						m = 0;
+					}
+					else
+					{
+						path = -1;
+						m = 0;
+					}
+				}
+			}
+			else
+			{
+				m -= path.pathlength - patht;
+				patht = 0;
+				path = juncchoosepath(path.junc);
+			}
 		}
 		else
 		{
@@ -190,14 +216,7 @@ function juncchoosepath(junc)
 {
 	switch (junc.kind)
 	{
-		case jnc.finish: {
-			if (GameManager.TrackLoop)
-			{
-				if (variable_instance_exists(id, "BloonData")) PlayerModel.lifes -= BloonData.dmg;
-				return juncchoosepath(TrackManager.StartingJunc);
-			}
-			return -1;
-		}
+		case jnc.finish: return -1;
 		case jnc.one: return junc.p;
 		case jnc.rand: return junc.p[irandom(array_length(junc.p)-1)];
 	}

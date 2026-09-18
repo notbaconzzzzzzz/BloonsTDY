@@ -77,6 +77,7 @@ else
 {
 	blimp = false;
 }
+rad = BloonData.size / 2;
 
 if (variable_instance_exists(id, "hp")) hp += MaxHp;
 else hp = MaxHp;
@@ -96,7 +97,6 @@ if (is_undefined(spr))
 	if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
 }
 else sprite_index = spr;
-rad = BloonData.size / 2;
 if (has(Atrs, atr.regrow)) rad *= 1.25;
 parentInstances = [id];
 if (instance_exists(parent)) array_copy(parentInstances, 1, parent.parentInstances, 0, array_length(parent.parentInstances));

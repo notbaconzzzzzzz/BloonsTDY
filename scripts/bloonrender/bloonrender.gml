@@ -120,9 +120,20 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			camoShades[0] = 1.2;
 			camoShades[1] = 1.35;
 		}
+		else if (bloonData.type == "black")
+		{
+			camoShades[0] = -0.1;
+			camoShades[1] = -0.24;
+			camoShades[2] = -0.3;
+			camoShades[3] = -0.45;
+		}
 	}
 	var fort = has(mods, atr.fort); // not implemented
+	var latex = has(mods, atr.latex);
 	var aqua = has(mods, atr.aqua);
+	var lead = has(mods, atr.lead);
+	var ice = has(mods, atr.ice);
+	var ceram = has(mods, atr.ceramic);
 	var bloonBase = BloonBase;
 	var sizeMultipier = 1;
 	var baseSize = 128;
@@ -272,6 +283,39 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		col = make_color_hsv(0/360*255, 0, 16/2);
 		draw_sprite_ext(bloonBase, 3, 400, 400, 1, 1, 0, col, 1);
 	}
+	
+	
+	if (aqua)
+	{
+		col = make_color_rgb(0, 0, 128);
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
+		draw_sprite_ext(AquaPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, camo ? 0.4 : 0.2);
+		gpu_set_blendmode(bm_normal);
+	}
+	if (ceram)
+	{
+		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(CeramicPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
+	}
+	if (lead)
+	{
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
+		draw_sprite_ext(LeadPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_black, 0.5);
+		gpu_set_blendmode(bm_normal);
+	}
+	if (ice)
+	{
+		col = make_color_rgb(239, 255, 255);
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
+		draw_sprite_ext(IcePattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.5);
+		gpu_set_blendmode(bm_normal);
+	}
+	gpu_set_colorwriteenable(true, true, true, true);
 
 
 
@@ -292,16 +336,6 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	{
 		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
 		draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, col, 1);
-	}
-	
-	
-	if (aqua)
-	{
-		col = make_color_rgb(0, 0, 128);
-		gpu_set_colorwriteenable(true, true, true, false);
-		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
-		draw_sprite_ext(AquaPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.2);
-		gpu_set_blendmode(bm_normal);
 	}
 	
 	if (!onlysurf2 && hpstate > 0)
@@ -379,12 +413,18 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
 		}
 		//
+		if (latex)
+		{
+			draw_sprite_ext(bloonBase, 5, 400 - 8, 400 + 4, 1, 1, 0, c_white, 0.5);
+		}
 		draw_sprite_ext(bloonBase, 5, 400, 400, 1, 1, 0, c_white, 0.75);
-	}
 	
-	if (fort)
-	{
-		
+		if (fort)
+		{
+			gpu_set_colorwriteenable(true, true, true, true);
+			gpu_set_blendmode(bm_normal);
+			draw_sprite_ext(FortPattern, hpstate, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_white, 1);
+		}
 	}
 	
 	gpu_set_colorwriteenable(true, true, true, true);

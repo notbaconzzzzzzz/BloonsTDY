@@ -1,6 +1,6 @@
 if (showRanges && grid > 1)
 {
-	draw_set_alpha(0.1);
+	draw_set_alpha(sqrt(grid / 30) * 0.1);
 	draw_set_color(c_black);
 	for (var i = 0; i < room_height; i += grid)
 	{

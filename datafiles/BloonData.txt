@@ -19,7 +19,7 @@ titanium    0.8 16	(61)	{titan heavy}	[3*lead]	<0 0 96>
 amber	0.8 12	(61)	{amber heavy}	[3*purple]	<15 255 192>
 ice	0.8 8	(61)	{ice frozen heavy}	[3*aqua]	<190 180 234>
 indigo	2.8 3	(52)	{indigo}	[2*orange]	<260 232 162>
-crystal	2.6 6	(55)	{crystal ceramic}	[2*indigo]	<290 162 212>
+crystal	2.6 6	(55)	{crystal heavy}	[2*indigo]	<290 162 212>
 hex	3.3 3	(58)	{hex hardy}	[crystal]	<275 232 255>
 clay	1.7 5	(64)	{clay ceramic hardy}	[ceramic]	<10 162 128>
 brick	2.3 25	(67)	{ceramic heavy}	[clay 2*orange]	<15 128 162>
@@ -30,14 +30,14 @@ ddt	2.75 400	(175 1 0.75 [red pink black lead zebra])	{moab camo lead black heav
 bad	0.18 20000	(350 3 0.12 [blue violet black teal orange rainbow indigo ceramic brick hex])	{moab indigo}	[2*zomg 3*ddt]	<275 220 224>
 rhs	1.20 225	(200 1 0.55 [blue green purple lime zebra])	{moab black white purple clay}	[4*hex]	<105 128 128>
 ocd	0.37 500	(200 1 0.21 [green yellow white teal ice])	{moab crystal ice}	[4*brick]	<195 64 255>
-bob	1.50 100	(100 1 0.60 [red blue green yellow pink])	{moab bob}	[24*rainbow 3*hex 3*ice 3*amber 3*titanium]	<60 192 255>
+bob	1.50 100	(225 1 0.60 [red blue green yellow pink])	{moab bob}	[24*rainbow 3*hex 3*ice 3*amber 3*titanium]	<60 192 255>
 bbt	1.80 300	(175 1 0.60 [blue yellow violet white aqua])	{moab aqua heavy hex tide}	[2*rtitanium 2*ramber 2*rice]	<225 192 192>
 hah	0.30 900	(250 2 0.17 [yellow violet lime orange indigo])	{moab hah}	[3*rhs]	<30 192 96>
 kant	0.22 1600	(250 2 0.14 [pink teal lime orange ceramic])	{moab kant}	[3*ocd]	<135 64 64>
 mpv	0.65 800	(225 2 0.35 [pink purple orange amber titanium])	{moab hah kant}	[2*bbt 6*lbrick 6*lhex]	<300 128 80>
 bteab	0.15 50000	(400 3 0.10 [red green pink black white purple lime lead aqua ice amber titanium brick hex moab])	{moab titan amber indigo hex tide}	[bad 2*kant 2*hah 2*mpv 6*bob]	<240 192 255>
 bobmega	0.25 1000	(300 3 0.15 [violet teal lime orange indigo])	{mega moab bob}	[1*bteab 2*bad 3*mpv 3*kant 3*hah 3*zomg 5*ddt 5*bfb 5*bbt 5*ocd 5*rhs 10*bob 10*moab 20*brick 20*hex 20*ice 20*amber 20*titanium 20*clay 20*crystal 30*ceramic 30*indigo 30*lead 30*aqua 30*purple 50*rainbow 80*zebra 120*black 120*white 50*orange 60*lime 70*teal 80*violet 200*pink 250*yellow 300*green 350*blue 400*red]	<60 192 255>
-bteabmega	0.06 50000	(500 4 0.06 [ice moab rhs amber ocd bob titanium ddt bbt brick bfb hah hex kant mpv])	{mega moab titan amber indigo hex tide hah kant honey black white purple lead aqua crystal ice clay camo regrow fort latex stream hive}	[6*bobmega]	<240 192 255>
+bteabmega	0.06 50000	(500 4 0.06 [ice moab rhs amber ocd bob titanium ddt bbt brick bfb hah hex kant mpv])	{mega moab titan amber indigo hex tide hah kant ceramic heavy honey black white purple lead aqua crystal ice clay camo regrow fort latex stream hive}	[6*bobmega]	<240 192 255>
 honey1	0.80 20	(80 0 0.55)	{moab honey hive [red]}	[4*syellow]	<50 255 255>
 honey2	0.80 25	(82 0 0.55)	{moab honey hive white [blue]}	[4*spink]	<330 224 224>
 honey3	0.80 30	(84 0 0.55)	{moab honey hive black [green]}	[2*sblack 2*syellow]	<55 224 255>

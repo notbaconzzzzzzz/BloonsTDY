@@ -14,13 +14,14 @@ else if (PlayerModel.hoveredTower == noone)
 }
 else
 {
-	if (max(point_distance(x, y, mouse_x, mouse_y), 100) < point_distance(PlayerModel.hoveredTower.x, PlayerModel.hoveredTower.y, mouse_x, mouse_y)) PlayerModel.hoveredTower = id;
+	if (point_distance(x, y, mouse_x, mouse_y) < min(100, point_distance(PlayerModel.hoveredTower.x, PlayerModel.hoveredTower.y, mouse_x, mouse_y))) PlayerModel.hoveredTower = id;
 }
-if (PlayerModel.hoveredTower == id)
+if (PlayerModel.quickUpgradeTower == id)
 {
 	var path5 = isupgradevalid(5) == 1;
 	var path6 = isupgradevalid(6) == 1;
-	if (point_distance(x, y, mouse_x, mouse_y) < 32) PlayerModel.hoverQuadrant = 0;
+	if (point_distance(x, y, mouse_x, mouse_y) <= 30) PlayerModel.hoverQuadrant = 0;
+	else if (abs(mouse_x - x) > 100 || abs(mouse_y - y) > 100) PlayerModel.hoverQuadrant = 0;
 	else if (mouse_x < x) {
 		if (path5)
 		{

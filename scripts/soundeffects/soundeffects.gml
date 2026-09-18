@@ -7,7 +7,7 @@ enum blnsnd
 	dmgmoab,
 	pop,
 	popceram,
-	popaqua,
+	popaqua, // deprecated
 	poptough,
 	popamber,
 	popglass,
@@ -77,7 +77,7 @@ function getpopsoundid(inst)
 		return blnsnd.popmoab0 + inst.BloonData.moab.class;
 	}
 	if (has(inst.Atrs, atr.amber)) return blnsnd.popamber;
-	if (has(inst.Atrs, atr.aqua)) return blnsnd.popaqua;
+	//if (has(inst.Atrs, atr.aqua)) return blnsnd.popaqua;
 	if (has(inst.Atrs, atr.titan) || inst.type == "brick") return blnsnd.poptough;
 	if (has(inst.Atrs, atr.ceramic)) return blnsnd.popceram;
 	if (hasany(inst.Atrs, atr.crystal | atr.frozen | atr.ice)) return blnsnd.popglass;

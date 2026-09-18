@@ -9,6 +9,8 @@ livesFrac = 5000;
 // radius values for explosions and AoEs are flat
 
 hoveredTower = noone;
+selectedTower = noone;
+quickUpgradeTower = noone;
 hoverQuadrant = 0;
 tryingtobuytower = false;
 tryingtobuytowertx = 0;

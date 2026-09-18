@@ -16,7 +16,7 @@ BloonSounds[blnsnd.popmoab3] =	{ s : getallassets("ZomgDestroyed"), v : 0.5, p :
 BloonSounds[blnsnd.popmoab4] =	{ s : getallassets("ZomgDestroyed"), v : 0.6, p : 0.8 };
 BloonSounds[blnsnd.hitlead] =	{ s : getallassets("HitMetal"), v : 0.25, p : 1 };
 BloonSounds[blnsnd.hitaqua] =	{ s : getallassets("WaterJet"), v : 0.5, p : 2 };
-BloonSounds[blnsnd.hitcrystal] ={ s : getallassets("HitImmuneGolden"), v : 0.25, p : 1 };
+BloonSounds[blnsnd.hitcrystal] ={ s : getallassets("HitImmuneGolden"), v : 0.5, p : 0.8 };
 BloonSounds[blnsnd.hitfrozen] =	{ s : getallassets("HitIce"), v : 0.25, p : 1 };
 BloonSounds[blnsnd.hitzebra] =	{ s : getallassets("HitPurpleSlow"), v : 0.25, p : 1 };
 BloonSounds[blnsnd.hitpurple] =	{ s : getallassets("HitPurple"), v : 0.25, p : 1 };
@@ -25,6 +25,7 @@ BloonSounds[blnsnd.hittitan] =	{ s : getallassets("HitSteel"), v : 0.125, p : 1 
 BloonSounds[blnsnd.hitkant] =	{ s : getallassets("HitSteelSlow"), v : 0.25, p : 1 };
 
 MusicTracks = [];
+array_push(MusicTracks, Main_Theme);
 array_push(MusicTracks, Jazz_Theme);
 array_push(MusicTracks, Volcano_Theme);
 array_push(MusicTracks, Bloons_Rock_Party);
