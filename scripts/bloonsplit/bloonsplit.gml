@@ -48,7 +48,7 @@ function bloonsplit(instant = false)
 		tot += BloonData.spawns[i].amt;
 		if (!has(DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)].atrs, atr.moab)) totnonmoab += BloonData.spawns[i].amt;
 	}
-	if (has(Atrs, atr.moab))
+	if (is_struct(BloonData.moab))
 	{
 		maxspread = 4;
 		hp = 0;
@@ -83,6 +83,14 @@ function bloonsplit(instant = false)
 			{
 				vari.regenTimer = regenTimer;
 				vari.highestRegrow = highestRegrow;
+				if (variable_struct_exists(BloonData.spawns[i], "disambig"))
+				{
+					vari.regrowdisambig = BloonData.spawns[i].disambig;
+				}
+				else if (variable_instance_exists(id, "regrowdisambig"))
+				{
+					vari.regrowdisambig = regrowdisambig;
+				}
 			}
 			
 			for (var j = 0; j < BloonData.spawns[i].amt; j++)
@@ -127,6 +135,14 @@ function bloonsplit(instant = false)
 			{
 				vari.regenTimer = regenTimer;
 				vari.highestRegrow = highestRegrow;
+				if (variable_struct_exists(BloonData.spawns[i], "disambig"))
+				{
+					vari.regrowdisambig = BloonData.spawns[i].disambig;
+				}
+				else if (variable_instance_exists(id, "regrowdisambig"))
+				{
+					vari.regrowdisambig = regrowdisambig;
+				}
 			}
 			
 			var ismoab = has(DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)].atrs, atr.moab);
@@ -181,6 +197,58 @@ function bloonsplit(instant = false)
 	return childs;
 }
 
+function getregrownext(t, highest, disambig = -1, data = -1)
+{
+	if (highest == -1) highest = 99;
+	if (t >= highest) return -1;
+	if (t >= 25) return -1;
+	if (t == 4)
+	{
+		if (highest == 7 || highest == 18) return 7;
+	}
+	if (data == -1) data = DataManager.BloonData[t];
+	if (disambig != -1 && variable_struct_exists(data, "regrowdisambiguation")) return array_get_index(DataManager.BloonOrd, data.regrowdisambiguation[disambig]);
+	switch (t)
+	{
+		case 1:
+			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 12;
+			return 2;
+		case 2:
+			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 13;
+			return 3;
+		case 3:
+			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 14;
+			return 4;
+		case 4:
+			if (highest == 5 || highest == 9 || highest == 17) return 5;
+			if (highest == 6 || highest == 16 || highest == 19) return 6;
+			if (highest == 7 || highest == 18) return 7;
+			if (highest >= 12) return 15;
+			return 5;
+		case 5:
+			if (highest == 9 || highest == 17) return 9;
+			return 8;
+		case 6:
+			if (highest == 16 || highest == 19) return 16;
+			return 8;
+		case 7: return 18;
+		case 8: return 10;
+		case 9: return 17;
+		case 11: return 23;
+		case 15:
+			if (highest == 24) return 24;
+			return 20;
+		case 16: return 19;
+		case 17:
+		case 18:
+		case 19:
+		case 22:
+		case 24:
+			return -1;
+	}
+	return t + 1;
+}
+
 function calculatespriteindex(t, atrs = -1)
 {
 	if (!is_numeric(t)) t = array_get_index(DataManager.BloonOrd, t);
@@ -197,4 +265,32 @@ function calculatespriteindex(t, atrs = -1)
 function extracttypefromspriteindex(sprindex)
 {
 	return real(sprindex >> 32);
+}
+
+function calculateuniquebloonidentifier(t, atrs = -1, growdisambiguation = 0)
+{
+	if (!is_numeric(t)) t = array_get_index(DataManager.BloonOrd, t);
+	if (t == -1) return atr.none;
+	if (atrs == -1)
+	{
+		atrs = DataManager.BloonData[t].atrs;
+	}
+	atrs |= int64(t) << 36;
+	if (growdisambiguation > 0 && has(atrs, atr.regrow)) atrs |= int64(growdisambiguation) << 32;
+	return atrs;
+}
+
+function extracttypefrombloonidentifier(ident)
+{
+	return real(ident >> 36);
+}
+
+function extractdisambiguationfrombloonidentifier(ident)
+{
+	return real(ident >> 32) % 16;
+}
+
+function extractatrsfrombloonidentifier(ident)
+{
+	return ident | atr.allall;
 }

@@ -1,19 +1,19 @@
-red	1.0	(49)	<0 212 234>
-blue	1.4	(52)	[red]	<210 212 234>
-green	1.8	(55)	[blue]	<80 232 162>
-yellow	3.2	(58)	[green]	<50 255 255>
-pink	3.5	(61)	[yellow]	<355 180 255>
-black	1.8	(37)	{black}	[2*pink]	<0 0 32>
-white	2.0	(37)	{white}	[2*pink]	<0 0 212>
+red	1.0	(49)	<0 212 234>	!0>blue 2>violet!
+blue	1.4	(52)	[red]	<210 212 234>	!0>green 3>violet 4>teal!
+green	1.8	(55)	[blue]	<80 232 162>	!0>yellow 5>teal 6>lime!
+yellow	3.2	(58)	[green]	<50 255 255>	!0>pink 7>lime 8>orange!
+pink	3.5	(61)	[yellow]	<355 180 255>	!0>black 1>white 9>orange 2>orange 3>orange 4>orange 5>orange 6>orange 7>orange 8>orange!
+black	1.8	(37)	{black}	[2*pink!0]	<0 0 32>
+white	2.0	(37)	{white}	[2*pink!1]	<0 0 212>
 purple	3.0	(58)	{purple}	[2*pink]	<275 220 224>
 zebra	1.8	(55)	{black white}	[black white]	<0 0 192>
 lead	1.0	(58)	{lead hardy heavy}	[2*black]	<0 0 128>
 rainbow	2.2	(61)	[2*zebra]	<0 212 234, 38 255 255, 50 255 255, 80 232 162, 210 212 234, 300 192 212>
 ceramic	2.5 10	(61)	{ceramic heavy}	[2*rainbow]	<30 212 192>
-violet	0.9	(40)	[blue 4*red]	<300 192 212>
-teal	1.1	(42)	[violet green 3*blue]	<175 212 212>
-lime	1.6	(44)	[teal yellow 2*green]	<75 232 212>
-orange	1.9	(46)	[lime pink yellow]	<38 255 255>
+violet	0.9	(40)	[blue!3 4*red!2]	<300 192 212>
+teal	1.1	(42)	[violet green!5 3*blue!4]	<175 212 212>
+lime	1.6	(44)	[teal yellow!7 2*green!6]	<75 232 212>
+orange	1.9	(46)	[lime pink!9 yellow!8]	<38 255 255>
 aqua	1.6	(58)	{aqua hardy}	[2*white]	<200 222 198>
 titanium    0.8 16	(61)	{titan heavy}	[3*lead]	<0 0 96>
 amber	0.8 12	(61)	{amber heavy}	[3*purple]	<15 255 192>

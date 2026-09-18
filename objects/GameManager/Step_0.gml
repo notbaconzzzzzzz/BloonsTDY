@@ -44,9 +44,9 @@ for (var i = 0; i < gameSpeed; i++)
 			endround();
 		}
 	}
-	with (Bloon) event_user(0);
-	with (Tower) event_user(0);
-	with (ProjBase) event_user(0);
+	with (Bloon) if (instance_exists(id)) event_user(0);
+	with (Tower) if (instance_exists(id)) event_user(0);
+	with (ProjBase) if (instance_exists(id)) event_user(0);
 }
 
 for (var i = 0; i < blnsnd.TOTAL_COUNT; i++)

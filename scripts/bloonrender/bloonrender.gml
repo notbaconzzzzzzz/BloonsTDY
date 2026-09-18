@@ -387,31 +387,26 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	{
 		gpu_set_colorwriteenable(true, true, true, false);
 		// alternative sheen code (but will require the sheen to be fixed up)
-		if (true)
-		{
-			surface_reset_target();
-			surface_set_target(surf2);
-			gpu_set_colorwriteenable(true, true, true, true);
-			draw_clear_alpha(c_black, 0);
-			draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.5); // 1 - (1 - 0.15) / (1 - 0.15 / 4));
-			gpu_set_blendmode(bm_subtract);
-			draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, c_white, 1);
-			draw_sprite_ext(bloonBase, 3, 400, 400, 1, 1, 0, c_white, 1);
-			gpu_set_blendmode(bm_normal);
-			draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
-			gpu_set_blendmode(bm_subtract);
-			draw_sprite_ext(bloonBase, 4, 400, 400, 1, 1, 0, c_white, 1);
-			gpu_set_blendmode(bm_normal);
-			gpu_set_colorwriteenable(true, true, true, false);
-			draw_sprite_ext(bloonBase, 0, 400, 400, 1, 1, 0, c_white, 1);
-			surface_reset_target();
-			surface_set_target(surf);
-			draw_surface(surf2, 0, 0);
-		}
-		else
-		{
-			draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
-		}
+		surface_reset_target();
+		surface_set_target(surf2);
+		gpu_set_colorwriteenable(true, true, true, true);
+		draw_clear_alpha(c_black, 0);
+		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.5); // 1 - (1 - 0.15) / (1 - 0.15 / 4));
+		gpu_set_blendmode(bm_subtract);
+		draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, c_white, 1);
+		draw_sprite_ext(bloonBase, 3, 400, 400, 1, 1, 0, c_white, 1);
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
+		gpu_set_blendmode(bm_subtract);
+		draw_sprite_ext(bloonBase, 4, 400, 400, 1, 1, 0, c_white, 1);
+		gpu_set_blendmode(bm_normal);
+		gpu_set_colorwriteenable(true, true, true, false);
+		draw_sprite_ext(bloonBase, 0, 400, 400, 1, 1, 0, c_white, 1);
+		surface_reset_target();
+		surface_set_target(surf);
+		draw_surface(surf2, 0, 0);
+			
+		//draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
 		//
 		if (latex)
 		{

@@ -41,6 +41,7 @@ enum atr
 	inherit = atr.camo | atr.regrow | atr.stream | atr.latex | atr.ostuffed | atr.ustuffed,
 	allinherit = atr.camo | atr.regrow | atr.stream | atr.fort | atr.latex | atr.ostuffed | atr.ustuffed | atr.hive,
 	spriteindexed = ((int64(1) << 32) - (int64(1) << 2)) - atr.stream, // - atr.latex,
+	allall = (int64(1) << 32) - int64(1),
 }
 
 enum upg

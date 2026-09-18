@@ -54,7 +54,7 @@ function nextword()
 	var specialChar = ["{", "}", ";"];
 	if (discriminantMode)
 	{
-		specialChar = ["{", "}", ";", "[", "]", "(", ")", "<", ">", ",", "*"];
+		specialChar = ["{", "}", ";", "[", "]", "(", ")", "<", ">", ",", "*", "!"];
 	}
 	//var specialChar = ["/", "*", "&", "%", "+", "-", "=", "_", "|", ":", "'", "^", ">", "<"];
 	//var specialLetter = ["x", "s", "f"];
@@ -160,6 +160,15 @@ function parsebloondata()
 					nextword();
 					if (word == "\r") return;
 					else if (word == "]") break;
+					else if (word == "!")
+					{
+						nextword();
+						if (isnumber(word))
+						{
+							bloonData.spawns[array_length(bloonData.spawns)-1].disambig = int64(word);
+						}
+						continue;
+					}
 					var a = 1;
 					var t = "";
 					if (isnumber(word))
@@ -212,6 +221,35 @@ function parsebloondata()
 							case 2:
 								v = int64(word);
 						}
+					}
+				}
+			}
+			else if (word == "!")
+			{
+				bloonData.regrowdisambiguation = array_create(10, -1);
+				while (true)
+				{
+					nextword();
+					if (word == "\r") return;
+					else if (word == "!") break;
+					var a = 1;
+					var t = "";
+					if (isnumber(word))
+					{
+						a = int64(word);
+						while (nextword() == ">")
+						{
+							
+						}
+					}
+					t = word;
+					bloonData.regrowdisambiguation[a] = t;
+				}
+				for (var i = 0; i < 10; i++)
+				{
+					if (bloonData.regrowdisambiguation[i] == -1)
+					{
+						bloonData.regrowdisambiguation[i] = bloonData.regrowdisambiguation[0];
 					}
 				}
 			}
