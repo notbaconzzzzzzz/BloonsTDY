@@ -33,10 +33,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"BloonBase",
-    "path":"sprites/BloonBase/BloonBase.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":{
     "name":"BloonBase",
     "path":"sprites/BloonBase/BloonBase.yy",

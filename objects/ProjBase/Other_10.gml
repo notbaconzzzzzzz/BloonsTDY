@@ -172,7 +172,7 @@ hitdetection(x, y, rad, "radial", function(inst)
 	with (inst)
 	{
 		hp -= other.dmg;
-		if (hp <= 0) childs = bloonsplit();
+		if (hp <= 0) childs = bloonsplit(other.cantHits);
 		else playdmgsound(inst);
 	}
 	var result = false;

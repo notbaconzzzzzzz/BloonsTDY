@@ -23,7 +23,7 @@ for (var i = 0; i < blnsnd.TOTAL_COUNT; i++)
 
 for (var i = 0; i < gameSpeed; i++)
 {
-	wait++;
+	if (true) wait++;
 	if (wait >= delay)
 	{
 		wait = 0;

@@ -82,7 +82,7 @@ if (has(Atrs, atr.regrow))
 					var spr = BloonRenderer.BloonSprites[? sprind];
 					if (is_undefined(spr))
 					{
-						sprite_index = BloonBase;
+						sprite_index = -1;
 						if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
 					}
 					else sprite_index = spr;

@@ -10,7 +10,7 @@ if (MenuManager.currentMenu != "none")
 var autobuythreshold = 200;
 if (autobuyupgrade)
 {
-	autobuythreshold = max(autobuythreshold, 100 + numberoftowers * 50);
+	autobuythreshold = max(autobuythreshold, 100 + numberoftowers * 100);
 }
 if (autobuytower && money >= autobuythreshold)
 {

@@ -4,10 +4,9 @@
 if (wait > 0) wait--;
 if (array_length(drawQueue) <= 0) return;
 
-generatebloonsprite(array_pop(drawQueue));
+var sprite = generatebloonsprite(array_pop(drawQueue));
 
-draw_surface(surf2, room_width / 2 - 400, room_height / 2 - 400);
-gpu_set_blendmode(bm_normal);
+if (!spawned) draw_sprite(sprite, 0, room_width / 2, room_height / 2);
 
 if (array_length(drawQueue) <= 0) spawned = true;
 

@@ -41,9 +41,10 @@ if (debug)
 	}
 }*/
 
-draw_set_color(c_white);
+/*
 if (debug)
 {
+	draw_set_color(c_white);
 	for (var i = 0; i < blnsnd.TOTAL_COUNT; i++)
 	{
 		draw_text(1500, 40 + 20 * i, bloonSounds[i]);
@@ -52,7 +53,7 @@ if (debug)
 			draw_text(1600 + j * 20, 40 + 20 * i, bloonSoundVariations[i][j]);
 		}
 	}
-}
+}*/
 
 draw_set_alpha(0.5);
 draw_set_color(c_teal);
@@ -85,6 +86,7 @@ for (var i = 0; i < array_length(pbudgets); i++)
 if (array_length(pbudgets) > 0) avoffby /= array_length(pbudgets);
 draw_text(240, 120, "Off by " + (pbudget < 0 ? "-" : "+") + stringify(abs(pbudget) / 200) + " (" + (avoffby < 0 ? "-" : "+") + stringify(abs(avoffby) / 200) + ")");
 
+/*
 if (shmupLeftBound > 0)
 {
 	draw_set_color(c_black);
@@ -96,4 +98,4 @@ if (shmupRightBound < room_width)
 	draw_set_color(c_black);
 	draw_set_alpha(0.2);
 	draw_rectangle(shmupRightBound, 0, room_width, room_height, false);
-}
+}*/

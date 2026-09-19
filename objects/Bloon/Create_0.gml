@@ -62,6 +62,10 @@ if (has(Atrs, atr.regrow))
 		highestRegrow = -1;
 	}
 }
+if (!variable_instance_exists(id, "highestValue") || highestValue > typeIndex)
+{
+	highestValue = typeIndex;
+}
 
 if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
 else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
@@ -79,21 +83,30 @@ else
 }
 rad = BloonData.size / 2;
 
-if (variable_instance_exists(id, "hp")) hp += MaxHp;
+if (variable_instance_exists(id, "hp"))
+{
+	if (variable_instance_exists(id, "bloonsplitcanthit"))
+	{
+		if (hasany(Atrs, bloonsplitcanthit))
+		{
+			hp = 0;
+		}
+	}
+	hp += MaxHp;
+}
 else hp = MaxHp;
 if (!variable_instance_exists(id, "parent")) parent = noone;
 if (hp <= 0)
 {
 	parentInstances = [];
 	if (instance_exists(parent)) array_copy(parentInstances, 1, parent.parentInstances, 0, array_length(parent.parentInstances));
-	bloonsplit(true);
+	bloonsplit(variable_instance_exists(id, "bloonsplitcanthit") ? bloonsplitcanthit : atr.none, true);
 	return;
 }
 var sprind = calculatespriteindex(typeIndex, Atrs);
 var spr = BloonRenderer.BloonSprites[? sprind];
 if (is_undefined(spr))
 {
-	sprite_index = BloonBase;
 	if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
 }
 else sprite_index = spr;

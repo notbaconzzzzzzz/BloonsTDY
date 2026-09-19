@@ -1,5 +1,6 @@
 if (debug)
 {
+	//spawnbloon("moab");
 	/*
 	var type = "bob";
 	var mods = atr.none;
@@ -20,6 +21,9 @@ if (debug)
 	
 	for (var i = 0; i < 45; i++)
 	{
-		if (has(DataManager.BloonData[i].atrs, atr.clay)) spawnbloon(i);
+		if (has(DataManager.BloonData[i].atrs, atr.bob))
+		{
+			spawnbloon(i);
+		}
 	}
 }
