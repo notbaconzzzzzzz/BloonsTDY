@@ -497,7 +497,7 @@ function DartMonkey_restats()
 		array_push(AfterHit, function(inst2, childs, proj) {
 			with (proj)
 			{
-				if (airburst)
+				if (airburst && instance_exists(owner))
 				{
 					var shots = owner.AirburstShots;
 					var spread = owner.AirburstSpread;

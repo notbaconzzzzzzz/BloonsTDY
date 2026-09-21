@@ -1,7 +1,7 @@
 if (debug)
 {
 	//spawnbloon("moab");
-	/*
+	
 	var type = "bob";
 	var mods = atr.none;
 	if (keyboard_check(vk_control)) type = "bteab";
@@ -17,13 +17,14 @@ if (debug)
 			mods |= atr.camo;
 		}
 	}
-	spawnbloon(type, mods);*/
-	
+	spawnbloon(type, mods);
+	/*
 	for (var i = 0; i < 45; i++)
 	{
 		if (has(DataManager.BloonData[i].atrs, atr.bob))
 		{
 			spawnbloon(i);
 		}
-	}
+	}*/
 }
+ticksPasted = 0;

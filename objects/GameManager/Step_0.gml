@@ -47,6 +47,7 @@ for (var i = 0; i < gameSpeed; i++)
 	with (Bloon) if (instance_exists(id)) event_user(0);
 	with (Tower) if (instance_exists(id)) event_user(0);
 	with (ProjBase) if (instance_exists(id)) event_user(0);
+	ticksPasted++;
 }
 
 for (var i = 0; i < blnsnd.TOTAL_COUNT; i++)

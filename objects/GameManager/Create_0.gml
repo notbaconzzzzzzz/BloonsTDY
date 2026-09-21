@@ -39,6 +39,7 @@ farmIncomeMult = 100; // 0:		100R : 80,		1,000R : 60,	10,000R : 40,	100,000R : 2
 
 debug = false;
 gameSpeed = 0;
+ticksPasted = 0;
 bloonSounds = array_create(blnsnd.TOTAL_COUNT, 0);
 for (var i = 0; i < blnsnd.TOTAL_COUNT; i++)
 {

@@ -86,6 +86,10 @@ for (var i = 0; i < array_length(pbudgets); i++)
 if (array_length(pbudgets) > 0) avoffby /= array_length(pbudgets);
 draw_text(240, 120, "Off by " + (pbudget < 0 ? "-" : "+") + stringify(abs(pbudget) / 200) + " (" + (avoffby < 0 ? "-" : "+") + stringify(abs(avoffby) / 200) + ")");
 
+if (debug)
+{
+	draw_text(40, 140, string(ticksPasted / 60));
+}
 /*
 if (shmupLeftBound > 0)
 {
