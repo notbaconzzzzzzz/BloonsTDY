@@ -20,11 +20,12 @@ if (variable_instance_exists(id, "RemoveAtrs"))
 
 MaxHp = BloonData.hp;
 Spd = BloonData.spd;
+IsMoab = is_struct(BloonData.moab);
 if (has(Atrs, atr.latex))
 {
-	if (has(Atrs, atr.moab))
+	if (IsMoab)
 	{
-		switch (is_struct(BloonData.moab) ? BloonData.moab.class : 1)
+		switch (BloonData.moab.class)
 		{
 			case 0: MaxHp += 5; break;
 			case 1: MaxHp += 25; break;
@@ -47,7 +48,7 @@ if (has(Atrs, atr.fort))
 if (has(Atrs, atr.mega)) MaxHp *= 10;
 if (has(Atrs, atr.stream))
 {
-	if (is_struct(BloonData.moab)) Spd += BloonData.moab.stream;
+	if (IsMoab) Spd += BloonData.moab.stream;
 	else Spd += 100;
 }
 if (has(Atrs, atr.regrow))
@@ -57,7 +58,7 @@ if (has(Atrs, atr.regrow))
 		regenTimer = 0;
 		highestRegrow = typeIndex;
 	}
-	if (has(Atrs, atr.moab))
+	if (IsMoab)
 	{
 		highestRegrow = -1;
 	}
@@ -71,7 +72,7 @@ if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
 else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
 Spd = round(Spd * GameManager.SpeedFactor / 100);
 
-if (has(Atrs, atr.moab))
+if (IsMoab)
 {
 	blimp = true;
 	if (type == "bob" || type == "bobmega") blimp = false;
@@ -96,6 +97,7 @@ if (variable_instance_exists(id, "hp"))
 }
 else hp = MaxHp;
 if (!variable_instance_exists(id, "parent")) parent = noone;
+bloonRegionNode = -1;
 if (hp <= 0)
 {
 	parentInstances = [];
@@ -113,3 +115,5 @@ else sprite_index = spr;
 if (has(Atrs, atr.regrow)) rad *= 1.25;
 parentInstances = [id];
 if (instance_exists(parent)) array_copy(parentInstances, 1, parent.parentInstances, 0, array_length(parent.parentInstances));
+bloonRegion = calculatebloonregion(x, y, IsMoab);
+bloonRegionNode = GameManager.bloonRegions[bloonRegion].Append(id);

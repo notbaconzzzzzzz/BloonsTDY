@@ -20,6 +20,56 @@ function hitdetection(cx, cy, cr, ordinal, func)
 			hitsd[i] = [];
 		}
 		off += 1;*/
+		for (var reg = 0; reg <= 12; reg++)
+		{
+			var regx = ((reg - 1) mod 4) * 360;
+			var regy = floor((reg - 1) / 4) * 360;
+			var regw = 360;
+			var regh = 360;
+			if (reg != 0)
+			{
+				if (regx > cx + cr + 34) continue;
+				if (regy > cy + cr + 34) continue;
+				if (regx + regw < cx - cr - 34) continue;
+				if (regy + regh < cy - cr - 34) continue;
+			}
+			var node = GameManager.bloonRegions[reg].r;
+			while (!is_instanceof(node, LinkedList))
+			{
+				with (node.obj)
+				{
+					if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
+					{
+						var dist = sqrt(sqr(x - cx) + sqr(y - cy)) - rad;
+						if (dist <= cr)
+						{
+							var flag = true;
+							for (var i = 0; i < array_length(parentInstances); i++)
+							{
+								if (array_contains(other.hitInstances, parentInstances[i]))
+								{
+									flag = false;
+									break;
+								}
+							}
+							if (flag)
+							{
+								if (has(Atrs, atr.amber)) dist -= 100000;
+								var i;
+								for (i = 0; i < array_length(hitsd); i++)
+								{
+									if (hitsd[i] > dist) break;
+								}
+								array_insert(hits, i, id);
+								array_insert(hitsd, i, dist);
+							}
+						}
+					}
+				}
+				node = node.r;
+			}
+		}
+		/*
 		with (Bloon)
 		{
 			if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
@@ -46,33 +96,10 @@ function hitdetection(cx, cy, cr, ordinal, func)
 						}
 						array_insert(hits, i, id);
 						array_insert(hitsd, i, dist);
-						/*
-						if (has(atr.amber))
-						{
-							var i;
-							for (i = 0; i < array_length(hitsd[0]); i++)
-							{
-								if (hitsd[0][i] > dist) break;
-							}
-							array_insert(hits[0], i, id);
-							array_insert(hitsd[0], i, dist);
-						}
-						else
-						{
-							var j = clamp(floor(dist) + off, 1, array_length(hitsd) - 1)
-							var i = 0;
-							for (i = 0; i < array_length(hitsd[j]); i++)
-							{
-								if (hitsd[j][i] > dist) break;
-							}
-							array_insert(hits[j], i, id);
-							array_insert(hitsd[j], i, dist);
-						}
-						*/
 					}
 				}
 			}
-		}
+		}*/
 	}
 	else
 	{
@@ -96,6 +123,49 @@ function bloondetection(cx, cy, cr, ordinal, canhitcamo)
 	//var off = 50;
 	if (ordinal == "radial" || true)
 	{
+		for (var reg = 0; reg <= 12; reg++)
+		{
+			var regx = ((reg - 1) mod 4) * 360;
+			var regy = floor((reg - 1) / 4) * 360;
+			var regw = 360;
+			var regh = 360;
+			if (reg != 0)
+			{
+				if (regx > cx + cr + 34) continue;
+				if (regy > cy + cr + 34) continue;
+				if (regx + regw < cx - cr - 34) continue;
+				if (regy + regh < cy - cr - 34) continue;
+			}
+			var node = GameManager.bloonRegions[reg].r;
+			while (!is_instanceof(node, LinkedList))
+			{
+				with (node.obj)
+				{
+					if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
+					{
+						var dist = sqrt(sqr(x - cx) + sqr(y - cy)) - rad;
+						if (dist <= cr)
+						{
+							var flag = true;
+							if (flag)
+							{
+								if (canhitcamo || !has(Atrs, atr.camo))
+								{
+									dist = finishdist;
+									if (dist < hitd)
+									{
+										hit = id;
+										hitd = dist;
+									}
+								}
+							}
+						}
+					}
+				}
+				node = node.r;
+			}
+		}
+		/*
 		with (Bloon)
 		{
 			if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
@@ -118,7 +188,7 @@ function bloondetection(cx, cy, cr, ordinal, canhitcamo)
 					}
 				}
 			}
-		}
+		}*/
 	}
 	else
 	{

@@ -37,6 +37,12 @@ farmIncomeMult = 100; // 0:		100R : 80,		1,000R : 60,	10,000R : 40,	100,000R : 2
 						//  100-150	+250/5 ~50		+1,500/5 ~300	+5,000/5 ~1000	+30,000/5 ~6000	+100,000/5 ~20000
 						// 150:		5,000R : 80,	25,000R : 60,	100,000R : 40,	500,000R : 20,	2,000,000R : 0
 
+bloonRegions = [];
+for (var i = 0; i <= 12; i++)
+{
+	bloonRegions[i] = new LinkedList(); 
+}
+
 debug = false;
 gameSpeed = 0;
 ticksPasted = 0;

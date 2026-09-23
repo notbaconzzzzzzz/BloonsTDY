@@ -223,6 +223,12 @@ function juncchoosepath(junc)
 	return -1;
 }
 
+function calculatebloonregion(_x, _y, ismoab = false)
+{
+	if (ismoab) return 0;
+	return 1 + clamp(floor(_x / 360), 0, 3) + 4 * clamp(floor(_y / 360), 0, 2);
+}
+
 function drawpaths(w)
 {
 	for (var i = 0; i < array_length(Paths); i++)
