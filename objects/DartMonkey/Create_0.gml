@@ -4,5 +4,6 @@ DartMonkey_initstats();
 event_inherited();
 
 critDart = 0;
+superCrit = 0;
 doubleDart = 0;
 airburst = 0;

@@ -207,8 +207,7 @@ function setposfrompath()
 	{
 		xv = Spd / 60 * dcos(dir);
 		yv = Spd / 60 * dsin(dir);
-		if (blimp) y -= rad * 1 / 3;
-		else y -= rad * 2 / 3;
+		y -= posoffset;
 	}
 }
 

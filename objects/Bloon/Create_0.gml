@@ -82,6 +82,8 @@ else
 	blimp = false;
 }
 rad = BloonData.size / 2;
+posoffset = rad * 2 / 3;
+if (blimp) posoffset = rad * 1 / 3;
 
 if (variable_instance_exists(id, "hp"))
 {

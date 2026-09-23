@@ -18,7 +18,9 @@ function DartMonkey_basestats()
 
 	CritDartInterval = -1;
 	CritDartDmg = 0;
-	CritDartPierce = 0;
+	SuperCritInterval = -1;
+	SuperCritDmg = 0;
+	SuperCritPierce = 0;
 	DoubleDartInterval = -1;
 	DoubleDartShots = 1;
 	AirburstInterval = -1;
@@ -111,7 +113,7 @@ function DartMonkey_initstats()
 	},
 	{
 		name : "Juggernaut",
-		price : 2400,
+		price : 3600,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
@@ -340,9 +342,9 @@ function DartMonkey_restats()
 		}
 		if (has(Upgrades, upg.b4))
 		{
-			CritDartInterval = 12;
-			CritDartDmg = 8;
-			CritDartPierce = 2;
+			SuperCritInterval = 3;
+			SuperCritDartDmg = 5;
+			SuperCritDartPierce = 2;
 		}
 	}
 	if (has(Upgrades, upg.c2))
@@ -427,9 +429,9 @@ function DartMonkey_restats()
 		}
 		if (has(Upgrades, upg.b4))
 		{
-			CritDartInterval = 15;
-			CritDartDmg = 25;
-			CritDartPierce = 4;
+			SuperCritInterval = 3;
+			SuperCritDmg = 18;
+			SuperCritPierce = 4;
 		}
 	}
 	if (has(Upgrades, upg.c4))
