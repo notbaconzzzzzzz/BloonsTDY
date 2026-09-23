@@ -86,6 +86,7 @@
     {"id":{"name":"scr_dartmonkey","path":"scripts/scr_dartmonkey/scr_dartmonkey.yy",},},
     {"id":{"name":"scr_fileread","path":"scripts/scr_fileread/scr_fileread.yy",},},
     {"id":{"name":"scr_hitdetection","path":"scripts/scr_hitdetection/scr_hitdetection.yy",},},
+    {"id":{"name":"scr_linkedlist","path":"scripts/scr_linkedlist/scr_linkedlist.yy",},},
     {"id":{"name":"scr_menucontrol","path":"scripts/scr_menucontrol/scr_menucontrol.yy",},},
     {"id":{"name":"scr_purchaseupgrade","path":"scripts/scr_purchaseupgrade/scr_purchaseupgrade.yy",},},
     {"id":{"name":"scr_roundcontrol","path":"scripts/scr_roundcontrol/scr_roundcontrol.yy",},},

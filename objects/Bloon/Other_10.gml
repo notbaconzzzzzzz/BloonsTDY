@@ -97,3 +97,10 @@ if (has(Atrs, atr.regrow))
 		regenTimer = 0;
 	}
 }
+
+var newBloonRegion = calculatebloonregion(x, y, IsMoab);
+if (newBloonRegion != bloonRegion)
+{
+	bloonRegion = newBloonRegion;
+	bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+}
