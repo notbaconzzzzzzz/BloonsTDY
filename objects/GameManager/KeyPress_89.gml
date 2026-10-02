@@ -22,10 +22,11 @@ if (debug)
 	
 	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
-		if (has(DataManager.BloonData[i].atrs, atr.hex))
+		if (has(DataManager.BloonData[i].atrs, atr.clay) && i <= 37)
 		{
 			spawnbloon(i);
 		}
 	}
+	spawnbloon("brick");
 }
 ticksPasted = 0;

@@ -293,6 +293,7 @@ function parsebloondata()
 		BloonData[bloonInd] = bloonData;
 		BloonOrd[bloonInd] = bloonId;
 		bloonInd++;
+		bloonData.atrs |= atr.clay;
 	}
 	for (var i = 0; i < array_length(BloonData); i++)
 	{

@@ -60,6 +60,22 @@ if (has(Atrs, atr.regrow))
 						if (is_struct(BloonData.moab)) Spd += BloonData.moab.stream;
 						else Spd += 100;
 					}
+					if (has(Atrs, atr.clay))
+					{
+						if (IsMoab)
+						{
+							clayLockout = 0;
+						}
+						else
+						{
+							if (!variable_instance_exists(id, "clayLockout") || !is_int64(clayLockout))
+							{
+								clayLockout = int64(0);
+							}
+							if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
+							else if (highestRegrow < typeIndex) clayLockout |= int64(1) << typeIndex;
+						}
+					}
 
 					if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
 					else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);

@@ -4,6 +4,7 @@
 function DartMonkey_basestats()
 {
 	CantHits = atr.canthits;
+	CantHits |= atr.clay;
 	Cond = [];
 	AfterHit = [];
 	Tick = [];

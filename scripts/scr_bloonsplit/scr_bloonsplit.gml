@@ -108,6 +108,10 @@ function bloonsplit(canthit = atr.none, instant = false)
 					vari.regrowdisambig = regrowdisambig;
 				}
 			}
+			if (variable_instance_exists(id, "clayLockout") && !IsMoab && hasany(bloonData.atrs | mods, atr.clay | atr.regrow))
+			{
+				vari.clayLockout = clayLockout;
+			}
 			
 			for (var j = 0; j < BloonData.spawns[i].amt; j++)
 			{
@@ -167,10 +171,11 @@ function bloonsplit(canthit = atr.none, instant = false)
 			}
 			if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
 			var vari = {parent : id, type : t, Atrs : mods, hp : hp, bloonsplitcanthit : canthit};
-			if (has(Atrs, atr.regrow))
+			if (has(Atrs, atr.regrow) || has(bloonData.atrs | mods, atr.clay))
 			{
-				vari.regenTimer = regenTimer;
-				vari.highestRegrow = highestRegrow;
+				if (variable_instance_exists(id, "regenTimer")) vari.regenTimer = regenTimer;
+				if (variable_instance_exists(id, "highestRegrow")) vari.highestRegrow = highestRegrow;
+				else vari.highestRegrow = typeIndex;
 				if (variable_struct_exists(BloonData.spawns[i], "disambig"))
 				{
 					vari.regrowdisambig = BloonData.spawns[i].disambig;
@@ -179,6 +184,10 @@ function bloonsplit(canthit = atr.none, instant = false)
 				{
 					vari.regrowdisambig = regrowdisambig;
 				}
+			}
+			if (variable_instance_exists(id, "clayLockout") && !IsMoab && hasany(bloonData.atrs | mods, atr.clay | atr.regrow))
+			{
+				vari.clayLockout = clayLockout;
 			}
 			
 			var ismoab = has(bloonData.atrs, atr.moab);
@@ -272,48 +281,53 @@ function getregrownext(t, highest, disambig = -1, data = -1)
 	if (highest == -1) highest = 99;
 	if (t >= highest) return -1;
 	if (t >= 25) return -1;
-	if (t == 4)
+	if (t == 4) // Pink
 	{
-		if (highest == 7 || highest == 18) return 7;
+		if (highest == 7 || highest == 17 || highest == 19) return 7; // Purple
 	}
 	if (data == -1) data = DataManager.BloonData[t];
 	if (disambig != -1 && variable_struct_exists(data, "regrowdisambiguation")) return array_get_index(DataManager.BloonOrd, data.regrowdisambiguation[disambig]);
 	switch (t)
 	{
-		case 1:
-			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 12;
-			return 2;
-		case 2:
-			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 13;
-			return 3;
-		case 3:
-			if (highest >= 12 && !(highest >= 16 && highest <= 19)) return 14;
-			return 4;
-		case 4:
-			if (highest == 5 || highest == 9 || highest == 17) return 5;
-			if (highest == 6 || highest == 16 || highest == 19) return 6;
-			if (highest == 7 || highest == 18) return 7;
-			if (highest >= 12) return 15;
-			return 5;
-		case 5:
-			if (highest == 9 || highest == 17) return 9;
-			return 8;
-		case 6:
-			if (highest == 16 || highest == 19) return 16;
-			return 8;
-		case 7: return 18;
-		case 8: return 10;
-		case 9: return 17;
-		case 11: return 23;
-		case 15:
-			if (highest == 24) return 24;
-			return 20;
-		case 16: return 19;
-		case 17:
-		case 18:
-		case 19:
-		case 22:
-		case 24:
+		case 1: // Blue
+			if (highest >= 99) return 2; // Green
+			if (highest >= 12 && !(highest >= 16 && highest <= 20)) return 12; // Violet
+			return 2; // Green
+		case 2: // Green
+			if (highest >= 99) return 3; // Yellow
+			if (highest >= 12 && !(highest >= 16 && highest <= 20)) return 13; // Teal
+			return 3; // Yellow
+		case 3: // Yellow
+			if (highest >= 99) return 4; // Pink
+			if (highest >= 12 && !(highest >= 16 && highest <= 20)) return 14; // Lime
+			return 4; // Pink
+		case 4: // Pink
+			if (highest >= 99) return 5; // Black
+			if (highest == 5 || highest == 9 || highest == 18) return 5; // Black
+			if (highest == 6 || highest == 16 || highest == 20) return 6; // White
+			if (highest == 7 || highest == 17 || highest == 19) return 7; // Purple
+			if (highest >= 12) return 15; // Orange
+			return 5; // Black
+		case 5: // Black
+			if (highest == 9 || highest == 18) return 9; // Lead
+			return 8; // Zebra
+		case 6: // White
+			if (highest == 16 || highest == 20) return 16; // Aqua
+			return 8; // Zebra
+		case 7: return 17; // Purple > Crystal
+		case 8: return 10; // Zebra > Rainbow
+		case 9: return 18; // Lead > Titanium
+		case 11: return 24; // Ceramic > Brick
+		case 15: // Orange
+			if (highest == 23 || highest == 24) return 23; // Clay
+			return 21; // Indigo
+		case 16: return 20; // Aqua > Ice
+		case 17: return 19; // Crystal > Amber
+		case 18: // Titanium
+		case 19: // Amber
+		case 20: // Ice
+		case 22: // Hex
+		case 24: // Brick
 			return -1;
 	}
 	return t + 1;

@@ -2,7 +2,7 @@
 // You can write your code in this editor
 datafileread();
 Difficulty = "Normal";
-StartingMoney = 650;
+StartingMoney = 650 * 10;
 StartingLifes = 150;
 StartRound = 1;
 EndRound = 80;
@@ -15,7 +15,7 @@ HardHpFactor = 100;
 BloonIncomeFactor = 100;
 RoundIncomeFactor = 100;
 FarmIncomeFactor = 100;
-AllIncomeFactor = 100;
+AllIncomeFactor = 100 * 10;
 LifeIncomeFactor = 100;
 LifeSlowThreshold = 1000;
 LifeSlowFactor = 10;

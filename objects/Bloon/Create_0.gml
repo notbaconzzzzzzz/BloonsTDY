@@ -67,6 +67,22 @@ if (!variable_instance_exists(id, "highestValue") || highestValue > typeIndex)
 {
 	highestValue = typeIndex;
 }
+if (has(Atrs, atr.clay))
+{
+	if (IsMoab)
+	{
+		clayLockout = 0;
+	}
+	else
+	{
+		if (!variable_instance_exists(id, "clayLockout") || !is_int64(clayLockout))
+		{
+			clayLockout = int64(0);
+		}
+		if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
+		else if (highestRegrow < typeIndex) clayLockout |= int64(1) << typeIndex;
+	}
+}
 
 if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
 else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
@@ -85,6 +101,7 @@ else
 rad = BloonData.size / 2;
 posoffset = rad * 2 / 3;
 if (blimp) posoffset = rad * 1 / 3;
+if (!blimp && has(Atrs, atr.regrow)) rad *= 1.25;
 
 if (variable_instance_exists(id, "hp"))
 {
@@ -114,7 +131,6 @@ if (is_undefined(spr))
 	if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
 }
 else sprite_index = spr;
-if (has(Atrs, atr.regrow)) rad *= 1.25;
 parentInstances = [id];
 if (instance_exists(parent)) array_copy(parentInstances, 1, parent.parentInstances, 0, array_length(parent.parentInstances));
 bloonRegion = calculatebloonregion(x, y, IsMoab);
