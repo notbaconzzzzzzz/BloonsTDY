@@ -140,6 +140,7 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	var hah = has(mods, atr.hah);
 	var kant = has(mods, atr.kant);
 	var bob = has(mods, atr.bob);
+	var hex = has(mods, atr.hex);
 	var bloonBase = BloonBase;
 	var sizeMultipier = 1;
 	var baseSize = 128;
@@ -355,6 +356,22 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		gpu_set_blendmode(bm_normal);
 		draw_sprite_ext(HahPattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, c_red, 0.5);
 	}
+	if (hex)
+	{
+		var h = bloonData.colors[0].h;
+		var v = bloonData.colors[0].v * 2;
+		var s = bloonData.colors[0].s;
+		if (v > 255) 
+		{
+			s /= v / 255;
+			v = 255;
+		}
+		if (s < 0) s = 0;
+		col = make_color_hsv(h/360*255, s, v);
+		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
+		draw_sprite_ext(HexPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 2/3);
+		gpu_set_blendmode(bm_normal);
+	}
 	gpu_set_colorwriteenable(true, true, true, true);
 
 
@@ -457,11 +474,12 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		if (fort)
 		{
 			gpu_set_colorwriteenable(true, true, true, true);
-			gpu_set_blendmode(bm_normal);
+			gpu_set_blendmode_ext(bm_one, bm_inv_src_alpha);
 			draw_sprite_ext(FortPattern, hpstate, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_white, 1);
 		}
 	}
 	
 	gpu_set_colorwriteenable(true, true, true, true);
+	gpu_set_blendmode(bm_normal);
 	surface_reset_target();
 }

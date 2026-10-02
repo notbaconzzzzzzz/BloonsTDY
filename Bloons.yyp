@@ -218,6 +218,7 @@
     {"id":{"name":"DamagePatternLatex","path":"sprites/DamagePatternLatex/DamagePatternLatex.yy",},},
     {"id":{"name":"FortPattern","path":"sprites/FortPattern/FortPattern.yy",},},
     {"id":{"name":"HahPattern","path":"sprites/HahPattern/HahPattern.yy",},},
+    {"id":{"name":"HexPattern","path":"sprites/HexPattern/HexPattern.yy",},},
     {"id":{"name":"IcePattern","path":"sprites/IcePattern/IcePattern.yy",},},
     {"id":{"name":"KantPattern","path":"sprites/KantPattern/KantPattern.yy",},},
     {"id":{"name":"LeadPattern","path":"sprites/LeadPattern/LeadPattern.yy",},},

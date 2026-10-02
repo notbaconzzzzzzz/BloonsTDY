@@ -31,7 +31,7 @@ bad	0.18 20000	(350 3 0.12 [blue violet black teal orange rainbow indigo ceramic
 rhs	1.20 225	(200 1 0.55 [blue green purple lime zebra])	{moab black white purple clay}	[4*hex]	<105 128 128>
 ocd	0.37 500	(200 1 0.21 [green yellow white teal ice])	{moab crystal ice}	[4*brick]	<195 64 255>
 bob	1.50 100	(225 1 0.60 [red blue green yellow pink])	{moab bob}	[24*rainbow 3*hex 3*ice 3*amber 3*titanium]	<60 192 255>
-bbt	1.80 300	(175 1 0.60 [blue yellow violet white aqua])	{moab aqua heavy hex tide}	[2*rtitanium 2*ramber 2*rice]	<225 192 192>
+bbt	1.80 300	(175 1 0.60 [blue yellow violet white aqua])	{moab aqua white heavy hex tide}	[2*rtitanium 2*ramber 2*rice]	<225 192 192>
 hah	0.30 900	(250 2 0.17 [yellow violet lime orange indigo])	{moab hah}	[3*rhs]	<30 192 96>
 kant	0.22 1600	(250 2 0.14 [pink teal lime orange ceramic])	{moab kant}	[3*ocd]	<135 64 64>
 mpv	0.65 800	(225 2 0.35 [pink purple orange amber titanium])	{moab hah kant}	[2*bbt 6*lbrick 6*lhex]	<300 128 80>
@@ -43,3 +43,4 @@ honey2	0.80 25	(82 0 0.55)	{moab honey hive white [blue]}	[4*spink]	<330 224 224
 honey3	0.80 30	(84 0 0.55)	{moab honey hive black [green]}	[2*sblack 2*syellow]	<55 224 255>
 honey4	0.80 40	(86 0 0.55)	{moab honey hive purple [yellow]}	[2*spurple 2*spink]	<315 192 224>
 honey5	0.80 50	(88 0 0.55)	{moab honey hive [pink]}	[2*srainbow]	<20 200 234, 32 232 255, 45 255 255, 53 232 255, 280 100 234, 330 150 212>
+harbinger	0.37 1200	(250 2 0.21 [green purple teal zebra crystal])	{moab purple hex}	[3*bbt 6*chex]	<175 192 128>

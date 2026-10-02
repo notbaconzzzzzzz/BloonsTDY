@@ -1,6 +1,7 @@
 if (debug)
 {
 	//spawnbloon("moab");
+	
 	/*
 	var type = "bob";
 	var mods = atr.none;
@@ -18,15 +19,13 @@ if (debug)
 		}
 	}
 	spawnbloon(type, mods);*/
-	/*
-	for (var i = 0; i < 45; i++)
+	
+	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
-		if (has(DataManager.BloonData[i].atrs, atr.bob))
+		if (has(DataManager.BloonData[i].atrs, atr.hex))
 		{
 			spawnbloon(i);
 		}
-	}*/
-	spawnbloon("amber");
-	spawnbloon("crystal");
+	}
 }
 ticksPasted = 0;

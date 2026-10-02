@@ -91,12 +91,12 @@ function spawnrandombloon()
 	var type = "red";
 	var o = 0;
 	var rand = 0;
-	for (var i = 0; i < 45; i++)
+	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
 		rand += getbloonweight(DataManager.BloonData[i]);
 	}
 	rand = random_range(0, rand);
-	for (var i = 0; i < 45; i++)
+	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
 		rand -= getbloonweight(DataManager.BloonData[i]);
 		if (rand <= 0)
@@ -155,6 +155,7 @@ function spawnbloon(type, mods = -1, removemods = -1)
 function getbloonweight(bloon, difficulty = -1, remainingbudget = -1, remainingbloons = -1, scale = true)
 {
 	if (!GameManager.HoneyBloons && bloon.ind >= 40 && bloon.ind <= 44) return 0;
+	if (!(true) && bloon.ind == 45) return 0;
 	if (difficulty == -1) difficulty = dif;
 	if (scale && remainingbudget == -1) remainingbudget = budget;
 	if (scale && remainingbloons == -1) remainingbloons = blns;
@@ -210,7 +211,7 @@ function getbloonaveragedif(difficulty = -1)
 	if (difficulty == -1) difficulty = dif;
 	var total = 0;
 	var width = 0;
-	for (var i = 0; i < 45; i++)
+	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
 		var bloon = DataManager.BloonData[i];
 		if (!GameManager.HoneyBloons && bloon.ind >= 40 && bloon.ind <= 44) continue;
