@@ -80,7 +80,6 @@ if (has(Atrs, atr.clay))
 			clayLockout = int64(0);
 		}
 		if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
-		else if (highestRegrow < typeIndex) clayLockout |= int64(1) << typeIndex;
 	}
 }
 

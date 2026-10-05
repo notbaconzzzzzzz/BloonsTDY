@@ -58,8 +58,23 @@ function bloonsplit(canthit = atr.none, instant = false)
 		{
 			t = string_delete(t, 1, 1);
 		}
-		tot += BloonData.spawns[i].amt;
-		if (!has(DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)].atrs, atr.moab)) totnonmoab += BloonData.spawns[i].amt;
+		var normalcount = BloonData.spawns[i].amt;
+		var actualcount = normalcount;
+		if (has(Atrs, atr.bob | atr.fort))
+		{
+			actualcount = floor(actualcount * 4 / 3);
+		}
+		if (has(Atrs, atr.ustuffed))
+		{
+			actualcount = actualcount * 2;
+		}
+		else if (has(Atrs, atr.ostuffed))
+		{
+			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
+			else actualcount = floor(actualcount * 3 / 2);
+		}
+		tot += actualcount;
+		if (!has(DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)].atrs, atr.moab)) totnonmoab += actualcount;
 	}
 	if (is_struct(BloonData.moab))
 	{
@@ -71,202 +86,168 @@ function bloonsplit(canthit = atr.none, instant = false)
 	{
 		spread = 20 * (maxspread - 1) / (tot - 1);
 	}
+	var bobBlow = false;
 	if (has(Atrs, atr.bob))
 	{
-		for (var i = 0; i < array_length(BloonData.spawns); i++)
+		bobBlow = true;
+	}
+	var ind = 0;
+	var ind2 = 0;
+	var tot2 = 1;
+	var spread2 = 20;
+	for (var i = 0; i < array_length(BloonData.spawns); i++)
+	{
+		var t = BloonData.spawns[i].type;
+		var mods = int64(0);
+		var bloonInd = array_get_index(DataManager.BloonOrd, t);
+		if (bloonInd == -1)
 		{
-			var t = BloonData.spawns[i].type;
-			var mods = int64(0);
-			var bloonInd = array_get_index(DataManager.BloonOrd, t);
-			if (bloonInd == -1)
+			mods |= getatrfromletter(string_char_at(t, 1));
+			t = string_delete(t, 1, 1);
+			bloonInd = array_get_index(DataManager.BloonOrd, t);
+		}
+		var bloonData = DataManager.BloonData[bloonInd];
+		mods |= Atrs & atr.inherit;
+		var ismoab = has(bloonData.atrs, atr.moab);
+		var isbob = has(bloonData.atrs, atr.bob);
+		if (isbob && has(Atrs, atr.stream)) { mods |= atr.camo; mods |= atr.regrow; }
+		if (has(Atrs, atr.fort) && hasany(bloonData.atrs, atr.canfort))
+		{
+			mods |= atr.fort;
+			if (isbob) mods |= atr.latex;
+		}
+		if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
+		if (GameManager.InheritanceMode)
+		{
+			mods |= Atrs & atr.extrainherit;
+			if (ismoab) mods |= Atrs & atr.extramoabinherit;
+			if (has(Atrs, atr.indigo) && typeIndex != 37 && typeIndex != 39) mods |= atr.indigo;
+			if (!hasany(bloonData.atrs, atr.lead | atr.aqua | atr.crystal))
 			{
-				mods |= getatrfromletter(string_char_at(t, 1));
-				t = string_delete(t, 1, 1);
-				bloonInd = array_get_index(DataManager.BloonOrd, t);
-			}
-			var bloonData = DataManager.BloonData[bloonInd];
-			mods |= Atrs & atr.inherit;
-			var isbob = has(bloonData.atrs, atr.bob);
-			if (isbob && has(Atrs, atr.stream)) { mods |= atr.camo; mods |= atr.regrow; }
-			if (has(Atrs, atr.fort) && hasany(bloonData.atrs, atr.canfort))
-			{
-				mods |= atr.fort;
-				if (isbob) mods |= atr.latex;
-			}
-			if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
-			var vari = {parent : id, type : t, Atrs : mods, hp : hp, bloonsplitcanthit : canthit};
-			if (has(Atrs, atr.regrow))
-			{
-				vari.regenTimer = regenTimer;
-				vari.highestRegrow = highestRegrow;
-				if (variable_struct_exists(BloonData.spawns[i], "disambig"))
+				var temp = -1;
+				var totalTemp = 0;
+				if (has(Atrs, atr.lead))
 				{
-					vari.regrowdisambig = BloonData.spawns[i].disambig;
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 0;
 				}
-				else if (variable_instance_exists(id, "regrowdisambig"))
+				if (has(Atrs, atr.aqua))
 				{
-					vari.regrowdisambig = regrowdisambig;
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 1;
 				}
+				if (has(Atrs, atr.crystal))
+				{
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 2;
+				}
+				if (temp == 0) mods |= atr.lead;
+				else if (temp == 1) mods |= atr.aqua;
+				else if (temp == 2) mods |= atr.crystal;
 			}
-			if (variable_instance_exists(id, "clayLockout") && !IsMoab && hasany(bloonData.atrs | mods, atr.clay | atr.regrow))
+			if (has(Atrs, atr.black) && !has(bloonData.atrs | mods, atr.lead)) mods |= atr.black;
+			if (has(Atrs, atr.white) && !has(bloonData.atrs | mods, atr.aqua)) mods |= atr.white;
+			if (has(Atrs, atr.purple) && !has(bloonData.atrs | mods, atr.crystal)) mods |= atr.purple;
+		}
+		var vari = {parent : id, type : t, Atrs : mods, hp : hp, bloonsplitcanthit : canthit};
+		if (has(Atrs, atr.regrow) || has(bloonData.atrs | mods, atr.clay))
+		{
+			if (variable_instance_exists(id, "regenTimer")) vari.regenTimer = regenTimer;
+			if (variable_instance_exists(id, "highestRegrow")) vari.highestRegrow = highestRegrow;
+			else vari.highestRegrow = typeIndex;
+			if (variable_struct_exists(BloonData.spawns[i], "disambig"))
 			{
-				vari.clayLockout = clayLockout;
+				vari.regrowdisambig = BloonData.spawns[i].disambig;
 			}
-			
-			for (var j = 0; j < BloonData.spawns[i].amt; j++)
+			else if (variable_instance_exists(id, "regrowdisambig"))
 			{
-				if (giveValue > 0)
+				vari.regrowdisambig = regrowdisambig;
+			}
+		}
+		if (variable_instance_exists(id, "clayLockout") && !IsMoab && hasany(bloonData.atrs | mods, atr.clay | atr.regrow))
+		{
+			vari.clayLockout = clayLockout;
+		}
+		
+		var normalcount = BloonData.spawns[i].amt;
+		var actualcount = normalcount;
+		if (has(Atrs, atr.bob | atr.fort))
+		{
+			actualcount = floor(actualcount * 4 / 3);
+		}
+		if (has(Atrs, atr.ustuffed))
+		{
+			actualcount = actualcount * 2;
+		}
+		else if (has(Atrs, atr.ostuffed))
+		{
+			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
+			else actualcount = floor(actualcount * 3 / 2);
+		}
+		if (ismoab && !bobBlow)
+		{
+			ind2 = 0;
+			tot2 = actualcount;
+			spread2 = 20;
+			if (tot2 > maxspread)
+			{
+				spread2 = 20 * (maxspread - 1) / (tot2 - 1);
+			}
+		}
+		for (var j = 0; j < actualcount; j++)
+		{
+			if (giveValue > 0)
+			{
+				if (j >= normalcount) vari.highestValue = -1;
+				else vari.highestValue = highestValue;
+			}
+			else if (giveValue == 0)
+			{
+				if (bloonData.downstream[highestValue])
 				{
 					vari.highestValue = highestValue;
+					giveValue = -1;
 				}
-				else if (giveValue == 0)
-				{
-					if (bloonData.downstream[highestValue])
-					{
-						vari.highestValue = highestValue;
-						giveValue = -1;
-					}
-					else vari.highestValue = -1;
-				}
-				else
-				{
-					vari.highestValue = -1;
-				}
-				if (shmup)
-				{
+				else vari.highestValue = -1;
+			}
+			else
+			{
+				vari.highestValue = -1;
+			}
+			if (bobBlow)
+			{
+				if (shmup) {
 					vari.dir = dir + random_range(0, 360);
 					array_push(childs, instance_create_layer(x, y, "Bloons", ShmupBloon, vari));
-				}
-				else
-				{
+				} else {
 					vari.path = path;
 					vari.patht = patht + random_range(-60, 60);
 					array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
 				}
 			}
-		}
-	}
-	else
-	{
-		var ind = 0;
-		for (var i = 0; i < array_length(BloonData.spawns); i++)
-		{
-			var t = BloonData.spawns[i].type;
-			var mods = int64(0);
-			var bloonInd = array_get_index(DataManager.BloonOrd, t);
-			if (bloonInd == -1)
+			else if (ismoab)
 			{
-				mods |= getatrfromletter(string_char_at(t, 1));
-				t = string_delete(t, 1, 1);
-				bloonInd = array_get_index(DataManager.BloonOrd, t);
-			}
-			var bloonData = DataManager.BloonData[bloonInd];
-			mods |= Atrs & atr.inherit;
-			var isbob = has(bloonData.atrs, atr.bob);
-			if (isbob && has(Atrs, atr.stream)) { mods |= atr.camo; mods |= atr.regrow; }
-			if (has(Atrs, atr.fort) && hasany(bloonData.atrs, atr.canfort))
-			{
-				mods |= atr.fort;
-				if (isbob) mods |= atr.latex;
-			}
-			if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
-			var vari = {parent : id, type : t, Atrs : mods, hp : hp, bloonsplitcanthit : canthit};
-			if (has(Atrs, atr.regrow) || has(bloonData.atrs | mods, atr.clay))
-			{
-				if (variable_instance_exists(id, "regenTimer")) vari.regenTimer = regenTimer;
-				if (variable_instance_exists(id, "highestRegrow")) vari.highestRegrow = highestRegrow;
-				else vari.highestRegrow = typeIndex;
-				if (variable_struct_exists(BloonData.spawns[i], "disambig"))
-				{
-					vari.regrowdisambig = BloonData.spawns[i].disambig;
+				if (shmup) {
+					vari.dir = dir + random_range(-3, 3);
+					array_push(childs, instance_create_layer(x + spread2 * dcos(dir) * (ind2 - tot2 / 2 + 1/2), y + spread2 * dsin(dir) * (ind2 - tot2 / 2 + 1/2), "Bloons", ShmupBloon, vari));
+				} else {
+					vari.path = path;
+					vari.patht = patht + spread2 * (ind2 - tot2 / 2 + 1/2);
+					array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
 				}
-				else if (variable_instance_exists(id, "regrowdisambig"))
-				{
-					vari.regrowdisambig = regrowdisambig;
-				}
-			}
-			if (variable_instance_exists(id, "clayLockout") && !IsMoab && hasany(bloonData.atrs | mods, atr.clay | atr.regrow))
-			{
-				vari.clayLockout = clayLockout;
-			}
-			
-			var ismoab = has(bloonData.atrs, atr.moab);
-			if (ismoab)
-			{
-				var ind2 = 0;
-				var tot2 = BloonData.spawns[i].amt;
-				var spread2 = 20;
-				if (tot2 > maxspread)
-				{
-					spread2 = 20 * (maxspread - 1) / (tot2 - 1);
-				}
-				for (var j = 0; j < BloonData.spawns[i].amt; j++)
-				{
-					if (giveValue > 0)
-					{
-						vari.highestValue = highestValue;
-					}
-					else if (giveValue == 0)
-					{
-						if (bloonData.downstream[highestValue])
-						{
-							vari.highestValue = highestValue;
-							giveValue = -1;
-						}
-						else vari.highestValue = -1;
-					}
-					else
-					{
-						vari.highestValue = -1;
-					}
-					if (shmup)
-					{
-						vari.dir = dir + random_range(-3, 3);
-						array_push(childs, instance_create_layer(x + spread2 * dcos(dir) * (ind2 - tot2 / 2 + 1/2), y + spread2 * dsin(dir) * (ind2 - tot2 / 2 + 1/2), "Bloons", ShmupBloon, vari));
-					}
-					else
-					{
-						vari.path = path;
-						vari.patht = patht + spread2 * (ind2 - tot2 / 2 + 1/2);
-						array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
-					}
-					ind2++;
-				}
+				ind2++;
 			}
 			else
 			{
-				for (var j = 0; j < BloonData.spawns[i].amt; j++)
-				{
-					if (giveValue > 0)
-					{
-						vari.highestValue = highestValue;
-					}
-					else if (giveValue == 0)
-					{
-						if (bloonData.downstream[highestValue])
-						{
-							vari.highestValue = highestValue;
-							giveValue = -1;
-						}
-						else vari.highestValue = -1;
-					}
-					else
-					{
-						vari.highestValue = -1;
-					}
-					if (shmup)
-					{
-						vari.dir = dir + random_range(-3, 3);
-						array_push(childs, instance_create_layer(x + spread * dcos(dir) * (ind - tot / 2 + 1/2), y + spread * dsin(dir) * (ind - tot / 2 + 1/2), "Bloons", ShmupBloon, vari));
-					}
-					else
-					{
-						vari.path = path;
-						vari.patht = patht + spread * (ind - tot / 2 + 1/2);
-						array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
-					}
-					ind++;
+				if (shmup) {
+					vari.dir = dir + random_range(-3, 3);
+					array_push(childs, instance_create_layer(x + spread * dcos(dir) * (ind - tot / 2 + 1/2), y + spread * dsin(dir) * (ind - tot / 2 + 1/2), "Bloons", ShmupBloon, vari));
+				} else {
+					vari.path = path;
+					vari.patht = patht + spread * (ind - tot / 2 + 1/2);
+					array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
 				}
+				ind++;
 			}
 		}
 	}

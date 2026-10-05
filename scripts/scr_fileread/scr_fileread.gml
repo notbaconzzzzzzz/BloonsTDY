@@ -54,7 +54,7 @@ function nextword()
 	var specialChar = ["{", "}", ";"];
 	if (discriminantMode)
 	{
-		specialChar = ["{", "}", ";", "[", "]", "(", ")", "<", ">", ",", "*", "!"];
+		specialChar = ["{", "}", ";", "[", "]", "(", ")", "<", ">", ",", "*", "!", "^"];
 	}
 	//var specialChar = ["/", "*", "&", "%", "+", "-", "=", "_", "|", ":", "'", "^", ">", "<"];
 	//var specialLetter = ["x", "s", "f"];
@@ -166,6 +166,15 @@ function parsebloondata()
 						if (isnumber(word))
 						{
 							bloonData.spawns[array_length(bloonData.spawns)-1].disambig = int64(word);
+						}
+						continue;
+					}
+					else if (word == "^")
+					{
+						nextword();
+						if (isnumber(word))
+						{
+							bloonData.spawns[array_length(bloonData.spawns)-1].overstuffedAmt = int64(word);
 						}
 						continue;
 					}
@@ -293,7 +302,7 @@ function parsebloondata()
 		BloonData[bloonInd] = bloonData;
 		BloonOrd[bloonInd] = bloonId;
 		bloonInd++;
-		bloonData.atrs |= atr.clay;
+		//bloonData.atrs |= atr.clay;
 	}
 	for (var i = 0; i < array_length(BloonData); i++)
 	{

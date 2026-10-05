@@ -23,32 +23,18 @@ if (PlayerModel.showUpgradeIndicators)
 				case 5: drawx -= dx; break;
 				case 6: drawx += dx; break;
 			}
-			var colorr = 255;
-			var colorg = 255;
-			var colorb = 255;
-			switch (i)
+			var k = PossibleUpgrades[getupgindex(i, j)];
+			switch (k)
 			{
-				case 1: {colorr = 244; colorg = 204; colorb = 204;} break;
-				case 2: {colorr = 201; colorg = 218; colorb = 248;} break;
-				case 3: {colorr = 252; colorg = 229; colorb = 205;} break;
-				case 4: {colorr = 217; colorg = 234; colorb = 211;} break;
-				case 5: {colorr = 217; colorg = 210; colorb = 233;} break;
-				case 6: {colorr = 255; colorg = 242; colorb = 204;} break;
+				case -2: draww *= 1; drawh *= 1/4; break;
+				case -1: draww *= 1; drawh *= 1/4; break;
+				case 0: draww *= 1; drawh *= 1/2; break;
+				case 1: draww *= 1; drawh *= 3/4; break;
+				case 2: draww *= 1; drawh *= 1; break;
 			}
-			colorr = colorr * (1 + j / 2) - 255 * (1 + j / 2 - 1);
-			colorg = colorg * (1 + j / 2) - 255 * (1 + j / 2 - 1);
-			colorb = colorb * (1 + j / 2) - 255 * (1 + j / 2 - 1);
-			var colora = 15;
-			switch (PossibleUpgrades[getupgindex(i, j)])
-			{
-				case -2: colora = 15; draww *= 1; drawh *= 1/4; break;
-				case -1: colora = 63; draww *= 1; drawh *= 1/4; colorr = 255 / 4 + colorr / 2; colorg = 255 / 4 + colorg / 2; colorb = 255 / 4 + colorb / 2; break;
-				case 0: colora = 127; draww *= 1; drawh *= 1/2; colorr = colorr * 3 / 4; colorg = colorg * 3 / 4; colorb = colorb * 3 / 4; break;
-				case 1: colora = 127; draww *= 1; drawh *= 3/4; colorr = 255 / 4 + colorr * 3 / 4; colorg = 255 / 4 + colorg * 3 / 4; colorb = 255 / 4 + colorb * 3 / 4; break;
-				case 2: colora = 255; draww *= 1; drawh *= 1; break;
-			}
-			draw_set_color(make_color_rgb(colorr, colorg, colorb));
-			draw_set_alpha(colora / 255);
+			var colIndex = j*30 + i*5 + k - 33;
+			draw_set_color(UpgradeColors[colIndex]);
+			draw_set_alpha(UpgradeAlphas[colIndex]);
 			draw_rectangle(drawx - draww/2, drawy - drawh/2, drawx + draww/2 - 1, drawy + drawh/2 - 1, false);
 		}
 	}

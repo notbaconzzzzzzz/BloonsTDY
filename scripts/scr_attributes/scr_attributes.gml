@@ -40,7 +40,9 @@ enum atr
 	canhive = atr.moab | atr.honey,
 	inherit = atr.camo | atr.regrow | atr.stream | atr.latex | atr.ostuffed | atr.ustuffed,
 	allinherit = atr.camo | atr.regrow | atr.stream | atr.fort | atr.latex | atr.ostuffed | atr.ustuffed | atr.hive,
-	spriteindexed = ((int64(1) << 32) - (int64(1) << 2)) - atr.stream, // - atr.latex,
+	extrainherit = atr.titan | atr.amber | atr.ice | atr.hex | atr.clay,
+	extramoabinherit = atr.hah | atr.kant | atr.tide,
+	spriteindexed = ((int64(1) << 31) - (int64(1) << 2)) - atr.stream, // - atr.latex,
 	allall = (int64(1) << 32) - int64(1),
 }
 

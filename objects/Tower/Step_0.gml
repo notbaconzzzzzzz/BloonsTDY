@@ -54,5 +54,6 @@ if (NextRandUp != -1 && PlayerModel.autobuyupgrade)
 		}
 		if (array_length(temp) <= 0) NextRandUp = -1;
 		else NextRandUp = temp[irandom_range(0, array_length(temp) - 1)];
+		//if (array_contains(temp, 3)) NextRandUp = 3;
 	}
 }

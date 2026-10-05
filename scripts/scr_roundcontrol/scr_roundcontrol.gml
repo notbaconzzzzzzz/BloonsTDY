@@ -111,6 +111,7 @@ function spawnrandombloon()
 	type = DataManager.BloonOrd[o];
 	var mods = atr.none;
 	if (random(1) < clamp((currentRound / ((bloonData.spd >= 200 || bloonData.type == "bbt") ? 1.5 : 1) - 40) / 60 * 0.5, 0, 0.5)) mods |= atr.stream;
+	if (o > 4 && random(1) < clamp((currentRound / ((bloonData.dmg >= 100) ? 3 : 1) - 25) / 75 * 0.5, 0, 0.5)) mods |= atr.ostuffed;
 	if (!has(bloonData.atrs, atr.moab) || hasany(bloonData.atrs, atr.bob | atr.honey))
 	{
 		if (random(1) < clamp((currentRound / (hasany(bloonData.atrs, atr.canthits) ? 1.5 : 1) - 10) / 70 * 0.5, 0, 0.5)) mods |= atr.camo;
@@ -155,6 +156,7 @@ function spawnbloon(type, mods = -1, removemods = -1)
 function getbloonweight(bloon, difficulty = -1, remainingbudget = -1, remainingbloons = -1, scale = true)
 {
 	if (!GameManager.HoneyBloons && bloon.ind >= 40 && bloon.ind <= 44) return 0;
+	if (!GameManager.HarbingerBloon && bloon.ind == 45) return 0;
 	if (!(true) && bloon.ind == 45) return 0;
 	if (difficulty == -1) difficulty = dif;
 	if (scale && remainingbudget == -1) remainingbudget = budget;
@@ -215,6 +217,7 @@ function getbloonaveragedif(difficulty = -1)
 	{
 		var bloon = DataManager.BloonData[i];
 		if (!GameManager.HoneyBloons && bloon.ind >= 40 && bloon.ind <= 44) continue;
+		if (!GameManager.HarbingerBloon && bloon.ind == 45) continue;
 		var d = bloon.dif;
 		var d2 = d;
 		var size = 1;

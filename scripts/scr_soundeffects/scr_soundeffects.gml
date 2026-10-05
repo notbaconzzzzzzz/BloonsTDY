@@ -80,7 +80,7 @@ function getpopsoundid(inst)
 	//if (has(inst.Atrs, atr.aqua)) return blnsnd.popaqua;
 	if (has(inst.Atrs, atr.titan) || inst.type == "brick") return blnsnd.poptough;
 	if (has(inst.Atrs, atr.ceramic)) return blnsnd.popceram;
-	if (hasany(inst.Atrs, atr.crystal | atr.frozen | atr.ice)) return blnsnd.popglass;
+	if (hasany(inst.Atrs, atr.frozen | atr.ice)) return blnsnd.popglass; // atr.crystal
 	return blnsnd.pop;
 }
 

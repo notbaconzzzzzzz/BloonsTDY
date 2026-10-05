@@ -25,8 +25,41 @@ if (has(Atrs, atr.regrow))
 					typeIndex = growinto;
 					type = DataManager.BloonOrd[typeIndex];
 					BloonData = DataManager.BloonData[typeIndex];
-					Atrs &= atr.allinherit;
-					Atrs |= BloonData.atrs;
+					var tempAtrs = Atrs;
+					Atrs = BloonData.atrs;
+					Atrs |= tempAtrs & atr.allinherit;
+					if (GameManager.InheritanceMode)
+					{
+						Atrs |= tempAtrs & atr.extrainherit;
+						if (has(Atrs, atr.moab)) Atrs |= tempAtrs & atr.extramoabinherit;
+						if (has(tempAtrs, atr.indigo)) Atrs |= atr.indigo;
+						if (!hasany(Atrs, atr.lead | atr.aqua | atr.crystal))
+						{
+							var temp = -1;
+							var totalTemp = 0;
+							if (has(tempAtrs, atr.lead))
+							{
+								totalTemp++;
+								if (random(totalTemp) <= 1) temp = 0;
+							}
+							if (has(tempAtrs, atr.aqua))
+							{
+								totalTemp++;
+								if (random(totalTemp) <= 1) temp = 1;
+							}
+							if (has(tempAtrs, atr.crystal))
+							{
+								totalTemp++;
+								if (random(totalTemp) <= 1) temp = 2;
+							}
+							if (temp == 0) Atrs |= atr.lead;
+							else if (temp == 1) Atrs |= atr.aqua;
+							else if (temp == 2) Atrs |= atr.crystal;
+						}
+						if (has(tempAtrs, atr.black) && !has(Atrs, atr.lead)) Atrs |= atr.black;
+						if (has(tempAtrs, atr.white) && !has(Atrs, atr.aqua)) Atrs |= atr.white;
+						if (has(tempAtrs, atr.purple) && !has(Atrs, atr.crystal)) Atrs |= atr.purple;
+					}
 
 					MaxHp = BloonData.hp;
 					Spd = BloonData.spd;
@@ -73,7 +106,6 @@ if (has(Atrs, atr.regrow))
 								clayLockout = int64(0);
 							}
 							if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
-							else if (highestRegrow < typeIndex) clayLockout |= int64(1) << typeIndex;
 						}
 					}
 

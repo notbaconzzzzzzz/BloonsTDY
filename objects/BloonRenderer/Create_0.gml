@@ -16,6 +16,7 @@ colors = [
 [make_color_hsv(0/360*255, 0, 212), make_color_hsv(0/360*255, 0, 212/2)],
 [make_color_hsv(275/360*255, 220, 224), make_color_hsv(195/360*255, 204, 255), make_color_hsv(275/360*255, 220, 224/2)]
 ];
+InheritanceMode = true;
 drawQueue = [];
 for (var i = 0; i < array_length(DataManager.BloonData); i++)
 {

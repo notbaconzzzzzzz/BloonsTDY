@@ -7,3 +7,9 @@ critDart = 0;
 superCrit = 0;
 doubleDart = 0;
 airburst = 0;
+
+reactorTimer = 0;
+bloontoniumCharges = 0;
+bloontoniumTimer = 0;
+catalystStacks = 0;
+catalystTimer = 0;

@@ -2,7 +2,7 @@ if (debug)
 {
 	//spawnbloon("moab");
 	
-	/*
+	
 	var type = "bob";
 	var mods = atr.none;
 	if (keyboard_check(vk_control)) type = "bteab";
@@ -18,8 +18,8 @@ if (debug)
 			mods |= atr.camo;
 		}
 	}
-	spawnbloon(type, mods);*/
-	
+	spawnbloon(type, mods);
+	/*
 	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
 		if (has(DataManager.BloonData[i].atrs, atr.clay) && i <= 37)
@@ -27,6 +27,6 @@ if (debug)
 			spawnbloon(i);
 		}
 	}
-	spawnbloon("brick");
+	spawnbloon("brick");*/
 }
 ticksPasted = 0;

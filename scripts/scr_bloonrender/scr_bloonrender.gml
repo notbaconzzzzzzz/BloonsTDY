@@ -109,7 +109,7 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			camoShades[1] = 0.36;
 			camoShades[2] = 0.45;
 			camoShades[3] = 0.45;
-		}
+		}/*
 		else if (bloonData.type == "green")
 		{
 			camoShades[4] = camoShades[0];
@@ -119,7 +119,7 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		{
 			camoShades[0] = 1.2;
 			camoShades[1] = 1.35;
-		}
+		}*/
 		else if (bloonData.type == "black")
 		{
 			camoShades[0] = -0.1;
@@ -134,6 +134,8 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	var lead = has(mods, atr.lead);
 	var ice = has(mods, atr.ice);
 	var ceram = has(mods, atr.ceramic);
+	var brick = ceram && bloonData.type == "brick";
+	if (brick) ceram = false;
 	var titan = has(mods, atr.titan);
 	var crystal = has(mods, atr.crystal);
 	var amber = has(mods, atr.amber);
@@ -141,6 +143,8 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	var kant = has(mods, atr.kant);
 	var bob = has(mods, atr.bob);
 	var hex = has(mods, atr.hex);
+	var clay = has(mods, atr.clay);
+	var indigo = has(mods, atr.indigo) && bloonData.type != "indigo" && bloonData.type != "bad" && bloonData.type != "bteab" && bloonData.type != "bteabmega";
 	var bloonBase = BloonBase;
 	var sizeMultipier = 1;
 	var baseSize = 128;
@@ -210,8 +214,10 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	}
 	else
 	{
+		/*
 		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
-		draw_sprite_ext(bloonBase, 0, 400, 400, 1, 1, 0, col, 1);
+		if (brick) col = make_color_hsv(bloonData.colors[1].h/360*255, bloonData.colors[1].s*2, bloonData.colors[1].v/2);
+		draw_sprite_ext(bloonBase, 0, 400, 400, 1, 1, 0, col, 1);*/
 		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v);
 		draw_sprite_ext(bloonBase, 1, 400, 400, 1, 1, 0, col, 1);
 	}
@@ -269,7 +275,16 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		gpu_set_colorwriteenable(true, true, true, false);
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
 		col = make_color_hsv(0/360*255, 0, 16);
-		draw_sprite_ext(ZebraPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
+		if (indigo)
+		{
+			draw_sprite_ext(ZebraPattern, 1, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
+			col = make_color_hsv(260/360*255, 232, 162);
+			draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		}
+		else
+		{
+			draw_sprite_ext(ZebraPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
+		}
 		gpu_set_colorwriteenable(true, true, true, true);
 		gpu_set_blendmode(bm_normal);
 	}
@@ -277,10 +292,22 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	{
 		gpu_set_colorwriteenable(true, true, true, false);
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
-		col = make_color_hsv(0/360*255, 0, 0);
-		draw_sprite_ext(ZebraPattern, 1, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
-		col = make_color_hsv(0/360*255, 0, 255);
-		draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		if (indigo)
+		{
+			col = make_color_hsv(0/360*255, 0, 0);
+			draw_sprite_ext(ZebraPattern, 3, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+			col = make_color_hsv(0/360*255, 0, 255);
+			draw_sprite_ext(ZebraPattern, 4, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+			col = make_color_hsv(260/360*255, 232, 162);
+			draw_sprite_ext(ZebraPattern, 5, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		}
+		else
+		{
+			col = make_color_hsv(0/360*255, 0, 0);
+			draw_sprite_ext(ZebraPattern, 1, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+			col = make_color_hsv(0/360*255, 0, 255);
+			draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		}
 		gpu_set_colorwriteenable(true, true, true, true);
 		gpu_set_blendmode(bm_normal);
 	}
@@ -290,6 +317,11 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
 		col = make_color_hsv(0/360*255, 0, 0);
 		draw_sprite_ext(ZebraPattern, 1, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		if (indigo)
+		{
+			col = make_color_hsv(260/360*255, 232, 162);
+			draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		}
 		gpu_set_colorwriteenable(true, true, true, true);
 		gpu_set_blendmode(bm_normal);
 	}
@@ -299,6 +331,20 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
 		col = make_color_hsv(0/360*255, 0, 255);
 		draw_sprite_ext(ZebraPattern, 1, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		if (indigo)
+		{
+			col = make_color_hsv(260/360*255, 232, 162);
+			draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
+		}
+		gpu_set_colorwriteenable(true, true, true, true);
+		gpu_set_blendmode(bm_normal);
+	}
+	else if (indigo)
+	{
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
+		col = make_color_hsv(260/360*255, 232, 162);
+		draw_sprite_ext(ZebraPattern, 2, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.8);
 		gpu_set_colorwriteenable(true, true, true, true);
 		gpu_set_blendmode(bm_normal);
 	}
@@ -315,34 +361,50 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	gpu_set_colorwriteenable(true, true, true, false);
 	if (kant)
 	{
-		gpu_set_blendmode_ext(bm_zero, bm_inv_src_alpha);
-		draw_sprite_ext(KantPattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, c_black, 0.1);
 		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(KantPattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, bloonData.type == "black" ? c_gray : c_black, 0.1);
+	}
+	if (clay)
+	{
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(ClayPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, make_color_hsv(0/360*255, 192, 64), 0.33);
 	}
 	if (aqua)
 	{
 		col = make_color_rgb(0, 0, 128);
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
-		draw_sprite_ext(AquaPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, camo ? 0.4 : 0.2);
+		draw_sprite_ext(AquaPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.2);
 		gpu_set_blendmode(bm_normal);
 	}
 	if (ceram)
 	{
 		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
+		if (bloonData.type == "black") col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v + 64);
 		gpu_set_blendmode(bm_normal);
 		draw_sprite_ext(CeramicPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
+	}
+	if (brick)
+	{
+		col = make_color_hsv(bloonData.colors[1].h/360*255, bloonData.colors[1].s, bloonData.colors[1].v);
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(BrickPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 1);
 	}
 	if (lead)
 	{
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
-		draw_sprite_ext(LeadPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_black, 0.5);
+		draw_sprite_ext(LeadPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, bloonData.type == "black" ? c_gray : c_black, 0.5);
 		gpu_set_blendmode(bm_normal);
 	}
 	if (titan)
 	{
 		gpu_set_blendmode_ext(bm_src_alpha, bm_inv_src_alpha);
-		draw_sprite_ext(TitanPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_black, 0.5);
+		draw_sprite_ext(TitanPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, bloonData.type == "black" ? c_gray : c_black, 0.5);
 		gpu_set_blendmode(bm_normal);
+	}
+	if (latex)
+	{
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(LatexPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, c_white, 0.25); //bloonData.type == "white" ? c_gray : c_white, 0.5);
 	}
 	if (ice)
 	{
@@ -351,16 +413,12 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		draw_sprite_ext(IcePattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 0.5);
 		gpu_set_blendmode(bm_normal);
 	}
-	if (hah)
-	{
-		gpu_set_blendmode(bm_normal);
-		draw_sprite_ext(HahPattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, c_red, 0.5);
-	}
 	if (hex)
 	{
 		var h = bloonData.colors[0].h;
 		var v = bloonData.colors[0].v * 2;
 		var s = bloonData.colors[0].s;
+		if (bloonData.type == "black") v = 192;
 		if (v > 255) 
 		{
 			s /= v / 255;
@@ -372,16 +430,30 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		draw_sprite_ext(HexPattern, 0, 400, 400, overlayStretchX, overlayStretchY, overlayRotate, col, 2/3);
 		gpu_set_blendmode(bm_normal);
 	}
+	if (hah)
+	{
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(HahPattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, c_red, 0.5);
+	}
 	gpu_set_colorwriteenable(true, true, true, true);
 
 
 
+	col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
+	if (brick) col = make_color_hsv(bloonData.colors[1].h/360*255, bloonData.colors[1].s*2, bloonData.colors[1].v/2);
+	draw_sprite_ext(bloonBase, 3, 400, 400, 1, 1, 0, col, 1);
 	if (purple)
 	{
 		//col = make_color_hsv(bloonData.colors[1].h/360*255, bloonData.colors[1].s, bloonData.colors[1].v);
 		var h = ((bloonData.colors[0].h - 80 + 360 + 60 - 240) % 120) - 60 + 240;
 		var v = min(bloonData.colors[0].v / 2 + 162, 255);
 		var s = max(bloonData.colors[0].s - 16, 0);
+		if (brick)
+		{
+			h = ((bloonData.colors[1].h - 80 + 360 + 60 - 240) % 120) - 60 + 240;
+			v = min(bloonData.colors[1].v / 2 + 162, 255);
+			s = max(bloonData.colors[1].s - 16, 0);
+		}
 		col = make_color_hsv(h/360*255, s, v);
 		draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, col, 1);
 	}
@@ -391,7 +463,8 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	}
 	else
 	{
-		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s, bloonData.colors[0].v/2);
+		col = make_color_hsv(bloonData.colors[0].h/360*255, bloonData.colors[0].s*2, bloonData.colors[0].v/2);
+		if (brick) col = make_color_hsv(bloonData.colors[1].h/360*255, bloonData.colors[1].s, bloonData.colors[1].v/2);
 		draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, col, 1);
 	}
 	
@@ -424,6 +497,39 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			var bloonData2 = DataManager.BloonData[ind2];
 			mods2 |= bloonData2.atrs;
 			mods2 &= ~atr.fort;
+			if (InheritanceMode)
+			{
+				mods2 |= mods & atr.extrainherit;
+				if (has(mods2, atr.moab)) mods2 |= mods & atr.extramoabinherit;
+				if (has(mods, atr.indigo) && bloonInd != 37 && bloonInd != 39) mods2 |= atr.indigo;
+				if (!hasany(mods2, atr.lead | atr.aqua | atr.crystal))
+				{
+					var temp = -1;
+					var totalTemp = 0;
+					if (has(mods, atr.lead))
+					{
+						totalTemp++;
+						temp = 0;
+					}
+					if (has(mods, atr.aqua))
+					{
+						totalTemp++;
+						temp = 1;
+					}
+					if (has(mods, atr.crystal))
+					{
+						totalTemp++;
+						temp = 2;
+					}
+					if (totalTemp > 1) temp = -1;
+					if (temp == 0) mods2 |= atr.lead;
+					else if (temp == 1) mods2 |= atr.aqua;
+					else if (temp == 2) mods2 |= atr.crystal;
+				}
+				if (has(mods, atr.black) && !has(mods2, atr.lead)) mods2 |= atr.black;
+				if (has(mods, atr.white) && !has(mods2, atr.aqua)) mods2 |= atr.white;
+				if (has(mods, atr.purple) && !has(mods2, atr.crystal)) mods2 |= atr.purple;
+			}
 			mods2 &= atr.spriteindexed;
 			var spriteIndex2 = calculatespriteindex(ind2, mods2);
 			drawbloonsprite(spriteIndex2, 0, true);
@@ -448,12 +554,12 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 		surface_set_target(surf2);
 		gpu_set_colorwriteenable(true, true, true, true);
 		draw_clear_alpha(c_black, 0);
-		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, latex ? 0.75 : 0.5); // 1 - (1 - 0.15) / (1 - 0.15 / 4));
+		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.5); // 1 - (1 - 0.15) / (1 - 0.15 / 4));
 		gpu_set_blendmode(bm_subtract);
 		draw_sprite_ext(bloonBase, 2, 400, 400, 1, 1, 0, c_white, 1);
 		draw_sprite_ext(bloonBase, 3, 400, 400, 1, 1, 0, c_white, 1);
 		gpu_set_blendmode(bm_normal);
-		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, latex ? 0.25 : 0.15);
+		draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
 		gpu_set_blendmode(bm_subtract);
 		draw_sprite_ext(bloonBase, 4, 400, 400, 1, 1, 0, c_white, 1);
 		gpu_set_blendmode(bm_normal);
@@ -465,10 +571,6 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			
 		//draw_sprite_ext(bloonBase, 6, 400, 400, 1, 1, 0, c_white, 0.15);
 		//
-		if (latex)
-		{
-			draw_sprite_ext(bloonBase, 5, 400 - 8, 400 + 4, 1, 1, 0, c_white, 0.5);
-		}
 		draw_sprite_ext(bloonBase, 5, 400, 400, 1, 1, 0, c_white, 0.75);
 	
 		if (fort)

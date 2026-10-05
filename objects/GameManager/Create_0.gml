@@ -2,7 +2,7 @@
 // You can write your code in this editor
 datafileread();
 Difficulty = "Normal";
-StartingMoney = 650 * 10;
+StartingMoney = 650;
 StartingLifes = 150;
 StartRound = 1;
 EndRound = 80;
@@ -15,13 +15,15 @@ HardHpFactor = 100;
 BloonIncomeFactor = 100;
 RoundIncomeFactor = 100;
 FarmIncomeFactor = 100;
-AllIncomeFactor = 100 * 10;
+AllIncomeFactor = 100;
 LifeIncomeFactor = 100;
 LifeSlowThreshold = 1000;
 LifeSlowFactor = 10;
 MaxLifes = 5000;
-HoneyBloons = false;
-TrackLoop = false;
+HoneyBloons = true;
+HarbingerBloon = true;
+TrackLoop = true;
+InheritanceMode = true;
 
 bloonIncomeMult = 100; // 51+: 80,  61+: 50,  86+: 34,  101+: 20,  121+: 10
 roundIncomeMult = 100; // 51+: 120, 61+: 150, 86+: 200, 101+: 300, 121+: 500

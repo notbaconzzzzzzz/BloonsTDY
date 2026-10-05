@@ -34,6 +34,185 @@ hitdetection(x, y, rad, "radial", function(inst)
 	var flag = false;
 	if (has(cantHits, atr.clay) && has(inst.Atrs, atr.clay))
 	{
+		if (!is_int64(inst.clayLockout))
+		{
+			if (inst.clayLockout <= inst.MaxHp - inst.hp)
+			{
+				flag = true;
+				if (mibratio > 0)
+				{
+					if (dmg > 1) dmg = ceil(dmg * mibratio / 100);
+					else pierce -= ceil(100 / mibratio) - 1;
+				}
+				else
+				{
+					with (inst)
+					{
+						var heal = floor(25 * power(3, (is_struct(BloonData.moab) ? BloonData.moab.class : 0) - 1));
+						if (heal + other.dmg > MaxHp - clayLockout) heal = MaxHp - clayLockout - other.dmg;
+						if (heal + hp > MaxHp) heal = MaxHp - hp;
+						hp += heal;
+						clayLockout += heal + other.dmg;
+					}
+					playbloonsound(blnsnd.hitclay);
+					dmg = 0;
+					if (cantHits & (inst.Atrs & ~atr.camo & ~atr.clay) != atr.none)
+					{
+						if (destroyoncanthit)
+						{
+							pierce = 0;
+							return true;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			var highre = variable_instance_exists(inst, "highestRegrow") ? inst.highestRegrow : -1;
+			if (highre == inst.typeIndex) highre = -1;
+			var growinto = getregrownext(inst.typeIndex, highre, variable_instance_exists(inst, "regrowdisambig") ? inst.regrowdisambig : -1, inst.BloonData);
+			if (inst.highestRegrow >= inst.typeIndex && growinto != -1 && inst.clayLockout & (int64(1) << growinto) == 0)
+			{
+				flag = true;
+				if (mibratio > 0)
+				{
+					if (dmg > 1) dmg = ceil(dmg * mibratio / 100);
+					else pierce -= ceil(100 / mibratio) - 1;
+				}
+				else
+				{
+					with (inst)
+					{
+						clayLockout |= int64(1) << growinto;
+						typeIndex = growinto;
+						type = DataManager.BloonOrd[typeIndex];
+						BloonData = DataManager.BloonData[typeIndex];
+						var tempAtrs = Atrs;
+						Atrs = BloonData.atrs;
+						Atrs |= tempAtrs & atr.allinherit;
+						if (GameManager.InheritanceMode)
+						{
+							Atrs |= tempAtrs & atr.extrainherit;
+							if (has(Atrs, atr.moab)) Atrs |= tempAtrs & atr.extramoabinherit;
+							if (has(tempAtrs, atr.indigo)) Atrs |= atr.indigo;
+							if (!hasany(Atrs, atr.lead | atr.aqua | atr.crystal))
+							{
+								var temp = -1;
+								var totalTemp = 0;
+								if (has(tempAtrs, atr.lead))
+								{
+									totalTemp++;
+									if (random(totalTemp) <= 1) temp = 0;
+								}
+								if (has(tempAtrs, atr.aqua))
+								{
+									totalTemp++;
+									if (random(totalTemp) <= 1) temp = 1;
+								}
+								if (has(tempAtrs, atr.crystal))
+								{
+									totalTemp++;
+									if (random(totalTemp) <= 1) temp = 2;
+								}
+								if (temp == 0) Atrs |= atr.lead;
+								else if (temp == 1) Atrs |= atr.aqua;
+								else if (temp == 2) Atrs |= atr.crystal;
+							}
+							if (has(tempAtrs, atr.black) && !has(Atrs, atr.lead)) Atrs |= atr.black;
+							if (has(tempAtrs, atr.white) && !has(Atrs, atr.aqua)) Atrs |= atr.white;
+							if (has(tempAtrs, atr.purple) && !has(Atrs, atr.crystal)) Atrs |= atr.purple;
+						}
+
+						MaxHp = BloonData.hp;
+						Spd = BloonData.spd;
+						if (has(Atrs, atr.latex))
+						{
+							if (has(Atrs, atr.moab))
+							{
+								switch (is_struct(BloonData.moab) ? BloonData.moab.class : 1)
+								{
+									case 0: MaxHp += 5; break;
+									case 1: MaxHp += 25; break;
+									case 2: MaxHp += 100; break;
+									case 3: MaxHp += 400; break;
+									case 4: MaxHp += 1500; break;
+								}
+							}
+							else MaxHp += 1;
+						}
+						if (has(Atrs, atr.fort))
+						{
+							if (has(Atrs, atr.hardy))
+							{
+								MaxHp += 1;
+								Atrs |= atr.hard;
+							}
+							MaxHp *= 2;
+						}
+						if (has(Atrs, atr.mega)) MaxHp *= 10;
+						if (has(Atrs, atr.stream))
+						{
+							if (is_struct(BloonData.moab)) Spd += BloonData.moab.stream;
+							else Spd += 100;
+						}
+						if (has(Atrs, atr.clay))
+						{
+							if (IsMoab)
+							{
+								clayLockout = 0;
+							}
+							else
+							{
+								if (!variable_instance_exists(id, "clayLockout") || !is_int64(clayLockout))
+								{
+									clayLockout = int64(0);
+								}
+								if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
+							}
+						}
+
+						if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
+						else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
+						Spd = round(Spd * GameManager.SpeedFactor / 100);
+
+						if (has(Atrs, atr.moab))
+						{
+							blimp = true;
+							if (type == "bob" || type == "bobmega") blimp = false;
+							else if (type == "honey1" || type == "honey2" || type == "honey3" || type == "honey4" || type == "honey5") blimp = false;
+						}
+						else
+						{
+							blimp = false;
+						}
+						rad = BloonData.size / 2;
+
+						hp = MaxHp;
+						var sprind = calculatespriteindex(typeIndex, Atrs);
+						var spr = BloonRenderer.BloonSprites[? sprind];
+						if (is_undefined(spr))
+						{
+							sprite_index = -1;
+							if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
+						}
+						else sprite_index = spr;
+						if (has(Atrs, atr.regrow)) rad *= 1.25;
+					}
+					playbloonsound(blnsnd.hitclay);
+					dmg = 0;
+					if (cantHits & (inst.Atrs & ~atr.camo & ~atr.clay) != atr.none)
+					{
+						if (destroyoncanthit)
+						{
+							pierce = 0;
+							return true;
+						}
+					}
+				}
+			}
+		}
+		/*
 		if (inst.IsMoab ? (inst.clayLockout <= inst.MaxHp - inst.hp) : (!variable_instance_exists(inst, "clayLockout") || inst.clayLockout & (int64(1) << inst.typeIndex) == 0))
 		{
 			flag = true;
@@ -165,6 +344,7 @@ hitdetection(x, y, rad, "radial", function(inst)
 				}
 			}
 		}
+		*/
 	}
 	if (cantHits & (inst.Atrs & ~atr.camo & ~atr.clay) != atr.none && !flag)
 	{
