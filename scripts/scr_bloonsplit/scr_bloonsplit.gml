@@ -58,6 +58,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 		{
 			t = string_delete(t, 1, 1);
 		}
+		var bloonData = DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)];
 		var normalcount = BloonData.spawns[i].amt;
 		var actualcount = normalcount;
 		if (has(Atrs, atr.bob | atr.fort))
@@ -73,8 +74,11 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
+		
+		//if (!has(bloonData.atrs, atr.moab)) actualcount = 1;
+		
 		tot += actualcount;
-		if (!has(DataManager.BloonData[array_get_index(DataManager.BloonOrd, t)].atrs, atr.moab)) totnonmoab += actualcount;
+		if (!has(bloonData.atrs, atr.moab)) totnonmoab += actualcount;
 	}
 	if (is_struct(BloonData.moab))
 	{
@@ -116,6 +120,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 			mods |= atr.fort;
 			if (isbob) mods |= atr.latex;
 		}
+		if (has(Atrs, atr.camo) && (!has(bloonData.atrs, atr.moab) || hasany(bloonData.atrs, atr.bob | atr.honey))) mods |= atr.camo;
 		if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
 		if (GameManager.InheritanceMode)
 		{
@@ -184,6 +189,9 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
+		
+		//if (!has(bloonData.atrs, atr.moab)) actualcount = 1;
+		
 		if (ismoab && !bobBlow)
 		{
 			ind2 = 0;
