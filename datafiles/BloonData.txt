@@ -23,24 +23,24 @@ indigo	2.8 5	(52)	{indigo heavy}	[2*orange]	<260 232 162>
 hex	3.3 10	(58)	{hex heavy}	[2*indigo]	<275 232 255>
 clay	1.7 5	(64)	{clay ceramic}	[2*orange]	<10 162 128>
 brick	2.3 25	(67)	{ceramic heavy}	[clay 2*ceramic]	<5 162 162, 45 32 192>
-moab	1.00 200	(200 1 0.50 [red blue green white teal])	{moab}	[4*ceramic]	<210 212 234>
-bfb	0.25 700	(250 2 0.15 [red yellow purple violet orange])	{moab}	[4*moab]	<0 212 234>
-zomg	0.18 4000	(300 3 0.12 [red blue green yellow pink violet black teal lime rainbow])	{moab}	[4*bfb]	<80 116 128>
-ddt	2.75 400	(175 1 0.75 [red pink black lead zebra])	{moab camo lead black heavy}	[4*rceramic]	<0 0 128>
-bad	0.18 20000	(350 3 0.12 [blue violet black teal orange rainbow indigo ceramic brick hex])	{moab indigo}	[2*zomg 3*ddt]	<275 220 224>
-rhs	1.20 225	(200 1 0.55 [blue green purple lime zebra])	{moab black white purple clay}	[4*hex]	<105 128 128>
-ocd	0.37 500	(200 1 0.21 [green yellow white teal ice])	{moab crystal ice}	[4*brick]	<195 64 255>
-bob	1.50 100	(225 1 0.60 [red blue green yellow pink])	{moab bob}	[24*rainbow 3*hex 3*ice 3*amber 3*titanium]	<60 192 255>
-bbt	1.80 300	(175 1 0.60 [blue yellow violet white aqua])	{moab aqua white heavy hex tide}	[2*rtitanium 2*ramber 2*rice]	<225 192 192>
-hah	0.30 900	(250 2 0.17 [yellow violet lime orange indigo])	{moab hah}	[3*rhs]	<30 192 96>
-kant	0.22 1600	(250 2 0.14 [pink teal lime orange ceramic])	{moab kant}	[3*ocd]	<135 64 64>
-mpv	0.65 800	(225 2 0.35 [pink purple orange amber titanium])	{moab hah kant}	[2*bbt 6*lbrick 6*lhex]	<300 128 80>
-bteab	0.15 50000	(400 3 0.10 [red green pink black white purple lime lead aqua ice amber titanium brick hex moab])	{moab titan amber indigo hex tide heavy}	[bad 2*kant 2*hah 2*mpv 6*bob]	<240 192 255>
-bobmega	0.25 1000	(300 3 0.15 [violet teal lime orange indigo])	{mega moab bob}	[1*bteab 2*bad 3*mpv 3*kant 3*hah 3*zomg 5*ddt 5*bfb 5*bbt 5*ocd 5*rhs 10*bob 10*moab 20*brick 20*hex 20*ice 20*amber 20*titanium 20*clay 20*crystal 30*ceramic 30*indigo 30*lead 30*aqua 30*purple 50*rainbow 80*zebra 120*black 120*white 50*orange 60*lime 70*teal 80*violet 200*pink 250*yellow 300*green 350*blue 400*red]	<60 192 255>
-bteabmega	0.06 50000	(500 4 0.06 [ice moab rhs amber ocd bob titanium ddt bbt brick bfb hah hex kant mpv])	{mega moab titan amber indigo hex tide hah kant ceramic heavy honey black white purple lead aqua crystal ice clay camo regrow fort latex stream hive}	[6*bobmega]	<240 192 255>
-honey1	0.80 20	(80 0 0.55)	{moab honey hive [red]}	[4*syellow]	<50 255 255>
-honey2	0.80 25	(82 0 0.55)	{moab honey hive white [blue]}	[4*spink]	<330 224 224>
-honey3	0.80 30	(84 0 0.55)	{moab honey hive black [green]}	[2*sblack 2*syellow]	<55 224 255>
-honey4	0.80 40	(86 0 0.55)	{moab honey hive purple [yellow]}	[2*spurple 2*spink]	<315 192 224>
-honey5	0.80 50	(88 0 0.55)	{moab honey hive [pink]}	[2*srainbow]	<20 200 234, 32 232 255, 45 255 255, 53 232 255, 280 100 234, 330 150 212>
-harbinger	0.37 1200	(250 2 0.21 [green purple teal zebra crystal])	{moab purple hex}	[3*bbt 6*chex]	<175 192 128>
+moab	1.00 200	(200 1 0.50 [4*red 4*blue 4*green 2*white 2*teal])	{moab}	[4*ceramic]	<210 212 234>
+bfb	0.25 700	(250 2 0.15 [6*red 6*yellow 6*violet 3*purple 3*orange])	{moab}	[4*moab]	<0 212 234>
+zomg	0.18 4000	(300 3 0.12 [10*red 8*blue 10*green 8*yellow 10*pink 8*violet 5*black 4*teal 5*lime 4*rainbow])	{moab}	[4*bfb]	<80 116 128>
+ddt	2.75 400	(175 1 0.75 [6*red 6*pink 3*black 2*zebra 2*lead])	{moab camo lead black heavy}	[4*rceramic]	<0 0 128>
+bad	0.18 20000	(350 3 0.12 [12*blue 12*violet 6*black 6*teal 4*orange 4*rainbow 3*indigo 3*ceramic 3*brick 3*hex])	{moab indigo}	[2*zomg 3*ddt]	<275 220 224>
+rhs	1.20 225	(200 1 0.55 [4*blue 4*green 2*purple 2*lime 2*zebra])	{moab black white purple clay}	[4*hex]	<105 128 128>
+ocd	0.37 500	(200 1 0.21 [4*green 4*yellow 2*white 2*teal 1*ice])	{moab crystal ice}	[4*brick]	<195 64 255>
+bob	1.50 100	(225 1 0.60 [4*red 4*blue 4*green 4*yellow 4*pink])	{moab bob}	[24*rainbow 3*hex 3*ice 3*amber 3*titanium]	<60 192 255>
+bbt	1.80 300	(175 1 0.60 [6*blue 6*yellow 6*violet 3*white 2*aqua])	{moab aqua white heavy hex tide}	[2*rtitanium 2*ramber 2*rice]	<225 192 192>
+hah	0.30 900	(250 2 0.17 [6*yellow 6*violet 3*lime 3*orange 2*indigo])	{moab hah}	[3*rhs]	<30 192 96>
+kant	0.22 1600	(250 2 0.14 [6*pink 3*teal 3*lime 3*orange 2*ceramic])	{moab kant}	[3*ocd]	<135 64 64>
+mpv	0.65 800	(225 2 0.35 [8*pink 4*purple 3*orange 2*amber 2*titanium])	{moab hah kant}	[2*bbt 6*lbrick 6*lhex]	<300 128 80>
+bteab	0.15 50000	(400 3 0.10 [16*red 16*green 16*pink 8*black 8*white 8*purple 6*lead 6*aqua 6*crystal 4*ice 4*amber 4*titanium 4*brick 4*hex 2*moab])	{moab titan amber indigo hex tide heavy}	[bad 2*kant 2*hah 2*mpv 6*bob]	<240 192 255>
+bobmega	0.25 1000	(300 3 0.15 [10*violet 10*teal 10*lime 10*orange 10*indigo])	{mega moab bob}	[1*bteab 2*bad 3*mpv 3*kant 3*hah 3*zomg 5*ddt 5*bfb 5*bbt 5*ocd 5*rhs 10*bob 10*moab 20*brick 20*hex 20*ice 20*amber 20*titanium 20*clay 20*crystal 30*ceramic 30*indigo 30*lead 30*aqua 30*purple 50*rainbow 80*zebra 120*black 120*white 50*orange 60*lime 70*teal 80*violet 200*pink 250*yellow 300*green 350*blue 400*red]	<60 192 255>
+bteabmega	0.06 50000	(500 4 0.06 [12*ice 2*moab 2*rhs 12*amber 2*ocd 2*bob 12*titanium 2*ddt 2*bbt 12*brick 2*bfb 2*hah 12*hex 2*kant 2*mpv])	{mega moab titan amber indigo hex tide hah kant ceramic heavy honey black white purple lead aqua crystal ice clay camo regrow fort latex stream hive}	[6*bobmega]	<240 192 255>
+honey1	0.80 20	(80 0 0.55 [2*red])	{moab honey hive}	[4*syellow]	<50 255 255>
+honey2	0.80 25	(82 0 0.55 [2*blue])	{moab honey hive white}	[4*spink]	<330 224 224>
+honey3	0.80 30	(84 0 0.55 [2*green])	{moab honey hive black}	[2*sblack 2*syellow]	<55 224 255>
+honey4	0.80 40	(86 0 0.55 [2*yellow])	{moab honey hive purple}	[2*spurple 2*spink]	<315 192 224>
+honey5	0.80 50	(88 0 0.55 [2*pink])	{moab honey hive}	[2*srainbow]	<20 200 234, 32 232 255, 45 255 255, 53 232 255, 280 100 234, 330 150 212>
+harbinger	0.37 1200	(250 2 0.21 [6*green 4*purple 3*crystal 2*indigo 2*amber])	{moab purple hex}	[3*bbt 6*chex]	<175 192 128>

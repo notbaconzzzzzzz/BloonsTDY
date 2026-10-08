@@ -181,7 +181,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 		}
 		else if (has(Atrs, atr.ostuffed))
 		{
-			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
+			if (variable_struct_exists(BloonData.spawns[i], "overstuffedAmt")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
 		if (ismoab && !bobBlow)
@@ -254,6 +254,87 @@ function bloonsplit(canthit = atr.none, instant = false)
 	if (!instant) playpopsound(id);
 	instance_destroy();
 	hp = -999999.5;
+	return childs;
+}
+
+function hivespawn(hpstate)
+{
+	var shmup = false;
+	var childs = [];
+	var startSpawn = floor(hpstate * array_length(BloonData.moab.hive) / 5);
+	var endSpawn = startSpawn + ceil(array_length(BloonData.moab.hive) / 5);
+	if (array_length(BloonData.moab.hive) == 1) { hpstate = 0; startSpawn = 0; endSpawn = 1; }
+	for (var i = startSpawn; i < endSpawn; i++)
+	{
+		var t = BloonData.moab.hive[i].type;
+		var mods = int64(0);
+		var bloonInd = array_get_index(DataManager.BloonOrd, t);
+		if (bloonInd == -1)
+		{
+			mods |= getatrfromletter(string_char_at(t, 1));
+			t = string_delete(t, 1, 1);
+			bloonInd = array_get_index(DataManager.BloonOrd, t);
+		}
+		var bloonData = DataManager.BloonData[bloonInd];
+		mods |= Atrs & atr.inherit;
+		var ismoab = has(bloonData.atrs, atr.moab);
+		var isbob = has(bloonData.atrs, atr.bob);
+		if (isbob && has(Atrs, atr.stream)) { mods |= atr.camo; mods |= atr.regrow; }
+		if (has(Atrs, atr.fort) && hasany(bloonData.atrs, atr.canfort))
+		{
+			mods |= atr.fort;
+			if (isbob) mods |= atr.latex;
+		}
+		//if (has(Atrs, atr.hive) && hasany(bloonData.atrs, atr.canhive)) mods |= atr.hive;
+		if (GameManager.InheritanceMode)
+		{
+			mods |= Atrs & atr.extrainherit;
+			if (ismoab) mods |= Atrs & atr.extramoabinherit;
+			if (has(Atrs, atr.indigo) && typeIndex != 37 && typeIndex != 39) mods |= atr.indigo;
+			if (!hasany(bloonData.atrs, atr.lead | atr.aqua | atr.crystal))
+			{
+				var temp = -1;
+				var totalTemp = 0;
+				if (has(Atrs, atr.lead))
+				{
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 0;
+				}
+				if (has(Atrs, atr.aqua))
+				{
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 1;
+				}
+				if (has(Atrs, atr.crystal))
+				{
+					totalTemp++;
+					if (random(totalTemp) <= 1) temp = 2;
+				}
+				if (temp == 0) mods |= atr.lead;
+				else if (temp == 1) mods |= atr.aqua;
+				else if (temp == 2) mods |= atr.crystal;
+			}
+			if (has(Atrs, atr.black) && !has(bloonData.atrs | mods, atr.lead)) mods |= atr.black;
+			if (has(Atrs, atr.white) && !has(bloonData.atrs | mods, atr.aqua)) mods |= atr.white;
+			if (has(Atrs, atr.purple) && !has(bloonData.atrs | mods, atr.crystal)) mods |= atr.purple;
+		}
+		var vari = {type : t, Atrs : mods};
+		
+		var normalcount = BloonData.moab.hive[i].amt;
+		var actualcount = normalcount;
+		vari.highestValue = -1;
+		for (var j = 0; j < actualcount; j++)
+		{
+			if (shmup) {
+				vari.dir = dir + random_range(0, 360);
+				array_push(childs, instance_create_layer(x, y, "Bloons", ShmupBloon, vari));
+			} else {
+				vari.path = path;
+				vari.patht = patht + random_range(-60, 60);
+				array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
+			}
+		}
+	}
 	return childs;
 }
 

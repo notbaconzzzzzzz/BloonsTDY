@@ -5,6 +5,16 @@ if (hp <= 0 && instance_exists(id))
 	bloonsplit();
 	return;
 }
+if (IsMoab && has(Atrs, atr.hive))
+{
+	hiveTimer += 1;
+	if (hiveTimer >= HiveInterval)
+	{
+		hiveTimer -= HiveInterval;
+		var hpstate = clamp(5 - ceil(5 * hp / MaxHp), 0, 4);
+		hivespawn(hpstate);
+	}
+}
 if (has(Atrs, atr.regrow))
 {
 	if (highestRegrow != typeIndex || (highestRegrow == -1 && hp < MaxHp))

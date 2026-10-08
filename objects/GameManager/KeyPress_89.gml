@@ -22,11 +22,10 @@ if (debug)
 	/*
 	for (var i = 0; i < array_length(DataManager.BloonData); i++)
 	{
-		if (has(DataManager.BloonData[i].atrs, atr.clay) && i <= 37)
+		if (has(DataManager.BloonData[i].atrs, atr.honey))
 		{
-			spawnbloon(i);
+			spawnbloon(i, atr.hive);
 		}
-	}
-	spawnbloon("brick");*/
+	}*/
 }
 ticksPasted = 0;

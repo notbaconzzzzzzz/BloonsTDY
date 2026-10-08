@@ -78,7 +78,7 @@ function DartMonkey_initstats()
 	},
 	{
 		name : "Double Darts",
-		price : 240,
+		price : 210,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{

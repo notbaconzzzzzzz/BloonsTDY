@@ -133,7 +133,18 @@ function parsebloondata()
 									nextword();
 									if (word == "\r") return;
 									else if (word == "]") break;
-									array_push(bloonData.moab.hive, word);
+									var a = 1;
+									var t = "";
+									if (isnumber(word))
+									{
+										a = int64(word);
+										while (nextword() == "*")
+										{
+							
+										}
+									}
+									t = word;
+									array_push(bloonData.moab.hive, {type : t, amt : a});
 								}
 							}
 							break;

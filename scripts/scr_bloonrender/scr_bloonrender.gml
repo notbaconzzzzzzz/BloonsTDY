@@ -128,8 +128,9 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 			camoShades[3] = -0.45;
 		}
 	}
-	var fort = has(mods, atr.fort); // not implemented
+	var fort = has(mods, atr.fort);
 	var latex = has(mods, atr.latex);
+	var hive = has(mods, atr.hive);
 	var aqua = has(mods, atr.aqua);
 	var lead = has(mods, atr.lead);
 	var ice = has(mods, atr.ice);
@@ -263,6 +264,13 @@ function drawbloonsprite(spriteIndex, hpstate = 0, onlysurf2 = false)
 	}
 	
 	
+	if (hive)
+	{
+		gpu_set_colorwriteenable(true, true, true, false);
+		gpu_set_blendmode(bm_normal);
+		draw_sprite_ext(HivePattern, 0, 400, 400, overlayStretchX * 128 / 400, overlayStretchY * 64 / 275, overlayRotate + 90, c_black, 0.5);
+		gpu_set_colorwriteenable(true, true, true, true);
+	}
 	if (bob)
 	{
 		gpu_set_colorwriteenable(true, true, true, false);

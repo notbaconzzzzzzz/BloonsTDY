@@ -262,12 +262,16 @@ function getrandomtowerposition()
 	var d = 0;
 	for (var i = 0; i < 100; i++)
 	{
+		/*
 		path = juncchoosepath(TrackManager.StartingJunc);
 		patht = 0;
 		pathmovement(random_range(180, path.finishdist - 180));
 		var offset = (irandom(1)*2-1) * random_range(60, 180);
 		tx = x - offset * dsin(dir);
 		ty = y + offset * dcos(dir);
+		*/
+		tx = random_range(GameManager.shmupLeftBound, GameManager.shmupRightBound);
+		ty = random_range(0, room_height);
 		/*
 		tx = random_range(GameManager.shmupLeftBound, GameManager.shmupRightBound);
 		ty = random_range(room_height * 0.3333, room_height * 0.8333);*/

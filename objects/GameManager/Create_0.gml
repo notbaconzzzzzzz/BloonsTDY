@@ -22,8 +22,8 @@ LifeSlowFactor = 10;
 MaxLifes = 5000;
 HoneyBloons = true;
 HarbingerBloon = true;
-TrackLoop = true;
-InheritanceMode = true;
+TrackLoop = false;
+InheritanceMode = false;
 
 bloonIncomeMult = 100; // 51+: 80,  61+: 50,  86+: 34,  101+: 20,  121+: 10
 roundIncomeMult = 100; // 51+: 120, 61+: 150, 86+: 200, 101+: 300, 121+: 500

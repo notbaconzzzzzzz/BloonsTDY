@@ -122,6 +122,10 @@ function spawnrandombloon()
 	{
 		if (random(1) < clamp((currentRound / (has(bloonData.atrs, atr.moab) ? 2 : 1) - 30) / 40 * 0.5, 0, 0.5)) mods |= atr.fort;
 	}
+	if (has(bloonData.atrs, atr.moab))
+	{
+		//mods |= atr.hive;
+	}
 	spawnbloon(type, mods);
 	return bloonData;
 }

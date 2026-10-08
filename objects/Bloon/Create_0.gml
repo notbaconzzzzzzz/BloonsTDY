@@ -123,6 +123,15 @@ if (hp <= 0)
 	bloonsplit(variable_instance_exists(id, "bloonsplitcanthit") ? bloonsplitcanthit : atr.none, true);
 	return;
 }
+
+if (IsMoab && has(Atrs, atr.hive))
+{
+	hiveTimer = 0;
+	HiveInterval = 160 * power(1.5, BloonData.moab.class);
+	if (has(Atrs, atr.honey)) HiveInterval /= 2;
+	if (type == "ddt" || type == "bbt") HiveInterval /= 2;
+}
+
 var sprind = calculatespriteindex(typeIndex, Atrs);
 var spr = BloonRenderer.BloonSprites[? sprind];
 if (is_undefined(spr))
