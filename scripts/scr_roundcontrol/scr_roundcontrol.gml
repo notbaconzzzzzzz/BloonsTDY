@@ -124,7 +124,7 @@ function spawnrandombloon()
 	}
 	if (has(bloonData.atrs, atr.moab))
 	{
-		//mods |= atr.hive;
+		if (random(1) < clamp((currentRound - 30 - 30 * bloonData.moab.class) / 60 * 0.5, 0, 0.5)) mods |= atr.hive;
 	}
 	spawnbloon(type, mods);
 	return bloonData;

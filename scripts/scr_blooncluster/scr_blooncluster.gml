@@ -1,0 +1,129 @@
+
+function BloonGroup(_typeIndex, _atrs = atr.none) constructor
+{
+	if (!variable_instance_exists(id, "type")) type = "red";
+	typeIndex = _typeIndex;
+	if (typeIndex == -1) typeIndex = 0;
+	BloonData = DataManager.BloonData[typeIndex];
+	type = BloonData.type;
+	Atrs = _atrs;
+	Atrs |= BloonData.atrs;
+
+	MaxHp = BloonData.hp;
+	Spd = BloonData.spd;
+	IsMoab = is_struct(BloonData.moab);
+	if (has(Atrs, atr.latex))
+	{
+		if (IsMoab)
+		{
+			switch (BloonData.moab.class)
+			{
+				case 0: MaxHp += 5; break;
+				case 1: MaxHp += 25; break;
+				case 2: MaxHp += 100; break;
+				case 3: MaxHp += 400; break;
+				case 4: MaxHp += 1500; break;
+			}
+		}
+		else MaxHp += 1;
+	}
+	if (has(Atrs, atr.fort))
+	{
+		if (has(Atrs, atr.hardy))
+		{
+			MaxHp += 1;
+			Atrs |= atr.hard;
+		}
+		MaxHp *= 2;
+	}
+	if (has(Atrs, atr.mega)) MaxHp *= 10;
+	if (has(Atrs, atr.stream))
+	{
+		if (IsMoab) Spd += BloonData.moab.stream;
+		else Spd += 100;
+	}
+	
+	/*
+	if (has(Atrs, atr.regrow))
+	{
+		if (!variable_instance_exists(id, "regenTimer") || highestRegrow == -1)
+		{
+			regenTimer = 0;
+			highestRegrow = typeIndex;
+		}
+		if (IsMoab)
+		{
+			highestRegrow = -1;
+		}
+	}
+	if (!variable_instance_exists(id, "highestValue") || highestValue > typeIndex)
+	{
+		highestValue = typeIndex;
+	}
+	if (has(Atrs, atr.clay))
+	{
+		if (IsMoab)
+		{
+			clayLockout = 0;
+		}
+		else
+		{
+			if (!variable_instance_exists(id, "clayLockout") || !is_int64(clayLockout))
+			{
+				clayLockout = int64(0);
+			}
+			if (!variable_instance_exists(id, "highestRegrow")) highestRegrow = typeIndex;
+		}
+	}*/
+
+	if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
+	else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
+	Spd = round(Spd * GameManager.SpeedFactor / 100);
+
+	if (IsMoab)
+	{
+		blimp = true;
+		if (type == "bob" || type == "bobmega") blimp = false;
+		else if (type == "honey1" || type == "honey2" || type == "honey3" || type == "honey4" || type == "honey5") blimp = false;
+	}
+	else
+	{
+		blimp = false;
+	}
+	rad = BloonData.size / 2;
+	posoffset = rad * 2 / 3;
+	if (blimp) posoffset = rad * 1 / 3;
+	if (!blimp && has(Atrs, atr.regrow)) rad *= 1.25;
+
+/*
+	if (variable_instance_exists(id, "hp"))
+	{
+		if (variable_instance_exists(id, "bloonsplitcanthit"))
+		{
+			if (hasany(Atrs, bloonsplitcanthit))
+			{
+				hp = 0;
+			}
+		}
+		hp += MaxHp;
+	}
+	else hp = MaxHp;*/
+	
+	/*
+	if (hp <= 0)
+	{
+		parentInstances = [];
+		if (instance_exists(parent)) array_copy(parentInstances, 1, parent.parentInstances, 0, array_length(parent.parentInstances));
+		bloonsplit(variable_instance_exists(id, "bloonsplitcanthit") ? bloonsplitcanthit : atr.none, true);
+		return;
+	}*/
+	
+	/*
+	if (IsMoab && has(Atrs, atr.hive))
+	{
+		hiveTimer = 0;
+		HiveInterval = 160 * power(1.5, BloonData.moab.class);
+		if (has(Atrs, atr.honey)) HiveInterval /= 2;
+		if (type == "ddt" || type == "bbt") HiveInterval /= 2;
+	}*/
+}

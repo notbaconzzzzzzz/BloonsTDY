@@ -55,14 +55,74 @@ function LinkedListNode(_obj) constructor
 
 function SortedLinkedList() : LinkedList() constructor
 {
-	static Add = function (_obj, _score)
+	static Append = function (_obj, _score, combine = false)
 	{
-		
+		return AppendExisting(new SortedLinkedListNode(_obj, _score), combine);
 	}
 	
-	static AddExisting = function(linkedlistnode)
+	static AppendExisting = function(linkedlistnode, combine = false)
 	{
+		if (l == -1 || l == self)
+		{
+			linkedlistnode.r = self;
+			l = linkedlistnode;
+			linkedlistnode.l = self;
+			r = linkedlistnode;
+			return linkedlistnode;
+		}
+		var searchDirection = true;
+		var searchNode = r;
+		if (abs(linkedlistnode.s - l.s) < abs(linkedlistnode.s - searchNode.s))
+		{
+			searchNode = l;
+			searchDirection = false;
+		}
+		if (searchDirection)
+		{
+			while (!is_instanceof(searchNode, LinkedList) && s > searchNode.s)
+			{
+				searchNode = searchNode.r;
+			}
+			if (combine && !is_instanceof(searchNode, LinkedList) && searchNode.s == s)
+			{
+				searchNode.obj.Combine(linkedlistnode.obj);
+				return searchNode;
+			}
+			linkedlistnode.l = searchNode.l;
+			searchNode.l.r = linkedlistnode;
+			linkedlistnode.r = searchNode;
+			searchNode.l = linkedlistnode;
+		}
+		else
+		{
+			while (!is_instanceof(searchNode, LinkedList) && s < searchNode.s)
+			{
+				searchNode = searchNode.l;
+			}
+			if (combine && !is_instanceof(searchNode, LinkedList) && searchNode.s == s)
+			{
+				searchNode.obj.Combine(linkedlistnode.obj);
+				return searchNode;
+			}
+			linkedlistnode.r = searchNode.r;
+			searchNode.r.l = linkedlistnode;
+			linkedlistnode.l = searchNode;
+			searchNode.r = linkedlistnode;
+		}
 		return linkedlistnode;
+	}
+	
+	static Merge = function(sortedlinkedlist, combine = false)
+	{
+		if (l == -1 || l == self)
+		{
+			sortedlinkedlist.l.r = self;
+			l = sortedlinkedlist.l;
+			sortedlinkedlist.r.l = self;
+			r = sortedlinkedlist.r;
+			return self;
+		}
+		return self;
 	}
 }
 
@@ -78,12 +138,12 @@ function SortedLinkedListNode(_obj, _score) constructor
 		if (_score < s)
 		{
 			s = _score;
-			if (!is_instanceof(l, LinkedList) && l.score > s)
+			if (!is_instanceof(l, LinkedList) && l.s > s)
 			{
 				l.r = r;
 				r.l = l;
 				l = l.l;
-				while (!is_instanceof(l, LinkedList) && l.score > s)
+				while (!is_instanceof(l, LinkedList) && l.s > s)
 				{
 					l = l.l;
 				}
@@ -95,12 +155,12 @@ function SortedLinkedListNode(_obj, _score) constructor
 		else
 		{
 			s = _score;
-			if (!is_instanceof(r, LinkedList) && r.score < s)
+			if (!is_instanceof(r, LinkedList) && r.s < s)
 			{
 				l.r = r;
 				r.l = l;
 				r = r.r;
-				while (!is_instanceof(r, LinkedList) && r.score < s)
+				while (!is_instanceof(r, LinkedList) && r.s < s)
 				{
 					r = r.r;
 				}

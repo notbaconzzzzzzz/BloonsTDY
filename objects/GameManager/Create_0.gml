@@ -20,8 +20,8 @@ LifeIncomeFactor = 100;
 LifeSlowThreshold = 1000;
 LifeSlowFactor = 10;
 MaxLifes = 5000;
-HoneyBloons = true;
-HarbingerBloon = true;
+HoneyBloons = false;
+HarbingerBloon = false;
 TrackLoop = false;
 InheritanceMode = false;
 

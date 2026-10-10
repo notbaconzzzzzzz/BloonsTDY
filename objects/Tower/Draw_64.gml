@@ -96,6 +96,42 @@ if (PlayerModel.quickUpgradeTower == id && !PlayerModel.tryingtobuytower)
 		}
 		draw_text_transformed(drawx, drawy - 10, string(p.up.name), 2/3, 2/3, 0);
 		draw_text(drawx, drawy + 10, "$" + string(p.price));
+		if (PlayerModel.hoverQuadrant == i)
+		{
+			var desc = string(p.up.desc);
+			var wide = string_width(desc);
+			var high = string_height(desc);
+			var alignx = 0.5;
+			var aligny = 1;
+			drawx = x;
+			drawy = y - 120;
+			draw_set_halign(fa_center);
+			draw_set_valign(fa_bottom);
+			if (drawy - high < 10)
+			{
+				draw_set_valign(fa_top);
+				aligny = 0;
+				drawy = y + 120;
+			}
+			if (drawx - wide / 2 < GameManager.shmupLeftBound + 10)
+			{
+				draw_set_halign(fa_left);
+				alignx = 0;
+			}
+			else if (drawx + wide / 2 > GameManager.shmupRightBound - 10)
+			{
+				draw_set_halign(fa_right);
+				alignx = 1;
+			}
+			draw_set_color(c_white);
+			draw_set_alpha(0.5);
+			draw_rectangle(drawx - wide * alignx - 10, drawy - high * aligny - 10, drawx + wide - wide * alignx + 10, drawy + high - high * aligny + 10, false);
+			draw_set_color(c_black);
+			draw_set_alpha(1);
+			draw_text_transformed(drawx, drawy, desc, 1, 1, 0);
+			draw_set_valign(fa_middle);
+			draw_set_halign(fa_center);
+		}
 	}
 }
 draw_set_alpha(1);

@@ -26,7 +26,6 @@ function DartMonkey_basestats()
 	AirburstInterval = -1;
 	AirburstShots = 2;
 	AirburstSpread = 20;
-	AirburstPierce = 2;
 	AirburstVelocity = 30;
 	AirburstTravelDistance = 120;
 	Shots = 1;
@@ -44,85 +43,102 @@ function DartMonkey_initstats()
 	{
 		name : "Sharp Shots",
 		price : 140,
+		desc : "+1 Pierce",
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Razor Sharp Shots",
+		desc : "+2 Pierce",
 		price : 220,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
 		name : "Long Range Darts",
+		desc : "+5 Range",
 		price : 90,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Enhanced Eyesight",
+		desc : "+5 Range, can pop Camo",
 		price : 200,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Crossbow",
+		desc : "+2 Damage, +1 Pierce, +5 Range\nSlower base Attack Speed (1.100s),\nShoot Crossbow Bolts that have smaller size and faster velocity\n+1 Damage against MOABs",
 		price : 625,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Sharp Shooter",
+		desc : "+1 Damage, +2 Range, +25% Attack Speed\nCan pop Frozen, +1 Damage against MOABs\nAfter traveling a certain distance (150 units), bolts gain x2 Damage\n[Spike-o-pult] ^ +3 Damage instead of x2",
 		price : 5250,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
 		name : "Critical Darts",
+		desc : "Every 4th attack Crits, and gains: +1 Damage\n[Crossbow] Crits gain: +3 Damage instead\n(Sharpshooter) Every 3rd Crit gains: +8 Damage, +2 Pierce instead",
 		price : 150,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Double Darts",
+		desc : "Every 3rd attack shoots 2 projectiles in parellel\n[Triple Shot] +25% Attack Speed, every 3rd attack has 0 Spread instead",
 		price : 210,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Bloontonium Darts",
+		desc : "+1 Damage (no longer Crits)\n[Spike-o-pult] +2 Damage instead\nCan pop Lead, Aqua, Crystal, Frozen\n(Crossbow) Every 5th attack Crits, and gains: +5 Damage\n(Sharpshooter) Every 3rd Crit gains: +25 Damage, +4 Pierce instead\nGains +1 Pierce from Bloontonium Charges",
 		price : 550,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Bloontonium Radiator",
+		desc : "+1 Damage (does not gain Damage from Bloontonium Charges)\nEvery 3s while attacking, trigger Radiator:\nRadiator: Grant all other Towers in Range 5 Bloontonium Charges\n Bloontonium Charges: Spend 1 Charge to gain +1 Damage, the ability to pop Lead, Aqua, Crystal, Frozen;\nCap of 15 Charges, lose half of the Charges every 12s\nRadiator: Gain 1 Catalyst: +25% Attack Speed, -0.25s Radiator Interval, stacks up to 4 times,\nlose all Catalyst after 4s on not attacking\nHas ACTIVE Ability that is currently not implemented",
 		price : 10800,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
 		name : "Quick Shots",
+		desc : "+18% Attack Speed",
 		price : 100,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Very Quick Shots",
+		desc : "+27% Attack Speed",
 		price : 190,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Triple Shot",
+		desc : "-12% Attack Speed\nAttack shoots 3 Darts with a Spread of 40\n(Airburst Darts) Spread of 30\n(Spike-o-pult) -33% Attack Speed, Spread of 10",
 		price : 500,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Super Monkey Fan Club",
+		desc : "+50% Attack Speed\n[Double Darts] +33% Attack Speed instead\n[Spike-o-pult] +67% Attack Speed instead\nHas ACTIVE Ability that is currently not implemented",
 		price : 3000,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
 		name : "Spike-O-Pult",
+		desc : "+1 Damage, +20 Pierce\nCan pop Frozen\nMuch slower base Attack Speed (1.250s),\nShoot Spike Balls that have larger size, slower velocity, and much longer lifetime",
 		price : 450,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	},
 	{
 		name : "Juggernaut",
+		desc : "+40 Pierce, +11% Attack Speed\nCan pop Lead\nSpike Balls have larger size, faster velocity, and longer lifetime\n +3 Damage against Ceramic, +2 against Fortified\nProjectile does not get destroyed when hitting a Bloon that it cannot pop\nAmber only reduces half of remaining Pierce",
 		price : 3600,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}], [
 	{
 		name : "Airburst Darts",
+		desc : "+1 Pierce, +12% Attack Speed\nCan pop Aqua\nEvery 3rd Attack is Airbursting: Spawns 2 Darts with 20 Spread each time it hits a Bloon\n(Triple Shot) Airbursting Darts spawn 3 Darts with 30 Spread instead",
 		price : 725,
 		action : function(inst) { with (inst) { DartMonkey_restats(); }}
 	}]] };
@@ -363,7 +379,7 @@ function DartMonkey_restats()
 					var d = dir;
 					for (var i = 0; i < shots; i++)
 					{
-						instance_create_layer(x, y, "Projectiles", Projectile, {owner : owner, crit : crit, airburst : false, dir : d + spread * (i - (shots - 1) / 2), spd : spd2, lifetime : owner.AirburstTravelDistance / spd2, rad : rad, pierce : owner.AirburstPierce, damage : damage, damagemult : damagemult, cantHits : cantHits, cond : cond, afterHit : afterHit, tick : tick});
+						instance_create_layer(x, y, "Projectiles", Projectile, {owner : owner, crit : crit, airburst : false, dir : d + spread * (i - (shots - 1) / 2), spd : spd2, lifetime : owner.AirburstTravelDistance / spd2, rad : rad, pierce : owner.Pierce, damage : damage, damagemult : damagemult, cantHits : cantHits, cond : cond, afterHit : afterHit, tick : tick});
 					}
 				}
 			}
