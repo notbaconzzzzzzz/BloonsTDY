@@ -260,7 +260,7 @@ function DartMonkey_restats()
 	if (has(Upgrades, upg.b3))
 	{ // Crossbow
 		Damage += 2;
-		Pierce += 1;
+		if (!has(Upgrades, upg.e3)) Pierce += 1;
 		Range += 5;
 		array_push(Cond, function(inst2, proj) {
 			if (has(inst2.Atrs, atr.moab)) proj.dmg += 1;

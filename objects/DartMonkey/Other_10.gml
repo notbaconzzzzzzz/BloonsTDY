@@ -28,7 +28,7 @@ else
 		{
 			bloontoniumCharges -= 1;
 			if (!has(Upgrades, upg.c4)) vari.damage += 1;
-			if (has(Upgrades, upg.c3)) vari.pierce += 1;
+			if (has(Upgrades, upg.c3)) vari.pierce += has(Upgrades, upg.e3) ? 5 : 1;
 			vari.cantHits &= !(atr.lead | atr.aqua | atr.crystal | atr.frozen);
 		}
 		if (CritDartInterval != -1)

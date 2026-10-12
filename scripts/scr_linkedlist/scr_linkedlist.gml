@@ -216,12 +216,9 @@ function SortedLinkedList(combineMode = false) : LinkedList() constructor
 	}
 }
 
-function SortedLinkedListNode(_obj, _score) constructor
+function SortedLinkedListNode(_obj, _score) : LinkedListNode(_obj) constructor
 {
-	obj = _obj;
 	s = _score;
-	l = -1;
-	r = -1;
 	
 	static SetScore = function(_score, combine = false)
 	{

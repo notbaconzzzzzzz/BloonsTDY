@@ -1,19 +1,38 @@
 /// @description Insert description here
 // You can write your code in this editor
-if (typeIndex == -1) return;
 event_inherited();
-pathmovement(Spd / 60);
-if (path == -1)
+if (typeIndex == -1) return;
+if (variable_instance_exists(id, "blowtime") && blowtime > 0)
 {
-	PlayerModel.lifes -= BloonData.dmg;
-	instance_destroy();
-	hp = 0;
-	typeIndex = -1;
-	return;
+	blowt++;
+	var t = blowt / blowtime;
+	x = bezier(blowx0, blowx1, blowx1, blowx2, t);
+	y = bezier(blowy0, blowy1, blowy1, blowy2, t);
+	xv = bezier3(blowx1 - blowx0, 0, blowx2 - blowx1, t) / blowtime;
+	xy = bezier3(blowy1 - blowy0, 0, blowy2 - blowy1, t) / blowtime;
+	if (blowt >= blowtime)
+	{
+		blowtime = 0;
+	}
 }
-var newBloonRegion = calculatebloonregion(x, y, IsMoab);
-if (newBloonRegion != bloonRegion)
+else
 {
-	bloonRegion = newBloonRegion;
-	bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+	pathmovement(Spd / 60);
+	if (path == -1)
+	{
+		PlayerModel.lifes -= BloonData.dmg;
+		instance_destroy();
+		hp = 0;
+		typeIndex = -1;
+		return;
+	}
+}
+if (bloonRegionNode != -1 && !is_undefined(bloonRegionNode))
+{
+	var newBloonRegion = calculatebloonregion(x, y, IsMoab);
+	if (newBloonRegion != bloonRegion)
+	{
+		bloonRegion = newBloonRegion;
+		bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+	}
 }

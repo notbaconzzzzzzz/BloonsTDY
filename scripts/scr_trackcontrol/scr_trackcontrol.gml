@@ -180,35 +180,47 @@ function pathmovement(m)
 function setposfrompath()
 {
 	if (path == -1) return;
-	var t = patht / path.pathlength;
-	switch (path.kind)
-	{
-		case pth.line:
-			{
-				x = path.sx * (1 - t) + path.ex * t;
-				y = path.sy * (1 - t) + path.ey * t;
-				dir = path.dir;
-			}
-			break;
-		case pth.arc:
-			{
-				var d = path.sd * (1 - t) + path.ed * t;
-				x = path.cx + path.cz * dcos(d);
-				y = path.cy + path.cz * dsin(d);
-				if (path.wise) dir = d + 90;
-				else dir = d - 90;
-			}
-			break;
-		default:
-			return;
-	}
-	finishdist = path.finishdist - patht;
+	var strut = getposfrompath(path, patht);
+	x = strut.x;
+	y = strut.y;
+	dir = strut.dir;
+	finishdist = strut.finishdist;
 	if (variable_instance_exists(id, "Spd"))
 	{
 		xv = Spd / 60 * dcos(dir);
 		yv = Spd / 60 * dsin(dir);
 		y -= posoffset;
 	}
+}
+
+function getposfrompath(path, patht)
+{
+	var strut = { x : -999, y : -999, dir : 0, finishdist : 999999 };
+	if (path == -1) return strut;
+	var t = patht / path.pathlength;
+	switch (path.kind)
+	{
+		case pth.line:
+			{
+				strut.x = path.sx * (1 - t) + path.ex * t;
+				strut.y = path.sy * (1 - t) + path.ey * t;
+				strut.dir = path.dir;
+			}
+			break;
+		case pth.arc:
+			{
+				var d = path.sd * (1 - t) + path.ed * t;
+				strut.x = path.cx + path.cz * dcos(d);
+				strut.y = path.cy + path.cz * dsin(d);
+				if (path.wise) strut.dir = d + 90;
+				else strut.dir = d - 90;
+			}
+			break;
+		default:
+			return;
+	}
+	strut.finishdist = path.finishdist - patht;
+	return strut;
 }
 
 function juncchoosepath(junc)
@@ -220,6 +232,66 @@ function juncchoosepath(junc)
 		case jnc.rand: return junc.p[irandom(array_length(junc.p)-1)];
 	}
 	return -1;
+}
+
+function getrandombobblowposition(cx, cy, cr, finishdist)
+{
+	var r = sqrt(random_range(1/4/4, 1)) * cr;
+	var d = random(360);
+	var sx = cx + r * dcos(d);
+	var sy = cy + r * dsin(d);
+	return getbobblowposition(sx, sy, min(finishdist - cr, finishdist / 2), max(finishdist + cr, finishdist * 2), max(cr, r + cr / 8), cx, cy, min(cr - r, cr - cr / 8), cr / 8);
+}
+
+function getbobblowposition(sx, sy, minfinishdist, maxfinishdist, maxrad, cx, cy, minrad2, tolerance)
+{
+	var baseweights = [];
+	var totalweight = 0;
+	for (var i = 0; i < array_length(TrackManager.Paths); i++)
+	{
+		var path = TrackManager.Paths[i];
+		var weight = path.pathlength;
+		if (path.finishdist < minfinishdist) weight = 0;
+		else if (path.finishdist - path.pathlength > maxfinishdist) weight = 0;
+		baseweights[i] = weight;
+		totalweight += weight;
+	}
+	var bestpath = -1;
+	var bestt = 0;
+	var bestdist = 999999;
+	var tries = 0;
+	var intolerant = 0;
+	while (tries < 100 && intolerant < 10)
+	{
+		tries++;
+		var pickpath = random(totalweight);
+		if (pickpath >= totalweight) continue;
+		for (var i = 0; i < array_length(baseweights); i++)
+		{
+			pickpath -= baseweights[i];
+			if (pickpath < 0)
+			{
+				pickpath = TrackManager.Paths[i];
+				break;
+			}
+		}
+		var pickt = random(pickpath.pathlength);
+		var strut = getposfrompath(pickpath, pickt);
+		if (strut.finishdist < minfinishdist || strut.finishdist > maxfinishdist) continue;
+		var dist = point_distance(sx, sy, strut.x, strut.y);
+		var dist2 = point_distance(cx, cy, strut.x, strut.y);
+		if (dist > maxrad || dist2 < minrad2) continue;
+		if (dist >= bestdist - tolerance)
+		{
+			intolerant++;
+			continue;
+		}
+		bestpath = pickpath;
+		bestt = pickt;
+		bestdist = dist;
+	}
+	if (bestpath == -1) bestpath = juncchoosepath(TrackManager.StartingJunc);
+	return { path : bestpath, t : bestt, x : sx, y : sy };
 }
 
 function calculatebloonregion(_x, _y, ismoab = false)

@@ -1,7 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
-if (typeIndex == -1) return;
 event_inherited();
+if (typeIndex == -1) return;
 x += xv;
 y += yv;
 if (x <= GameManager.shmupLeftBound + rad)
@@ -34,9 +34,12 @@ if (y >= room_height + rad)
 	typeIndex = -1;
 	return;
 }
-var newBloonRegion = calculatebloonregion(x, y, IsMoab);
-if (newBloonRegion != bloonRegion)
+if (bloonRegionNode != -1 && !is_undefined(bloonRegionNode))
 {
-	bloonRegion = newBloonRegion;
-	bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+	var newBloonRegion = calculatebloonregion(x, y, IsMoab);
+	if (newBloonRegion != bloonRegion)
+	{
+		bloonRegion = newBloonRegion;
+		bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+	}
 }

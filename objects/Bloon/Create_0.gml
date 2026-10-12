@@ -1,6 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
 if (!variable_instance_exists(id, "isCluster")) isCluster = false;
+bloonRegionNode = -1;
 if (isCluster)
 {
 	bloonGroups = new SortedLinkedList(true);
@@ -233,7 +234,7 @@ else
 		hiveTimer = 0;
 		HiveInterval = 160 * power(1.5, BloonData.moab.class);
 		if (has(Atrs, atr.honey)) HiveInterval /= 2;
-		if (type == "ddt" || type == "bbt") HiveInterval /= 2;
+		if (type == "ddt" || type == "bbt" || type == "bob" || type == "bobmega") HiveInterval /= 2;
 	}
 
 	var sprind = calculatespriteindex(typeIndex, Atrs);

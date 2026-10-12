@@ -95,6 +95,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 	{
 		bobBlow = true;
 	}
+	//bobBlow = true;
 	var ind = 0;
 	var ind2 = 0;
 	var tot2 = 1;
@@ -155,6 +156,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (has(Atrs, atr.purple) && !has(bloonData.atrs | mods, atr.crystal)) mods |= atr.purple;
 		}
 		var vari = {parent : id, type : t, Atrs : mods, hp : hp, bloonsplitcanthit : canthit};
+		vari.finishdist = finishdist;
 		if (has(Atrs, atr.regrow) || has(bloonData.atrs | mods, atr.clay))
 		{
 			if (variable_instance_exists(id, "regenTimer")) vari.regenTimer = regenTimer;
@@ -188,6 +190,18 @@ function bloonsplit(canthit = atr.none, instant = false)
 		{
 			if (variable_struct_exists(BloonData.spawns[i], "overstuffedAmt")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
+		}
+		
+		if (variable_instance_exists(id, "blowtime") && blowtime > 0 && !bobBlow)
+		{
+			vari.blowtime = blowtime;
+			vari.blowx0 = blowx0;
+			vari.blowy0 = blowy0;
+			vari.blowx1 = blowx1;
+			vari.blowy1 = blowy1;
+			vari.blowx2 = blowx2;
+			vari.blowy2 = blowy2 + posoffset;
+			vari.blowt = blowt;
 		}
 		
 		//if (!has(bloonData.atrs, atr.moab)) actualcount = 1;
@@ -228,9 +242,13 @@ function bloonsplit(canthit = atr.none, instant = false)
 					vari.dir = dir + random_range(0, 360);
 					array_push(childs, instance_create_layer(x, y, "Bloons", ShmupBloon, vari));
 				} else {
-					vari.path = path;
-					vari.patht = patht + random_range(-60, 60);
-					array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
+					var pos = getrandombobblowposition(x, y + posoffset, 360, finishdist);
+					vari.path = pos.path;
+					vari.patht = pos.t;
+					vari.blowx1 = pos.x;
+					vari.blowy1 = pos.y;
+					vari.blowtime = irandom_range(45, 75);
+					array_push(childs, instance_create_layer(x + (pos.x - x) / 360 * rad / 2, y + (pos.y - y) / 360 * rad / 2, "Bloons", TrackBloon, vari));
 				}
 			}
 			else if (ismoab)
@@ -338,9 +356,13 @@ function hivespawn(hpstate)
 				vari.dir = dir + random_range(0, 360);
 				array_push(childs, instance_create_layer(x, y, "Bloons", ShmupBloon, vari));
 			} else {
-				vari.path = path;
-				vari.patht = patht + random_range(-60, 60);
-				array_push(childs, instance_create_layer(x, y, "Bloons", TrackBloon, vari));
+				var pos = getrandombobblowposition(x, y + posoffset, 720, finishdist);
+				vari.path = pos.path;
+				vari.patht = pos.t;
+				vari.blowx1 = (pos.x - x) / 2 + x;
+				vari.blowy1 = (pos.y - y) / 2 + y;
+				vari.blowtime = irandom_range(30, 50);
+				array_push(childs, instance_create_layer(x + (pos.x - x) / 720 * rad / 2, y + (pos.y - y) / 720 * rad / 2, "Bloons", TrackBloon, vari));
 			}
 		}
 	}

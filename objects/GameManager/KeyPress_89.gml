@@ -11,6 +11,7 @@ if (debug)
 	{
 		mods |= atr.fort;
 		mods |= atr.stream;
+		mods |= atr.hive;
 		if (type != "bteab")
 		{
 			mods |= atr.regrow;
