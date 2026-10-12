@@ -1,13 +1,15 @@
 
-function BloonGroup(_typeIndex, _atrs = atr.none) constructor
+function BloonGroup(_typeIndex, _atrs = atr.none, _count = 0, _hp = 0) constructor
 {
-	if (!variable_instance_exists(id, "type")) type = "red";
 	typeIndex = _typeIndex;
 	if (typeIndex == -1) typeIndex = 0;
 	BloonData = DataManager.BloonData[typeIndex];
 	type = BloonData.type;
-	Atrs = _atrs;
-	Atrs |= BloonData.atrs;
+	Atrs = BloonData.atrs;
+	Atrs |= _atrs;
+	Indentifier = calculateuniquebloonidentifier(typeIndex, Atrs);
+	
+	Count = _count;
 
 	MaxHp = BloonData.hp;
 	Spd = BloonData.spd;
@@ -79,7 +81,15 @@ function BloonGroup(_typeIndex, _atrs = atr.none) constructor
 	if (has(Atrs, atr.moab)) MaxHp = round(MaxHp * GameManager.MoabHpFactor / 100);
 	else if (has(Atrs, atr.hard)) MaxHp = round(MaxHp * GameManager.HardHpFactor / 100);
 	Spd = round(Spd * GameManager.SpeedFactor / 100);
-
+	
+	hp = [];
+	for (var i = 0; i < MaxHp; i++)
+	{
+		hp[i] = 0;
+	}
+	if (_hp <= 0) _hp = MaxHp;
+	hp[_hp-1] = Count;
+	
 	if (IsMoab)
 	{
 		blimp = true;
@@ -126,4 +136,24 @@ function BloonGroup(_typeIndex, _atrs = atr.none) constructor
 		if (has(Atrs, atr.honey)) HiveInterval /= 2;
 		if (type == "ddt" || type == "bbt") HiveInterval /= 2;
 	}*/
+	
+	static Combine = function(group)
+	{
+		Count += group.Count;
+		for (var i = 0; i < MaxHp; i++)
+		{
+			hp[i] += group.hp[i];
+		}
+	}
+}
+
+function findorcreategroup(sortedlinkedlist, _typeIndex, _atrs = atr.none)
+{
+	var indentifier = calculateuniquebloonidentifier(_typeIndex, _atrs);
+	var node = sortedlinkedlist.FindOrCreate(indentifier, -1);
+	if (node.obj == -1)
+	{
+		node.obj = new BloonGroup(_typeIndex, _atrs);
+	}
+	return node.obj;
 }

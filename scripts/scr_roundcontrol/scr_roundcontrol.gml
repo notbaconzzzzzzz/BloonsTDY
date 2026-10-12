@@ -130,7 +130,7 @@ function spawnrandombloon()
 	return bloonData;
 }
 
-function spawnbloon(type, mods = -1, removemods = -1)
+function spawnbloon(type, mods = -1, removemods = -1, hp = -999999.5, isCluster = false, clusterCount = 1)
 {
 	var typeInd = -1;
 	if (is_numeric(type))
@@ -151,10 +151,18 @@ function spawnbloon(type, mods = -1, removemods = -1)
 		}
 	}
 	var strut = {type : type, dir : random_range(45, 135)};
+	if (hp != -999999.5) strut.hp = hp;
 	if (mods != -1) strut.Atrs = mods;
 	if (removemods != -1) strut.RemoveAtrs = removemods;
+	strut.isCluster = isCluster;
+	if (isCluster) strut.count = clusterCount;
 	//instance_create_layer(random_range(shmupLeftBound, shmupRightBound), -64, "Bloons", ShmupBloon, strut);
 	instance_create_layer(-999, -999, "Bloons", TrackBloon, strut);
+}
+
+function spawnblooncluster(type, count = 1, mods = -1, removemods = -1, hp = -999999.5)
+{
+	spawnbloon(type, mods, removemods, hp, true, count)
 }
 
 function getbloonweight(bloon, difficulty = -1, remainingbudget = -1, remainingbloons = -1, scale = true)

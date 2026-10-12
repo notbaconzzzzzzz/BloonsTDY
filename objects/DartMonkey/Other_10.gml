@@ -83,7 +83,13 @@ else
 		//spread /= shots;
 		var tx = target.x - x;
 		var ty = target.y - y;
-		//ty += target.posoffset;
+		if (true)
+		{
+			var dotProd = dot_product_normalized(target.xv, target.yv, tx, ty + target.posoffset);
+			if (is_nan(dotProd)) dotProd = 1;
+			dotProd = sqr(dotProd);
+			ty += target.posoffset * dotProd;
+		}
 		var dist = sqrt(sqr(tx) + sqr(ty));
 		var spd = Velocity;
 		if (isCrit) spd *= 1.25;

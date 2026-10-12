@@ -53,7 +53,6 @@
     {"id":{"name":"BackgroundAbstract","path":"objects/BackgroundAbstract/BackgroundAbstract.yy",},},
     {"id":{"name":"Bloon","path":"objects/Bloon/Bloon.yy",},},
     {"id":{"name":"BloonRenderer","path":"objects/BloonRenderer/BloonRenderer.yy",},},
-    {"id":{"name":"ClusterTestBloon","path":"objects/ClusterTestBloon/ClusterTestBloon.yy",},},
     {"id":{"name":"DartMonkey","path":"objects/DartMonkey/DartMonkey.yy",},},
     {"id":{"name":"DataManager","path":"objects/DataManager/DataManager.yy",},},
     {"id":{"name":"Explosion","path":"objects/Explosion/Explosion.yy",},},

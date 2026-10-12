@@ -1,5 +1,7 @@
 /// @description Insert description here
 // You can write your code in this editor
+if (typeIndex == -1) return;
+event_inherited();
 x += xv;
 y += yv;
 if (x <= GameManager.shmupLeftBound + rad)
@@ -28,5 +30,13 @@ if (y >= room_height + rad)
 {
 	PlayerModel.lifes -= BloonData.dmg;
 	instance_destroy();
+	hp = 0;
+	typeIndex = -1;
+	return;
 }
-event_inherited();
+var newBloonRegion = calculatebloonregion(x, y, IsMoab);
+if (newBloonRegion != bloonRegion)
+{
+	bloonRegion = newBloonRegion;
+	bloonRegionNode.Migrate(GameManager.bloonRegions[bloonRegion]);
+}

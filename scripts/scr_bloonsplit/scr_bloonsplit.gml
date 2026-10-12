@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function bloonsplit(canthit = atr.none, instant = false)
 {
-	if (hp == -999999.5) return;
+	if (typeIndex == -1) return;
 	var shmup = false;
 	var giveValue = 1;
 	if (highestValue >= typeIndex)
@@ -262,6 +262,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 	if (!instant) playpopsound(id);
 	instance_destroy();
 	hp = -999999.5;
+	typeIndex = -1;
 	return childs;
 }
 

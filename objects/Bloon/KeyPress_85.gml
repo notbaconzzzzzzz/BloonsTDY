@@ -2,6 +2,13 @@
 // You can write your code in this editor
 if (GameManager.debug)
 {
-	if (keyboard_check(vk_shift)) hp -= ceil(MaxHp / 5);
-	else hp = 0;
+	if (isCluster)
+	{
+		
+	}
+	else
+	{
+		if (keyboard_check(vk_shift)) hp -= ceil(MaxHp / 5);
+		else hp = 0;
+	}
 }

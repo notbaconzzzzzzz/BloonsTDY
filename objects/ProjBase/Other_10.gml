@@ -10,6 +10,11 @@ if (x < 0 || x > room_width || y < 0 || y > room_height)
 if (pierce <= 0) return;
 hitdetection(x, y, rad, "radial", function(inst)
 {
+	if (inst.isCluster)
+	{
+		pierce -= inst.displayGroup.Count;
+		return true;
+	}
 	if (!instance_exists(inst)) return false;
 	dmg = damage;
 	dmgmult = damagemult;
