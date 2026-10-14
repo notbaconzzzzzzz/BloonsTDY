@@ -367,7 +367,7 @@ function DartMonkey_restats()
 		AirburstInterval = 3;
 		if (!has(Upgrades, upg.d3)) AttackSpeedCalcs.a = asf(36);
 		CantHits &= ~atr.aqua;
-		array_push(AfterHit, function(inst2, childs, proj) {
+		array_push(AfterHit, function(inst2, childs, proj, count) {
 			with (proj)
 			{
 				if (airburst && instance_exists(owner))
@@ -377,9 +377,12 @@ function DartMonkey_restats()
 					var spd2 = owner.AirburstVelocity;
 					if (crit) spd2 *= 1.25;
 					var d = dir;
-					for (var i = 0; i < shots; i++)
+					for (var n = 0; n < count; n++)
 					{
-						instance_create_layer(x, y, "Projectiles", Projectile, {owner : owner, crit : crit, airburst : false, dir : d + spread * (i - (shots - 1) / 2), spd : spd2, lifetime : owner.AirburstTravelDistance / spd2, rad : rad, pierce : owner.Pierce, damage : damage, damagemult : damagemult, cantHits : cantHits, cond : cond, afterHit : afterHit, tick : tick});
+						for (var i = 0; i < shots; i++)
+						{
+							instance_create_layer(x, y, "Projectiles", Projectile, {owner : owner, crit : crit, airburst : false, dir : d + spread * (i - (shots - 1) / 2), spd : spd2, lifetime : owner.AirburstTravelDistance / spd2, rad : rad, pierce : owner.Pierce, damage : damage, damagemult : damagemult, cantHits : cantHits, cond : cond, afterHit : afterHit, tick : tick});
+						}
 					}
 				}
 			}

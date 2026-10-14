@@ -170,12 +170,19 @@ function SortedLinkedList(combineMode = false) : LinkedList() constructor
 	
 	static Merge = function(sortedlinkedlist)
 	{
-		if (l == -1 || l == self)
+		if (r == -1 || r == self)
 		{
-			sortedlinkedlist.l.r = self;
-			l = sortedlinkedlist.l;
-			sortedlinkedlist.r.l = self;
-			r = sortedlinkedlist.r;
+			if (!(sortedlinkedlist.r == -1 || sortedlinkedlist.r == sortedlinkedlist))
+			{
+				sortedlinkedlist.l.r = self;
+				l = sortedlinkedlist.l;
+				sortedlinkedlist.r.l = self;
+				r = sortedlinkedlist.r;
+			}
+			return self;
+		}
+		if (sortedlinkedlist.r == -1 || sortedlinkedlist.r == sortedlinkedlist)
+		{
 			return self;
 		}
 		var node1 = r;
@@ -185,7 +192,7 @@ function SortedLinkedList(combineMode = false) : LinkedList() constructor
 			if (node1.s > node2.s)
 			{
 				node1.l.r = node2;
-				node2.l = node1.l.r;
+				node2.l = node1.l;
 				node1.l = node2;
 				node2 = node2.r;
 				node1.l.r = node1;

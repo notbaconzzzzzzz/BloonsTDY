@@ -18,7 +18,7 @@ if (sprite_index == -1)
 	var spr = BloonRenderer.BloonSprites[? sprind];
 	if (is_undefined(spr))
 	{
-		
+		if (!array_contains(BloonRenderer.drawQueue, sprind)) array_push(BloonRenderer.drawQueue, sprind);
 	}
 	else sprite_index = spr;
 }

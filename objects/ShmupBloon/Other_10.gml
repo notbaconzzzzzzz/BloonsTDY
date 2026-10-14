@@ -28,7 +28,19 @@ if (y >= room_height - rad)
 }*/
 if (y >= room_height + rad)
 {
-	PlayerModel.lifes -= BloonData.dmg;
+	if (isCluster)
+	{
+		var total = 0;
+		var node = bloonGroups.l;
+		while (!is_instanceof(node, LinkedList))
+		{
+			var group = node.obj;
+			total += group.BloonData.dmg * group.Count;
+			node = node.l;
+		}
+		PlayerModel.lifes -= total;
+	}
+	else PlayerModel.lifes -= BloonData.dmg;
 	instance_destroy();
 	hp = 0;
 	typeIndex = -1;

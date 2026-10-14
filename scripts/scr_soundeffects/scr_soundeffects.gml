@@ -70,6 +70,15 @@ function getdmgsoundid(inst)
 	return blnsnd.dmg;
 }
 
+function getdmgsound(Atrs)
+{
+	if (has(Atrs, atr.moab)) return blnsnd.dmgmoab;
+	if (has(Atrs, atr.amber)) return blnsnd.dmgamber;
+	if (has(Atrs, atr.ceramic)) return blnsnd.dmgceram;
+	if (has(Atrs, atr.heavy)) return blnsnd.dmghard;
+	return blnsnd.dmg;
+}
+
 function getpopsoundid(inst)
 {
 	if (is_struct(inst.BloonData.moab))
@@ -81,6 +90,20 @@ function getpopsoundid(inst)
 	if (has(inst.Atrs, atr.titan) || inst.type == "brick") return blnsnd.poptough;
 	if (has(inst.Atrs, atr.ceramic)) return blnsnd.popceram;
 	if (hasany(inst.Atrs, atr.frozen | atr.ice)) return blnsnd.popglass; // atr.crystal
+	return blnsnd.pop;
+}
+
+function getpopsound(BloonData, Atrs)
+{
+	if (is_struct(BloonData.moab))
+	{
+		return blnsnd.popmoab0 + BloonData.moab.class;
+	}
+	if (has(Atrs, atr.amber)) return blnsnd.popamber;
+	//if (has(inst.Atrs, atr.aqua)) return blnsnd.popaqua;
+	if (has(Atrs, atr.titan) || BloonData.type == "brick") return blnsnd.poptough;
+	if (has(Atrs, atr.ceramic)) return blnsnd.popceram;
+	if (hasany(Atrs, atr.frozen | atr.ice)) return blnsnd.popglass; // atr.crystal
 	return blnsnd.pop;
 }
 

@@ -74,6 +74,10 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
+		if (is_struct(BloonData.moab) && !is_struct(bloonData.moab))
+		{
+			actualcount = 1;
+		}
 		
 		//if (!has(bloonData.atrs, atr.moab)) actualcount = 1;
 		
@@ -190,6 +194,12 @@ function bloonsplit(canthit = atr.none, instant = false)
 		{
 			if (variable_struct_exists(BloonData.spawns[i], "overstuffedAmt")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
+		}
+		if (is_struct(BloonData.moab) && !is_struct(bloonData.moab))
+		{
+			vari.isCluster = true;
+			vari.count = actualcount;
+			actualcount = 1;
 		}
 		
 		if (variable_instance_exists(id, "blowtime") && blowtime > 0 && !bobBlow)
@@ -349,6 +359,12 @@ function hivespawn(hpstate)
 		
 		var normalcount = BloonData.moab.hive[i].amt;
 		var actualcount = normalcount;
+		if (!is_struct(bloonData.moab))
+		{
+			vari.isCluster = true;
+			vari.count = actualcount;
+			actualcount = 1;
+		}
 		vari.highestValue = -1;
 		for (var j = 0; j < actualcount; j++)
 		{

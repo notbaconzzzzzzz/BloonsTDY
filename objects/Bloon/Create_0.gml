@@ -12,7 +12,11 @@ if (isCluster)
 	if (variable_instance_exists(id, "typeIndex"))
 	{
 		var group = new BloonGroup(typeIndex, variable_instance_exists(id, "Atrs") ? Atrs : atr.none, variable_instance_exists(id, "count") ? count : 1, variable_instance_exists(id, "hp") ? hp : 0); 
-		if (!variable_instance_exists(id, "hp"))
+		if (variable_instance_exists(id, "hp"))
+		{
+			hp += group.MaxHp;
+		}
+		else
 		{
 			hp = group.MaxHp;
 		}

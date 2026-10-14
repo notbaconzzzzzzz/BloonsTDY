@@ -19,6 +19,21 @@ if (isCluster)
 		Atrs = displayGroup.Atrs;
 		MaxHp = displayGroup.MaxHp;
 		IsMoab = displayGroup.IsMoab;
+		if (IsMoab)
+		{
+			blimp = true;
+			if (type == "bob" || type == "bobmega") blimp = false;
+			else if (type == "honey1" || type == "honey2" || type == "honey3" || type == "honey4" || type == "honey5") blimp = false;
+		}
+		else
+		{
+			blimp = false;
+		}
+		rad = BloonData.size / 2;
+		posoffset = rad * 2 / 3;
+		if (blimp) posoffset = rad * 1 / 3;
+		if (!blimp && has(Atrs, atr.regrow)) rad *= 1.25;
+		sprite_index = -1;
 	}
 	Spd = 0;
 	var totalWeight = 0;
@@ -26,7 +41,7 @@ if (isCluster)
 	while (!is_instanceof(node, LinkedList))
 	{
 		var group = node.obj;
-		var weight = group.BloonData.dmg;
+		var weight = group.BloonData.dmg * group.Count;
 		Spd += group.Spd * weight;
 		totalWeight += weight;
 		node = node.l;
