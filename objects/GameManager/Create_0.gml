@@ -1,13 +1,13 @@
 /// @description Insert description here
 // You can write your code in this editor
 datafileread();
-Difficulty = "Normal";
+Difficulty = "Hard";
 StartingMoney = 650;
-StartingLifes = 150;
-StartRound = 1;
-EndRound = 80;
-CostFactor = 100;
-SpeedFactor = 100;
+StartingLifes = 100;
+StartRound = 3;
+EndRound = 120;
+CostFactor = 108;
+SpeedFactor = 115;
 SpawnRateFactor = 100;
 SpawnAmountFactor = 100;
 MoabHpFactor = 100;

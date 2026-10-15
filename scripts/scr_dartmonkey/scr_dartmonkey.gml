@@ -27,7 +27,7 @@ function DartMonkey_basestats()
 	AirburstShots = 2;
 	AirburstSpread = 20;
 	AirburstVelocity = 30;
-	AirburstTravelDistance = 120;
+	AirburstTravelDistance = 150;
 	Shots = 1;
 	Spread = 40;
 	
@@ -247,7 +247,7 @@ function DartMonkey_restats()
 		Pierce += 3;
 		if (has(Upgrades, upg.e3))
 		{
-			Pierce += 2;
+			Pierce += 7;
 			AttackSpeedCalcs.b = asf(48);
 		}
 		Velocity += 8;

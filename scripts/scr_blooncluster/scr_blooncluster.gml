@@ -262,7 +262,7 @@ function damagebloongroup(outputlist, group)
 		}
 	}
 	var hitCount;
-	if (has(group.Atrs, atr.amber))
+	if (has(group.Atrs, atr.amber) && forgivingamber < 1)
 	{
 		hitCount = 0;
 		var hasKant = has(group.Atrs, atr.kant);

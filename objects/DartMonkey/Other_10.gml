@@ -31,6 +31,18 @@ else
 			if (has(Upgrades, upg.c3)) vari.pierce += has(Upgrades, upg.e3) ? 5 : 1;
 			vari.cantHits &= !(atr.lead | atr.aqua | atr.crystal | atr.frozen);
 		}
+		if (DoubleDartInterval != -1)
+		{
+			doubleDart++;
+			if (doubleDart >= DoubleDartInterval)
+			{
+				isDouble = true;
+				shots += DoubleDartShots;
+				spread = 0;
+				offset = 2 * ProjRad;
+				doubleDart = 0;
+			}
+		}
 		if (CritDartInterval != -1)
 		{
 			critDart++;
@@ -48,20 +60,9 @@ else
 						vari.damage += SuperCritDmg;
 						vari.pierce += SuperCritPierce;
 						superCrit = 0;
+						if (!isDouble && DoubleDartInterval % SuperCritInterval == 0) doubleDart = 0;
 					}
 				}
-			}
-		}
-		if (DoubleDartInterval != -1)
-		{
-			doubleDart++;
-			if (doubleDart >= DoubleDartInterval)
-			{
-				isDouble = true;
-				shots += DoubleDartShots;
-				spread = 0;
-				offset = 2 * ProjRad;
-				doubleDart = 0;
 			}
 		}
 		if (has(Upgrades, upg.e3))

@@ -208,11 +208,12 @@ function purchasetower(tx, ty, type = "Dart Monkey")
 		tx = pos.tx;
 		ty = pos.ty;
 	}
-	if (PlayerModel.money < 200) return 0;
+	var p = getupgradeprice(0, 0);
+	if (PlayerModel.money < p.price) return 0;
 	var tower = placetower(tx, ty, type);
 	if (tower > 0)
 	{
-		money -= 200;
+		money -= p.price;
 		audio_play_sound(random(1) < 0.5 ? PlaceTowerMonkey01 : PlaceTowerMonkey02, 500, false);
 		return tower;
 	}
@@ -342,7 +343,7 @@ function getupgradeprice(path, tier = -1)
 {
 	if (path == 0 && tier == 0)
 	{
-		return { up : -1, price : 200, oprice : 200 };
+		return { up : -1, price : modifiedprice(200), oprice : modifiedprice(200) };
 	}
 	if (path < 1 || path > 6) return -1;
 	if (tier == -1)
@@ -357,14 +358,16 @@ function getupgradeprice(path, tier = -1)
 	if (tier <= 0 || tier > array_length(TowerData.ups[path-1])) return -1;
 	var up = TowerData.ups[path-1][tier-1];
 	if (path >= 5) tier += 2;
-	var price = up.price;
+	var oprice = up.price;
+	oprice = modifiedprice(oprice);
+	var price = oprice;
 	if (tier == 1 || tier == 2)
 	{
 		var newTotalT12 = TotalT12 + 1;
 		var newLowestT12 = LowestT12;
 		var newHighestT12 = HighestT12;
-		if (price < newLowestT12) newLowestT12 = price;
-		if (price > newHighestT12) newHighestT12 = price;
+		if (price < newLowestT12) newLowestT12 = oprice;
+		if (price > newHighestT12) newHighestT12 = oprice;
 		if (newTotalT12 == 5)
 		{
 			price += newLowestT12;
@@ -386,7 +389,7 @@ function getupgradeprice(path, tier = -1)
 	{
 		var newTotalT3 = TotalT3 + 1;
 		var newLowestT3 = LowestT3;
-		if (price < newLowestT3) newLowestT3 = price;
+		if (price < newLowestT3) newLowestT3 = oprice;
 		if (newTotalT3 == 2)
 		{
 			price += round(newLowestT3 * 3 / 5 / 5) * 5;
@@ -404,11 +407,20 @@ function getupgradeprice(path, tier = -1)
 	{
 		var newTotalT4 = TotalT4 + 1;
 		var newSumT4 = SumT4;
-		newSumT4 += price;
+		newSumT4 += oprice;
 		if (TotalT3 >= 2)
 		{
 			price += round(newSumT4 * 1 / 5 / 5) * 5 - round(SumT4 * 1 / 5 / 5) * 5;
 		}
 	}
-	return { up : up, price : price, oprice : up.price };
+	return { up : up, price : price, oprice : oprice };
+}
+
+function modifiedprice(price)
+{
+	price = price * GameManager.CostFactor;
+	if (price % 1000 <= 250) price = floor(price / 1000) * 10;
+	else if (price % 1000 < 750) price = floor(price / 1000) * 10 + 5;
+	else price = floor(price / 1000) * 10 + 10;
+	return price;
 }

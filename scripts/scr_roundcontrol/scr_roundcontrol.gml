@@ -9,6 +9,19 @@ function resetround()
 	FarmIncomeFactor = 100;
 	wait = 0;
 	dif = 1;
+	for (var i = 2; i <= currentRound; i++)
+	{
+		if (i <= 6) dif += 0.5; // 1 ~ 3.5
+		else if (i <= 9) dif += 1; // 4.5 ~ 7.5
+		else if (i <= 14) dif += 1.5; // 9 ~ 15
+		else if (i <= 21) dif += 3; // 18 ~ 36
+		else if (i <= 30) dif += 4; // 40 ~ 72
+		else if (i <= 34) dif += 6; // 78 ~ 96
+		else if (i <= 37) dif += 12; // 108 ~ 132
+		else if (i <= 39) dif += 20; // 152 ~ 172
+		else if (i <= 40) dif += 128; // 300
+		else dif += 2 * sqrt(dif / 3);
+	}
 	pdif = 0;
 	pbudget = 0;
 	pbudgets = [];
@@ -16,6 +29,9 @@ function resetround()
 	rate = 100;
 	maxblns = 10;
 	delay = 30;
+	rate = ceil(100 / (1 + 2 * log10(currentRound)));
+	maxblns = floor(min(10 + sqrt(currentRound), 20) * (1 + 2 * log10(currentRound)));
+	maxbudget = 10 * (1 + 2 * log10(currentRound)) * dif * 200;
 	hasSeen = array_create(array_length(DataManager.BloonData), false);
 	shmupLeftBound = 0;
 	shmupRightBound = room_width - 8 * 60;

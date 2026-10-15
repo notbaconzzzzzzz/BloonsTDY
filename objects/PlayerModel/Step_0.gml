@@ -7,7 +7,7 @@ if (MenuManager.currentMenu != "none")
 	showRanges = false;
 	return;
 }
-var autobuythreshold = 200;
+var autobuythreshold = getupgradeprice(0, 0).price;
 if (autobuyupgrade)
 {
 	autobuythreshold = max(autobuythreshold, 100 + numberoftowers * 100);
