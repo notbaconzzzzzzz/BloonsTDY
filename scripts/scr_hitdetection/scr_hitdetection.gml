@@ -38,7 +38,7 @@ function hitdetection(cx, cy, cr, ordinal, func)
 			{
 				with (node.obj)
 				{
-					if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
+					if (typeIndex != -1 && hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
 					{
 						var dist = sqrt(sqr(x - cx) + sqr(y - cy)) - rad;
 						if (dist <= cr)
@@ -141,7 +141,7 @@ function bloondetection(cx, cy, cr, ordinal, canhitcamo)
 			{
 				with (node.obj)
 				{
-					if (hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
+					if (typeIndex != -1 && hp > 0 && abs(x - cx) <= rad + cr && abs(y - cy) <= rad + cr)
 					{
 						var dist = sqrt(sqr(x - cx) + sqr(y - cy)) - rad;
 						if (dist <= cr)

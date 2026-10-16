@@ -44,6 +44,7 @@ for (var i = 0; i <= 12; i++)
 {
 	bloonRegions[i] = new LinkedList(); 
 }
+clusterMode = 0;
 
 debug = false;
 gameSpeed = 0;

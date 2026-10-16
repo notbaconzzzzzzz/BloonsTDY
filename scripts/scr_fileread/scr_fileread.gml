@@ -317,8 +317,18 @@ function parsebloondata()
 	}
 	for (var i = 0; i < array_length(BloonData); i++)
 	{
-		BloonData[i].upstream = array_create(array_length(BloonData), false);
-		BloonData[i].downstream = array_create(array_length(BloonData), false);
+		var bloonData = BloonData[i];
+		bloonData.upstream = array_create(array_length(BloonData), false);
+		bloonData.downstream = array_create(array_length(BloonData), false);
+		bloonData.money = 1;
+		for (var j = 0; j < array_length(bloonData.spawns); j++)
+		{
+			var spawnData = bloonData.spawns[j].type;
+			var ind = array_get_index(BloonOrd, spawnData);
+			if (ind == -1) ind = array_get_index(BloonOrd, string_delete(spawnData, 1, 1));
+			spawnData = BloonData[ind];
+			BloonData[i].money += spawnData.money * bloonData.spawns[j].amt;
+		}
 	}
 	for (var i = array_length(BloonData) - 1; i >= 0; i--)
 	{

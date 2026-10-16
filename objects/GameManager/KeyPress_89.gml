@@ -6,7 +6,7 @@ if (debug)
 	var type = "bob";
 	var mods = atr.none;
 	if (keyboard_check(vk_control)) type = "bteab";
-	if (keyboard_check(vk_alt)) type += "mega";
+	if (keyboard_check(vk_alt)) { type += "mega"; clusterMode = max(1, clusterMode); }
 	if (keyboard_check(vk_shift))
 	{
 		mods |= atr.fort;

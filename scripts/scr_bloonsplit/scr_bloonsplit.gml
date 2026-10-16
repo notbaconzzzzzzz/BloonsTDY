@@ -74,7 +74,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (variable_struct_exists(BloonData.spawns[i], "")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
-		if (GameManager.currentRound > 80 && is_struct(BloonData.moab) && !is_struct(bloonData.moab))
+		if (GameManager.clusterMode >= 1 && is_struct(BloonData.moab) && !is_struct(bloonData.moab))
 		{
 			actualcount = 1;
 		}
@@ -195,7 +195,7 @@ function bloonsplit(canthit = atr.none, instant = false)
 			if (variable_struct_exists(BloonData.spawns[i], "overstuffedAmt")) actualcount = floor(BloonData.spawns[i].overstuffedAmt * actualcount / normalcount);
 			else actualcount = floor(actualcount * 3 / 2);
 		}
-		if (GameManager.currentRound > 80 && is_struct(BloonData.moab) && !is_struct(bloonData.moab))
+		if (GameManager.clusterMode >= 1 && is_struct(BloonData.moab) && !is_struct(bloonData.moab))
 		{
 			vari.isCluster = true;
 			vari.count = actualcount;
@@ -359,7 +359,7 @@ function hivespawn(hpstate)
 		
 		var normalcount = BloonData.moab.hive[i].amt;
 		var actualcount = normalcount;
-		if (GameManager.currentRound > 80 && !is_struct(bloonData.moab))
+		if (GameManager.clusterMode >= 1 && !is_struct(bloonData.moab))
 		{
 			vari.isCluster = true;
 			vari.count = actualcount;

@@ -7,6 +7,7 @@ function resetround()
 	BloonIncomeFactor = 100;
 	RoundIncomeFactor = 100;
 	FarmIncomeFactor = 100;
+	clusterMode = 0;
 	wait = 0;
 	dif = 1;
 	for (var i = 2; i <= currentRound; i++)
@@ -95,6 +96,7 @@ function endround()
 	else if (currentRound == 86) { BloonIncomeFactor = 34; RoundIncomeFactor = 200; }
 	else if (currentRound == 101) { BloonIncomeFactor = 20; RoundIncomeFactor = 300; }
 	else if (currentRound == 121) { BloonIncomeFactor = 10; RoundIncomeFactor = 500; }
+	if (currentRound == 71) clusterMode = 1;
 	//AllIncomeFactor += 5;
 	rate = ceil(100 / (1 + 2 * log10(currentRound)));
 	maxblns = floor(min(10 + sqrt(currentRound), 20) * (1 + 2 * log10(currentRound)));

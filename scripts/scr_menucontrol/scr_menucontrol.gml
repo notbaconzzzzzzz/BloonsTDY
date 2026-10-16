@@ -63,6 +63,7 @@ function gotomenu(menu)
 				break;
 			case "mainmenu":
 				createbutton(room_width / 2, room_height / 2, "Start", "room", "game");
+				createbutton(room_width / 2, room_height / 2 + 180, "Wave Editor", "room", "waveeditor");
 				break;
 			case "settings":
 				createbutton(room_width - 200, 100, "Close", "menu", "default");
@@ -100,6 +101,9 @@ function gotoroom(r)
 				break;
 			case "game":
 				room_goto(Game);
+				break;
+			case "waveeditor":
+				room_goto(WaveEditing);
 				break;
 		}
 	}

@@ -53,7 +53,8 @@ hitdetection(x, y, rad, "radial", function(inst)
 				{
 					with (inst)
 					{
-						var heal = floor(25 * power(3, (is_struct(BloonData.moab) ? BloonData.moab.class : 0) - 1));
+						//var heal = floor(25 * power(3, (is_struct(BloonData.moab) ? BloonData.moab.class : 0) - 1));
+						var heal = other.dmg;
 						if (heal + other.dmg > MaxHp - clayLockout) heal = MaxHp - clayLockout - other.dmg;
 						if (heal + hp > MaxHp) heal = MaxHp - hp;
 						hp += heal;

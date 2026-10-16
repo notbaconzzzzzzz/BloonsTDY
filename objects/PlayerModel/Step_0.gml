@@ -7,17 +7,24 @@ if (MenuManager.currentMenu != "none")
 	showRanges = false;
 	return;
 }
-var autobuythreshold = getupgradeprice(0, 0).price;
-if (autobuyupgrade)
+if (autobuytower)
 {
-	autobuythreshold = max(autobuythreshold, 100 + numberoftowers * 100);
-}
-if (autobuytower && money >= autobuythreshold)
-{
-	purchasetower(-999, -999);
+	var autobuythreshold = getupgradeprice(0, 0).price;
+	if (autobuyupgrade)
+	{
+		autobuythreshold = max(autobuythreshold, 100 + numberoftowers * 100);
+	}
+	if (money >= autobuythreshold)
+	{
+		purchasetower(-999, -999);
+	}
 }
 if (tryingtobuytower)
 {
+	tryingtobuytowerdetectionrange = 20*9;
+	tryingtobuytowerradius = 30;
+	tryingtobuytowercolor = make_color_rgb(192, 128, 32);
+	tryingtobuytowerprice = getupgradeprice(0, 0);
 	var tx = mouse_x;
 	var ty = mouse_y;
 	tx = round(tx / grid) * grid;
@@ -25,5 +32,5 @@ if (tryingtobuytower)
 	tryingtobuytowertx = tx;
 	tryingtobuytowerty = ty;
 	tryingtobuytowervalidposition = isvalidtowerposition(tx, ty);
-	if (money < 200) tryingtobuytowervalidposition = false;
+	tryingtobuytowercanafford = money >= tryingtobuytowerprice.price;
 }
