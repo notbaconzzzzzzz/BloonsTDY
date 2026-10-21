@@ -276,3 +276,103 @@ function SortedLinkedListNode(_obj, _score) : LinkedListNode(_obj) constructor
 		return self;
 	}
 }
+
+function GroupContainer(_mode) constructor
+{
+	mode = _mode;
+	// 0 monotonic
+	// 1 ditonic
+	// 2 existantial
+	// 3 array by index
+	// 4 array with values
+	// 5 linkedlist exact
+	// 6 linkedlist approximate
+	
+	static SetMonotonic = function(_val)
+	{
+		mode = 0;
+		val = _val;
+	}
+	
+	static SetDiatonic = function(_amt, _val = true, _valoff = false)
+	{
+		mode = 1;
+		amt = _amt;
+		val = _val;
+		valoff = _valoff;
+	}
+	
+	static SetExistential = function(_amt)
+	{
+		mode = 2;
+		amt = _amt;
+	}
+	
+	static SetArrayByIndex = function(_size, _offset = 0, _amt = 0, _val = 0)
+	{
+		mode = 3;
+		size = _size;
+		val = _offset;
+		amt = array_create(size, 0);
+		_val -= _offset;
+		if (_amt > 0 && _val >= 0 && _val < size) amt[_val - val] = _amt;
+	}
+	
+	static SetArrayWithValues = function(_vals, _amt = 0, _val = 0)
+	{
+		mode = 4;
+		val = _vals;
+		size = array_length(val);
+		amt = array_create(size, 0);
+		if (_amt > 0)
+		{
+			var ind = array_get_index(val, _val);
+			if (ind != -1) amt[ind] = _amt;
+		}
+	}
+	
+	static SetLinkedListExact = function(_amt = 0, _val = 0)
+	{
+		mode = 5;
+		amt = new SortedLinkedList(true);
+		if (_amt > 0)
+		{
+			amt.Append(_amt, _val);
+		}
+	}
+	
+	static SetLinkedListApprox = function(_tolerance, _amt = 0, _val = 0)
+	{
+		mode = 6;
+		amt = new SortedLinkedList(true);
+		if (_amt > 0)
+		{
+			amt.Append(_amt, _val);
+		}
+	}
+	
+	static Copy = function()
+	{
+		
+	}
+	
+	static ConvertToMode = function(_mode)
+	{
+		
+	}
+	
+	static Add = function(_amt, _val)
+	{
+		
+	}
+	
+	static Combine = function(container, srctotal, desttotal)
+	{
+		
+	}
+	
+	static Split = function(_amt, _offset, srctotal)
+	{
+		
+	}
+}

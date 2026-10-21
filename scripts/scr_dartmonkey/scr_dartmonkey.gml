@@ -27,7 +27,7 @@ function DartMonkey_basestats()
 	AirburstShots = 2;
 	AirburstSpread = 20;
 	AirburstVelocity = 30;
-	AirburstTravelDistance = 150;
+	AirburstTravelDistance = 120;
 	Shots = 1;
 	Spread = 40;
 	
@@ -197,6 +197,7 @@ function DartMonkey_restats()
 	if (has(Upgrades, upg.b1))
 	{ // Long Range Darts
 		Range += 5;
+		AirburstTravelDistance += 30;
 	}
 	if (has(Upgrades, upg.b2))
 	{ // Enhanced Eyesight
@@ -262,6 +263,7 @@ function DartMonkey_restats()
 		Damage += 2;
 		if (!has(Upgrades, upg.e3)) Pierce += 1;
 		Range += 5;
+		AirburstSpread = 15;
 		array_push(Cond, function(inst2, proj) {
 			if (has(inst2.Atrs, atr.moab)) proj.dmg += 1;
 		});

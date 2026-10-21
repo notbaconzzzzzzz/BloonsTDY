@@ -4,7 +4,7 @@ datafileread();
 Difficulty = "Hard";
 StartingMoney = 650;
 StartingLifes = 100;
-StartRound = 3;
+StartRound = 1;
 EndRound = 120;
 CostFactor = 108;
 SpeedFactor = 115;

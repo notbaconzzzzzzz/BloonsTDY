@@ -53,6 +53,7 @@ function startround()
 {
 	budget = maxbudget;
 	blns = maxblns;
+	if (variable_instance_exists(PlayerModel, "money")) GameManager.DebugRoundMonies[currentRound-1] = PlayerModel.money;
 }
 
 function endround()
@@ -167,6 +168,14 @@ function spawnbloon(type, mods = -1, removemods = -1, hp = -999999.5, isCluster 
 		{
 			audio_play_sound(MoabWarHorn, 800, false, 4);
 		}
+	}
+	if (true)
+	{
+		var m = DataManager.BloonData[typeInd].money * GameManager.BloonIncomeFactor * GameManager.AllIncomeFactor;
+		PlayerModel.bloonFrac += m;
+		PlayerModel.money += floor(PlayerModel.bloonFrac / 10000);
+		PlayerModel.bloonFrac -= floor(PlayerModel.bloonFrac / 10000) * 10000;
+		return;
 	}
 	var strut = {type : type, dir : random_range(45, 135)};
 	if (hp != -999999.5) strut.hp = hp;
