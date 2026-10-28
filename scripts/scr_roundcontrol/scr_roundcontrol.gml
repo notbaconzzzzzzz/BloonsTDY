@@ -54,6 +54,20 @@ function startround()
 	budget = maxbudget;
 	blns = maxblns;
 	if (variable_instance_exists(PlayerModel, "money")) GameManager.DebugRoundMonies[currentRound-1] = PlayerModel.money;
+	if (currentRound == 201)
+	{
+		var str = "";
+		for (var i = 0; i < min(array_length(GameManager.DebugRoundMonies), 201); i++)
+		{
+			if (i > 0) str += "\n";
+			str += string(GameManager.DebugRoundMonies[i]);
+		}
+		if (!variable_instance_exists(GameManager, "debugOutputIndex")) GameManager.debugOutputIndex = 0;
+		else GameManager.debugOutputIndex += 1;
+		var file = file_text_open_write(working_directory + "debug_" + string(GameManager.debugOutputIndex) + ".txt");
+		file_text_write_string(file, str);
+		file_text_close(file);
+	}
 }
 
 function endround()

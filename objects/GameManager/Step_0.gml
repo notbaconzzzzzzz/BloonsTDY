@@ -43,10 +43,10 @@ for (var i = 0; i < gameSpeed; i++)
 		{
 			endround();
 		}
-	}
+	}/*
 	with (Bloon) if (instance_exists(id) && typeIndex != -1) event_user(0);
 	with (Tower) if (instance_exists(id)) event_user(0);
-	with (ProjBase) if (instance_exists(id)) event_user(0);
+	with (ProjBase) if (instance_exists(id)) event_user(0);*/
 	ticksPasted++;
 }
 

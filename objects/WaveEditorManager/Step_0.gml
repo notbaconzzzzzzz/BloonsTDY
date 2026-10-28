@@ -32,24 +32,28 @@ if (selectedGroup != -1)
 	}
 	if (keyboard_check_pressed(189)) // -
 	{
-		selectedGroup.amt -= 1;
+		if (shift) selectedGroup.amt = ceil(selectedGroup.amt / 5 - 1) * 5;
+		else selectedGroup.amt -= 1;
 		if (selectedGroup.amt < 1) selectedGroup.amt = 1;
 		flag = true;
 	}
 	if (keyboard_check_pressed(187)) // =
 	{
-		selectedGroup.amt += 1;
+		if (shift) selectedGroup.amt = floor(selectedGroup.amt / 5 + 1) * 5;
+		else selectedGroup.amt += 1;
 		flag = true;
 	}
 	if (keyboard_check_pressed(186)) // ;
 	{
-		selectedGroup.spacing -= 1;
+		if (shift) selectedGroup.spacing = ceil(selectedGroup.spacing / 5 - 1) * 5;
+		else selectedGroup.spacing -= 1;
 		if (selectedGroup.spacing < 0) selectedGroup.spacing = 0;
 		flag = true;
 	}
 	if (keyboard_check_pressed(222)) // '
 	{
-		selectedGroup.spacing += 1;
+		if (shift) selectedGroup.spacing = floor(selectedGroup.spacing / 5 + 1) * 5;
+		else selectedGroup.spacing += 1;
 		flag = true;
 	}
 	if (keyboard_check_pressed(188)) // ,
@@ -70,7 +74,10 @@ if (selectedGroup != -1)
 		}
 		else
 		{
-			selectedGroup.offset -= 1;
+			if (shift && alt) selectedGroup.offset = ceil(selectedGroup.offset / selectedGroup.spacing - 1) * selectedGroup.spacing;
+			else if (shift) selectedGroup.offset = ceil(selectedGroup.offset / 60 - 1) * 60;
+			else if (alt) selectedGroup.offset -= 1;
+			else selectedGroup.offset -= 5;
 			flag = true;
 		}
 	}
@@ -92,7 +99,10 @@ if (selectedGroup != -1)
 		}
 		else
 		{
-			selectedGroup.offset += 1;
+			if (shift && alt) selectedGroup.offset = floor(selectedGroup.offset / selectedGroup.spacing + 1) * selectedGroup.spacing;
+			else if (shift) selectedGroup.offset = floor(selectedGroup.offset / 60 + 1) * 60;
+			else if (alt) selectedGroup.offset += 1;
+			else selectedGroup.offset += 5;
 			flag = true;
 		}
 	}
